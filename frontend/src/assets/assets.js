@@ -8,3 +8,6 @@ export { default as heroPlaceholder } from './Hero_Placeholder.jpg';
 
 // Icon Assets
 export { default as reactIcon } from './react.svg';
+export { default as strategieIcon } from './Stratégie.svg';
+export { default as partenaireIcon } from './Partenaire.svg';
+export { default as croissanceIcon } from './Croissance.svg';

@@ -1,47 +1,42 @@
 import React from 'react';
-import { Lightbulb, Handshake, TrendingUp } from 'lucide-react';
-import { logoMain, heroPlaceholder } from '../assets/assets';
+import * as assets from '../assets/assets';
 
 const UnderConstruction = () => {
   const services = [
     {
-      icon: Lightbulb,
+      icon: assets.strategieIcon,
       title: 'Stratégie de Visibilité & Marketing',
     },
     {
-      icon: Handshake,
+      icon: assets.partenaireIcon,
       title: 'Partenariats & Relations B2B',
     },
     {
-      icon: TrendingUp,
+      icon: assets.croissanceIcon,
       title: 'Croissance & Optimisation',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="flex-col items-center min-h-screen bg-white">
       {/* Logo & Header */}
-      <div className="max-w-[1100px] mx-auto px-4 pt-16 pb-8">
+      <div className="max-w-[1100px] mx-auto ">
         <div className="flex flex-col items-center">
           {/* Logo */}
-          <img
-            src={logoMain}
-            alt="LeadGen Booster"
-            className="h-32 w-auto mb-4"
-          />
+          <img src={assets.logoMain} alt="LeadGen Booster" className="h-48 w-auto" />
         </div>
       </div>
 
       {/* Hero & Content Section */}
       <div className="relative w-full">
-        {/* Hero Image Container */}
-        <div className="max-w-[1100px] mx-auto px-4 py-12">
-          <div className="relative rounded-lg overflow-hidden h-80">
-            {/* Hero image */}
+        {/* Hero Image Container - Full height */}
+        <div className="max-w-[1200px] mx-auto px-4">
+          <div className="relative rounded-lg overflow-hidden">
+            {/* Hero image - natural height */}
             <img
-              src={heroPlaceholder}
+              src={assets.heroPlaceholder}
               alt="Hero background"
-              className="w-full h-full object-cover"
+              className="w-full max-h-[500px] h-auto object-cover object-center"
               style={{
                 filter: 'grayscale(100%) contrast(100%) brightness(95%)',
               }}
@@ -49,50 +44,50 @@ const UnderConstruction = () => {
           </div>
         </div>
 
-        {/* Overlapping Content Box - positioned 30% down from top of hero */}
-        <div className="max-w-[1100px] mx-auto px-4 relative -mt-24 flex justify-center">
-          <div className="relative max-w-2xl w-full bg-white bg-opacity-20 backdrop-blur-sm rounded-lg shadow-2xl p-8 md:p-12 border-4 border-[#D71C1C]">
-            {/* Red triangle pointer on top */}
-            <div
-              className="absolute -top-3 left-1/2 transform -translate-x-1/2"
-              style={{
-                width: 0,
-                height: 0,
-                borderLeft: '18px solid transparent',
-                borderRight: '18px solid transparent',
-                borderBottom: '20px solid #D71C1C',
-              }}
-            />
-
+        {/* Overlapping Content Box - positioned 30% higher */}
+        <div className="max-w-[1100px] mx-auto px-4 relative -mt-68 flex justify-center">
+          <div className="relative max-w-[1000px] w-full bg-transparent backdrop-blur-md rounded-lg shadow-2xl border-4 border-black/10">
             {/* Headline */}
-            <div className="text-center mb-8 mt-4">
-              <h1 className="text-3xl md:text-4xl font-black text-black uppercase tracking-wider mb-4">
+            <div className="text-center  bg-black/10">
+              <h1 className="text-3xl md:text-4xl  text-white uppercase tracking-wider mt-4 px-4 py-2 rounded inline-block font-black">
                 Propulsez Votre Croissance
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 font-medium">
+              <p className="text-lg md:text-xl text-white font-medium px-4 pb-6 rounded inline-block mt-3">
                 Visibilité | Engagement | Résultats
               </p>
             </div>
 
-            {/* Red Divider Line */}
-            <div className="w-16 h-1 bg-[#D71C1C] mx-auto mb-8" />
-
-            {/* Section Heading */}
-            <h2 className="text-white font-bold uppercase text-lg md:text-xl text-center tracking-wide mb-8 text-shadow-lg">
-              À Propos de Nous
-            </h2>
+            {/* Section Heading - Speech Bubble Style */}
+            <div className="relative flex justify-center mb-0 mt-12 z-10">
+              <div className="relative bg-[#D71C1C] rounded px-8 py-4">
+                <h2 className="text-white w-2xl font-bold uppercase text-lg md:text-xl text-center tracking-wide">
+                  À Propos de Nous
+                </h2>
+                {/* Triangle pointer at bottom */}
+                <div
+                  className="absolute -bottom-4 left-1/2 transform -translate-x-1/2"
+                  style={{
+                    width: 0,
+                    height: 0,
+                    borderLeft: '16px solid transparent',
+                    borderRight: '16px solid transparent',
+                    borderTop: '16px solid #D71C1C',
+                  }}
+                />
+              </div>
+            </div>
 
             {/* About Text */}
-            <div className="text-center space-y-6">
+            <div className="text-center bg-[#f2f2f2] rounded-b-sm px-8 py-8 md:px-12 md:py-10 -mt-6 relative z-0 space-y-6 mb-0">
               <p className="text-gray-800 text-base md:text-lg leading-relaxed font-medium">
-                LeadGen Booster est votre partenaire de confiance pour transformer votre approche commerciale. 
-                Nous spécialisons dans la génération de leads, la qualification de prospects et l'optimisation 
-                de votre croissance commerciale à travers des stratégies éprouvées et innovantes.
+                Lead Gen Booster est votre partenaire de confiance pour un
+                accompagnement sur mesure vers la réussite et le développement
+                de vos affaires.
               </p>
               <p className="text-gray-800 text-base md:text-lg leading-relaxed font-medium">
-                Notre mission est de vous aider à atteindre vos objectifs commerciaux en fournissant des solutions 
-                de prospection téléphonique, de qualification de leads et de gestion de relations clients qui 
-                génèrent des résultats mesurables et durables.
+                Notre mission est de propulser votre croissance en plaçant la
+                visibilité commerciale et la communication stratégique au cœur
+                de votre expansion.
               </p>
             </div>
           </div>
@@ -100,7 +95,7 @@ const UnderConstruction = () => {
       </div>
 
       {/* Services Section */}
-      <div className="max-w-[1100px] mx-auto px-4 py-24 mt-12">
+      <div className="max-w-[1100px] mx-auto px-4 pt-12 mt-12">
         {/* Services Heading */}
         <div className="flex items-center gap-4 mb-12">
           {/* Red vertical bar */}
@@ -111,7 +106,7 @@ const UnderConstruction = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 p-12">
           {services.map((service, index) => (
             <div
               key={index}
@@ -120,7 +115,7 @@ const UnderConstruction = () => {
               {/* Red icon circle */}
               <div className="flex justify-center mb-6">
                 <div className="w-16 h-16 rounded-full bg-[#D71C1C] flex items-center justify-center shadow-lg">
-                  <service.icon className="w-8 h-8 text-white" />
+                  <img src={service.icon} alt={service.title} className="w-8 h-8" />
                 </div>
               </div>
 
@@ -140,7 +135,14 @@ const UnderConstruction = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full text-gray-400"
         >
-          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2" />
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
           {[...Array(8)].map((_, i) => {
             const angle = (i * 360) / 8;
             const x1 = 50 + 42 * Math.cos((angle * Math.PI) / 180);
@@ -169,9 +171,6 @@ const UnderConstruction = () => {
           })}
         </svg>
       </div>
-
-      {/* Footer spacing */}
-      <div className="h-32" />
     </div>
   );
 };

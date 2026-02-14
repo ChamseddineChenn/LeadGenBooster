@@ -64,12 +64,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2 {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
 /* Custom utility classes */
 @utility rounded-button {
   border-radius: 8px;
