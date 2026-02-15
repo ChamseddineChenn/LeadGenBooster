@@ -1,5 +1,6 @@
 // Navbar.jsx
 import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRef = useRef(null);
+  const location = useLocation();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -156,12 +158,19 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { label: 'Accueil', href: '#', type: 'link' },
-    { label: 'Services', type: 'dropdown', key: 'services' },
-    { label: 'Blogs', type: 'dropdown', key: 'blogs' },
-    { label: 'À propos', type: 'dropdown', key: 'about' },
-    { label: 'Contact', href: '#contact', type: 'link' },
+    { label: 'Accueil', href: '/', type: 'link' },
+    { label: 'Services', type: 'dropdown', key: 'services', href: '/services' },
+    { label: 'Blogs', type: 'dropdown', key: 'blogs', href: '/blogs' },
+    { label: 'À propos', type: 'dropdown', key: 'about', href: '/about' },
+    { label: 'Contact', href: '/contact', type: 'link' },
   ];
+
+  const isLinkActive = (href) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
+  };
 
   // Dropdown animation variants
   const dropdownVariants = {
@@ -200,18 +209,15 @@ const Navbar = () => {
           : 'bg-white/95 backdrop-blur-sm py-5'
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <img
               src="/src/assets/LOGO LEADGEN BOOSTER.svg"
               alt="LeadGen Booster"
-              className="h-10 w-auto"
+              className="h-20 w-auto"
             />
-            <span className="text-2xl font-bold text-[#000000]">
-              LeadGen Booster
-            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -219,12 +225,16 @@ const Navbar = () => {
             {navItems.map((item) => (
               <div key={item.label} className="relative">
                 {item.type === 'link' ? (
-                  <a
-                    href={item.href}
-                    className="text-[#6D7280] hover:text-[#000000] font-medium transition-colors duration-200 px-2 py-1"
+                  <Link
+                    to={item.href}
+                    className={`font-medium transition-colors duration-200 px-2 py-1 ${
+                      isLinkActive(item.href)
+                        ? 'text-[#D71C1C]'
+                        : 'text-[#6D7280] hover:text-[#D71C1C]'
+                    }`}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ) : (
                   <>
                     <button
@@ -233,7 +243,11 @@ const Navbar = () => {
                           activeDropdown === item.key ? null : item.key,
                         )
                       }
-                      className="text-[#6D7280] hover:text-[#000000] font-medium transition-colors duration-200 px-2 py-1 flex items-center"
+                      className={`font-medium transition-colors duration-200 px-2 py-1 flex items-center ${
+                        isLinkActive(item.href)
+                          ? 'text-[#D71C1C]'
+                          : 'text-[#6D7280] hover:text-[#D71C1C]'
+                      }`}
                     >
                       {item.label}
                       <ChevronDown
@@ -270,9 +284,9 @@ const Navbar = () => {
                             <div className="grid grid-cols-2 gap-4">
                               {dropdownItems[item.key]?.items?.map(
                                 (dropdownItem, index) => (
-                                  <a
+                                  <Link
                                     key={index}
-                                    href={dropdownItem.href}
+                                    to={dropdownItem.href}
                                     className="group p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
                                     onClick={() => setActiveDropdown(null)}
                                   >
@@ -289,14 +303,14 @@ const Navbar = () => {
                                         </p>
                                       </div>
                                     </div>
-                                  </a>
+                                  </Link>
                                 ),
                               )}
                             </div>
                           </div>
                           <div className="bg-gray-50 px-6 py-4 border-t border-gray-100">
-                            <a
-                              href={`/${item.key}`}
+                            <Link
+                              to={`/${item.key}`}
                               className="text-[#E10C14] font-medium hover:text-[#000000] transition-colors duration-200 flex items-center"
                               onClick={() => setActiveDropdown(null)}
                             >
@@ -305,7 +319,7 @@ const Navbar = () => {
                                 ? item.label.toLowerCase()
                                 : ''}
                               <ChevronRight className="w-4 h-4 ml-2" />
-                            </a>
+                            </Link>
                           </div>
                         </motion.div>
                       )}
@@ -359,13 +373,17 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <div key={item.label}>
                   {item.type === 'link' ? (
-                    <a
-                      href={item.href}
-                      className="text-[#6D7280] hover:text-[#0A2846] font-medium py-2 block"
+                    <Link
+                      to={item.href}
+                      className={`font-medium py-2 block transition-colors ${
+                        isLinkActive(item.href)
+                          ? 'text-[#D71C1C]'
+                          : 'text-[#6D7280] hover:text-[#D71C1C]'
+                      }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   ) : (
                     <div className="border-b border-gray-100 pb-2">
                       <button
@@ -394,9 +412,9 @@ const Navbar = () => {
                           >
                             {dropdownItems[item.key]?.items?.map(
                               (dropdownItem, index) => (
-                                <a
+                                <Link
                                   key={index}
-                                  href={dropdownItem.href}
+                                  to={dropdownItem.href}
                                   className="block py-2 text-[#6D7280] hover:text-[#000000]"
                                   onClick={() => {
                                     setIsMobileMenuOpen(false);
@@ -409,11 +427,11 @@ const Navbar = () => {
                                     </div>
                                     <span>{dropdownItem.title}</span>
                                   </div>
-                                </a>
+                                </Link>
                               ),
                             )}
-                            <a
-                              href={`/${item.key}`}
+                            <Link
+                              to={`/${item.key}`}
                               className="block py-2 text-[#E10C14] font-medium"
                               onClick={() => {
                                 setIsMobileMenuOpen(false);
@@ -421,7 +439,7 @@ const Navbar = () => {
                               }}
                             >
                               Voir tout →
-                            </a>
+                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>

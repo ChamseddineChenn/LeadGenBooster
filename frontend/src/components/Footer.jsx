@@ -1,187 +1,195 @@
-import { useState } from 'react';
-import {
-  Phone,
-  Mail,
-  MessageSquare,
-  Facebook,
-  Linkedin,
-  Instagram,
-  ChevronUp,
-} from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter } from 'lucide-react';
+import * as assets from '../assets/assets';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // Handle subscription logic
-    console.log('Subscribed:', email);
-    setEmail('');
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0A2846] text-white pt-16 pb-8">
-      <div className="container">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Logo & Mission */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
+    <footer className="bg-black text-gray-300">
+      {/* Main Footer */}
+      <div className="max-w-[1200px] mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2 mb-6">
               <img
-                src="/src/assets/LOGO LEADGEN BOOSTER.svg"
-                alt="LeadGen Booster"
-                className="h-12 w-auto"
+                src={assets.logoWhite}
+                alt="Lead Gen Booster"
+                className="h-10 w-auto"
               />
-              <span className="text-2xl font-bold">LeadGen Booster</span>
             </div>
-            <p className="text-white/80 mb-6">
-              Nous transformons la prospection téléphonique en opportunités
-              commerciales concrètes. Des solutions sur mesure pour accélérer
-              votre croissance au Québec.
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+              Votre partenaire de confiance pour la génération de leads et la
+              prospection commerciale.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex gap-4">
               <a
                 href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#E10C14] transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#E10C14] transition-colors"
+                className="text-gray-400 hover:text-[#D71C1C] transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#E10C14] transition-colors"
+                className="text-gray-400 hover:text-[#D71C1C] transition-colors"
               >
-                <Instagram className="w-5 h-5" />
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-[#D71C1C] transition-colors"
+              >
+                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
 
-          {/* Pages */}
+          {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">Pages</h3>
+            <h3 className="text-white font-bold mb-6">Services</h3>
             <ul className="space-y-3">
-              {[
-                'Services',
-                'Processus',
-                'Tarifs',
-                'FAQ',
-                'Blog & Articles',
-                'Contact',
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/services"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Tous les Services
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Prospection Téléphonique
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Prise de Rendez-vous
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Qualification de Leads
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Relance Clients
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Company */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">Légal</h3>
+            <h3 className="text-white font-bold mb-6">Entreprise</h3>
             <ul className="space-y-3">
-              {[
-                'Mentions légales',
-                'Politique de confidentialité',
-                'Cookies',
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/about"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  À Propos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about/notre-equipe"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Notre Équipe
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about/carrieres"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Carrières
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blogs"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">Contact</h3>
+            <h3 className="text-white font-bold mb-6">Contact</h3>
             <div className="space-y-4">
-              <a
-                href="tel:+15145551234"
-                className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                <span>+1 (514) 555-1234</span>
-              </a>
-              <a
-                href="mailto:contact@callinova.ca"
-                className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                <span>contact@callinova.ca</span>
-              </a>
-              <a
-                href="https://wa.me/15145551234"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-[#25D366] rounded-lg hover:bg-[#20b858] transition-colors"
-              >
-                <MessageSquare className="w-5 h-5 mr-2" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-
-            {/* Newsletter */}
-            <div className="mt-8">
-              <h4 className="text-sm font-bold mb-3">NEWSLETTER</h4>
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Votre email"
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg placeholder-white/50 focus:outline-none focus:border-[#E10C14]"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2 bg-[#E10C14] rounded-lg hover:bg-[#C00A11] transition-colors font-medium"
-                >
-                  S'abonner
-                </button>
-              </form>
+              <div className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-gray-400 text-sm">+1 (514) 555-0000</p>
+                  <p className="text-gray-500 text-xs">Lun-Ven: 9h-18h EST</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
+                <p className="text-gray-400 text-sm">
+                  contact@leadgenbooster.ca
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
+                <p className="text-gray-400 text-sm">
+                  123 Rue du Commerce
+                  <br />
+                  Montréal, QC H2X 1Y8
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-white/60 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} LeadGen Booster. Tous droits
-              réservés.
-            </div>
-            <div className="text-white/60 text-sm">
-              Basé à Montréal, Québec • TVQ 123456789
-            </div>
+        <div className="border-t border-gray-800 my-12" />
+
+        {/* Bottom Footer */}
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="text-gray-400 text-sm text-center md:text-left mb-6 md:mb-0">
+            <p>
+              © {currentYear} Lead Gen Booster. Tous les droits réservés. |{' '}
+              <a href="#" className="hover:text-[#D71C1C] transition-colors">
+                Politique de Confidentialité
+              </a>{' '}
+              |{' '}
+              <a href="#" className="hover:text-[#D71C1C] transition-colors">
+                Conditions d'Utilisation
+              </a>
+            </p>
+          </div>
+          <div className="text-gray-400 text-sm">
+            Conçu et construit avec ❤️ par Code Anvil
           </div>
         </div>
-
-        {/* Back to Top Button */}
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-[#E10C14] rounded-full flex items-center justify-center shadow-lg hover:bg-[#C00A11] transition-colors z-50"
-          aria-label="Retour en haut"
-        >
-          <ChevronUp className="w-6 h-6" />
-        </button>
       </div>
     </footer>
   );

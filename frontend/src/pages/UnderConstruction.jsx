@@ -23,7 +23,11 @@ const UnderConstruction = () => {
       <div className="max-w-[1100px] mx-auto ">
         <div className="flex flex-col items-center">
           {/* Logo */}
-          <img src={assets.logoMain} alt="LeadGen Booster" className="h-48 w-auto" />
+          <img
+            src={assets.logoMain}
+            alt="LeadGen Booster"
+            className="h-48 w-auto"
+          />
         </div>
       </div>
 
@@ -115,7 +119,11 @@ const UnderConstruction = () => {
               {/* Red icon circle */}
               <div className="flex justify-center mb-6">
                 <div className="w-16 h-16 rounded-full bg-[#D71C1C] flex items-center justify-center shadow-lg">
-                  <img src={service.icon} alt={service.title} className="w-8 h-8" />
+                  <img
+                    src={service.icon}
+                    alt={service.title}
+                    className="w-8 h-8"
+                  />
                 </div>
               </div>
 
