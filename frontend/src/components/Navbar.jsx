@@ -1,6 +1,7 @@
 // Navbar.jsx
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import * as assets from '../assets/assets';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -214,7 +215,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <img
-              src="/src/assets/LOGO LEADGEN BOOSTER.svg"
+              src={assets.logoMain}
               alt="LeadGen Booster"
               className="h-20 w-auto"
             />
