@@ -1,83 +1,88 @@
-import React, { useState } from 'react';
-import { ArrowRight, Calendar, User } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Calendar, User, BookOpen, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import NewsletterForm from '../components/NewsletterForm';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const EmptyState = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="col-span-full flex flex-col items-center justify-center py-20"
+  >
+    <motion.div
+      animate={{
+        y: [0, -10, 0],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6"
+    >
+      <BookOpen className="w-12 h-12 text-gray-400" />
+    </motion.div>
+    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+      Aucun article pour le moment
+    </h3>
+    <p className="text-gray-500 text-center max-w-md">
+      Nous préparons du contenu de qualité pour vous. Revenez bientôt pour
+      découvrir nos derniers articles et conseils en prospection commerciale.
+    </p>
+  </motion.div>
+);
+
+const LoadingState = () => (
+  <div className="col-span-full flex items-center justify-center py-20">
+    <Loader2 className="w-8 h-8 animate-spin text-[#D71C1C]" />
+  </div>
+);
 
 const Blogs = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const blogs = [
-    {
-      id: 1,
-      category: 'conseils',
-      title: '5 Stratégies Éprouvées pour Augmenter votre Taux de Conversion',
-      excerpt:
-        'Découvrez les meilleures pratiques utilisées par les entreprises les plus performantes pour convertir leurs prospects...',
-      date: '15 Février 2026',
-      author: 'Marc Dubois',
-      readTime: '5 min de lecture',
-      image: 'bg-gradient-to-br from-[#D71C1C] to-[#B01818]',
-    },
-    {
-      id: 2,
-      category: 'tendances',
-      title: 'Les Tendances du Télémarketing en 2026',
-      excerpt:
-        'Explorez les dernières tendances et innovations dans le domaine du télémarketing et de la prospection commerciale...',
-      date: '10 Février 2026',
-      author: 'Sophie Martin',
-      readTime: '7 min de lecture',
-      image: 'bg-gradient-to-br from-[#6B7280] to-[#4B5563]',
-    },
-    {
-      id: 3,
-      category: 'etudes',
-      title: 'Étude de Cas: Comment TechCorp a Augmenté ses Ventes de 150%',
-      excerpt:
-        "Cas d'étude détaillé montrant comment nos solutions ont transformé le pipeline commercial d'une entreprise leader...",
-      date: '8 Février 2026',
-      author: 'Jean Lefebvre',
-      readTime: '10 min de lecture',
-      image: 'bg-gradient-to-br from-[#059669] to-[#027a48]',
-    },
-    {
-      id: 4,
-      category: 'conseils',
-      title: 'Guide Complet: Scripts de Prospection Efficaces',
-      excerpt:
-        'Les meilleurs scripts télephoniques et les techniques de communication qui convertissent vraiment les prospects...',
-      date: '5 Février 2026',
-      author: 'Marie Rousseau',
-      readTime: '8 min de lecture',
-      image: 'bg-gradient-to-br from-[#1e3a8a] to-[#1e1b4b]',
-    },
-    {
-      id: 5,
-      category: 'technologie',
-      title: 'Les Meilleurs Outils de Prospection en 2026',
-      excerpt:
-        "Comparaison complète des outils CRM, d'automatisation et de prospection les plus performants du marché...",
-      date: '1 Février 2026',
-      author: 'Philippe Leroy',
-      readTime: '9 min de lecture',
-      image: 'bg-gradient-to-br from-[#7c3aed] to-[#5b21b6]',
-    },
-    {
-      id: 6,
-      category: 'legislation',
-      title:
-        'Législation Québécoise: Ce que Vous Devez Savoir sur la Prospection',
-      excerpt:
-        'Guide complet de la conformité légale pour vos campagnes de prospection téléphonique au Québec...',
-      date: '28 Janvier 2026',
-      author: 'Nathalie Gagnon',
-      readTime: '6 min de lecture',
-      image: 'bg-gradient-to-br from-[#ea580c] to-[#c2410c]',
-    },
-  ];
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const url =
+          selectedCategory === 'all'
+            ? `${API_URL}/blogs`
+            : `${API_URL}/blogs?category=${selectedCategory}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (res.ok) {
+          setBlogs(data.blogs || []);
+        } else {
+          setError(data.message || 'Erreur lors du chargement');
+        }
+      } catch {
+        setError('Impossible de charger les articles');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const filteredBlogs =
-    selectedCategory === 'all'
-      ? blogs
-      : blogs.filter((blog) => blog.category === selectedCategory);
+    fetchBlogs();
+  }, [selectedCategory]);
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-CA', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white pt-24">
@@ -100,84 +105,106 @@ const Blogs = () => {
         {/* Category Filter */}
         <div className="flex flex-wrap gap-4 justify-center mb-12">
           {[
-            'Tous',
-            'Conseils',
-            'Tendances',
-            'Études',
-            'Technologie',
-            'Législation',
+            { label: 'Tous', value: 'all' },
+            { label: 'Conseils', value: 'conseils' },
+            { label: 'Tendances', value: 'tendances' },
+            { label: 'Études', value: 'etudes' },
+            { label: 'Technologie', value: 'technologie' },
+            { label: 'Législation', value: 'legislation' },
           ].map((category) => (
             <button
-              key={category}
-              onClick={() =>
-                setSelectedCategory(
-                  category === 'Tous' ? 'all' : category.toLowerCase(),
-                )
-              }
+              key={category.value}
+              onClick={() => setSelectedCategory(category.value)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
-                selectedCategory ===
-                (category === 'Tous' ? 'all' : category.toLowerCase())
+                selectedCategory === category.value
                   ? 'bg-[#D71C1C] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              {category}
+              {category.label}
             </button>
           ))}
         </div>
 
+        {/* Error State */}
+        {error && <div className="text-center py-10 text-red-500">{error}</div>}
+
         {/* Blogs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredBlogs.map((blog) => (
-            <article
-              key={blog.id}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
-            >
-              {/* Image */}
-              <div
-                className={`h-48 ${blog.image} flex items-center justify-center text-white text-4xl font-bold`}
-              >
-                {blog.id}
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs font-semibold text-[#D71C1C] uppercase">
-                    {blog.category}
-                  </span>
-                  <span className="text-xs text-gray-500">•</span>
-                  <span className="text-xs text-gray-500">{blog.readTime}</span>
-                </div>
-
-                <h3 className="text-lg font-bold text-black mb-3 line-clamp-2 group-hover:text-[#D71C1C] transition-colors">
-                  {blog.title}
-                </h3>
-
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {blog.excerpt}
-                </p>
-
-                {/* Meta */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-2">
-                    <User className="w-4 h-4 text-gray-400" />
-                    <span className="text-xs text-gray-600">{blog.author}</span>
+          {loading ? (
+            <LoadingState />
+          ) : blogs.length === 0 ? (
+            <EmptyState />
+          ) : (
+            blogs.map((blog) => (
+              <Link key={blog._id} to={`/blogs/${blog.slug}`}>
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
+                >
+                  {/* Image */}
+                  <div
+                    className={`h-48 ${blog.coverGradient || 'bg-gradient-to-br from-[#D71C1C] to-[#B01818]'} flex items-center justify-center text-white text-4xl font-bold`}
+                  >
+                    {blog.coverImage ? (
+                      <img
+                        src={blog.coverImage}
+                        alt={blog.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <BookOpen className="w-12 h-12" />
+                    )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-xs text-gray-600">{blog.date}</span>
-                  </div>
-                </div>
 
-                {/* Read More */}
-                <button className="mt-4 text-[#D71C1C] font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Lire l'article
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </article>
-          ))}
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold text-[#D71C1C] uppercase">
+                        {blog.category}
+                      </span>
+                      <span className="text-xs text-gray-500">•</span>
+                      <span className="text-xs text-gray-500">
+                        {blog.readTime} min de lecture
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-black mb-3 line-clamp-2 group-hover:text-[#D71C1C] transition-colors">
+                      {blog.title}
+                    </h3>
+
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {blog.excerpt}
+                    </p>
+
+                    {/* Meta */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-2">
+                        <User className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs text-gray-600">
+                          {blog.author}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs text-gray-600">
+                          {formatDate(blog.publishedAt)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Read More */}
+                    <button className="mt-4 text-[#D71C1C] font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Lire l'article
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </motion.article>
+              </Link>
+            ))
+          )}
         </div>
       </section>
 
@@ -192,16 +219,7 @@ const Blogs = () => {
             articles, conseils et ressources directement dans votre boîte de
             réception.
           </p>
-          <div className="flex gap-2">
-            <input
-              type="email"
-              placeholder="Votre adresse email"
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#D71C1C]"
-            />
-            <button className="bg-[#D71C1C] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#B01818] transition-colors">
-              S'inscrire
-            </button>
-          </div>
+          <NewsletterForm />
         </div>
       </section>
     </div>

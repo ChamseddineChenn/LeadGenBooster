@@ -198,3 +198,67 @@ body {
 .bg-brand-background {
   background-color: var(--color-background);
 }
+
+/* ===== Blog Content Display – Prevent Overflow ===== */
+.blog-content {
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.blog-content p,
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content li,
+.blog-content a,
+.blog-content span,
+.blog-content strong,
+.blog-content em,
+.blog-content u {
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal !important;
+  max-width: 100%;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.blog-content ul {
+  list-style-type: disc;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+}
+
+.blog-content li {
+  margin-bottom: 0.5em;
+  display: list-item;
+  list-style-position: outside;
+}
+
+/* Override any Quill inline styles that cause overflow */
+.blog-content [style] {
+  white-space: normal !important;
+}
+
+.blog-content .ql-indent-1 {
+  padding-left: 1.5em;
+}
+.blog-content .ql-indent-2 {
+  padding-left: 3em;
+}

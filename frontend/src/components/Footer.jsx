@@ -59,36 +59,36 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services/creation-graphique"
                   className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
                 >
-                  Prospection Téléphonique
-                </a>
+                  Création Graphique
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services/developpement-web"
                   className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
                 >
-                  Prise de Rendez-vous
-                </a>
+                  Développement Web
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services/prospection-commerciale-b2b"
                   className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
                 >
-                  Qualification de Leads
-                </a>
+                  Prospection B2B
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services/prise-rdv-qualifies"
                   className="text-gray-400 hover:text-[#D71C1C] transition-colors text-sm"
                 >
-                  Relance Clients
-                </a>
+                  Prise de RDV Qualifiés
+                </Link>
               </li>
             </ul>
           </div>
@@ -147,22 +147,22 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-gray-400 text-sm">+1 (514) 555-0000</p>
-                  <p className="text-gray-500 text-xs">Lun-Ven: 9h-18h EST</p>
+                  <p className="text-gray-400 text-sm">98 635 324</p>
+                  <p className="text-gray-500 text-xs">Lun-Ven: 9h-18h</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-400 text-sm">
-                  contact@leadgenbooster.ca
+                  contact@leadgen-booster.com
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-400 text-sm">
-                  123 Rue du Commerce
+                  39, Bis av Khereddine Pacha
                   <br />
-                  Montréal, QC H2X 1Y8
+                  5ème étage Montplaisir – Tunis
                 </p>
               </div>
             </div>

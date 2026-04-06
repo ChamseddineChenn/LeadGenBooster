@@ -1,0 +1,32 @@
+/* ===== Quill Editor Overrides ===== */
+
+/* Prevent text overflow in Quill editor */
+.ql-editor {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.ql-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure Quill toolbar wraps properly on mobile */
+.ql-toolbar {
+  flex-wrap: wrap;
+}
+
+/* Quill snow theme border fixes */
+.ql-toolbar.ql-snow {
+  border-color: #e5e7eb;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.ql-container.ql-snow {
+  border-color: #e5e7eb;
+  border-radius: 0 0 0.5rem 0.5rem;
+}

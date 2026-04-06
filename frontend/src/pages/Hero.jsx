@@ -15,7 +15,7 @@ const Hero = () => {
           >
             <div className="inline-flex items-center space-x-2 bg-[#E10C14]/10 text-[#E10C14] font-semibold px-4 py-2 rounded-full mb-6">
               <Target className="w-4 h-4" />
-              <span>Spécialistes en prospection Québec</span>
+              <span>Spécialistes en prospection commerciale</span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#000000] leading-tight mb-6">

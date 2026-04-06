@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
 import {
   Building2,
   Home,
@@ -13,43 +12,35 @@ import {
 } from 'lucide-react';
 
 const IndustriesWeServe = () => {
-  const [performanceWidths, setPerformanceWidths] = useState([]);
-  const hasGenerated = useRef(false);
-
   const industries = [
     {
       icon: Building2,
       name: 'Services financiers',
       description: 'Banques, institutions financières et sociétés de courtage',
-      clients: '15+ clients',
       color: '#000000',
     },
     {
       icon: Home,
       name: 'Immobilier',
       description: 'Agences immobilières, promoteurs et gestionnaires de biens',
-      clients: '28+ clients',
       color: '#E10C14',
     },
     {
       icon: Shield,
       name: 'Assurances',
       description: "Courtiers, assureurs et sociétés de services d'assurance",
-      clients: '22+ clients',
       color: '#000000',
     },
     {
       icon: Stethoscope,
       name: 'Médical / paramédical',
       description: 'Cliniques, cabinets médicaux et laboratoires de santé',
-      clients: '18+ clients',
       color: '#E10C14',
     },
     {
       icon: GraduationCap,
       name: 'Formation & coaching',
       description: 'Centres de formation, écoles et coachs professionnels',
-      clients: '14+ clients',
       color: '#000000',
     },
     {
@@ -57,26 +48,9 @@ const IndustriesWeServe = () => {
       name: 'Associations & ONG',
       description:
         'Organismes à but non lucratif et associations professionnelles',
-      clients: '12+ clients',
       color: '#E10C14',
     },
   ];
-
-  // Use setTimeout to defer the random generation
-  useEffect(() => {
-    if (!hasGenerated.current) {
-      const timeoutId = setTimeout(() => {
-        const widths = industries.map(() => Math.random() * 30 + 60);
-        setPerformanceWidths(widths);
-        hasGenerated.current = true;
-      }, 0);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [industries.length]);
-
-  // Alternative: Use fixed values instead of random
-  // const performanceWidths = [78, 85, 72, 88, 65, 70];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -151,45 +125,10 @@ const IndustriesWeServe = () => {
                     {industry.name}
                   </h3>
                   <p className="text-[#6D7280] mb-4">{industry.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-[#F5F7FA] text-[#0A2846]">
-                      {industry.clients}
-                    </span>
-                    <div className="flex items-center text-[#1CA7A6] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-sm mr-2">
-                        Voir les études de cas
-                      </span>
-                      <ChevronRight className="w-4 h-4" />
-                    </div>
+                  <div className="flex items-center text-[#1CA7A6] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm mr-2">En savoir plus</span>
+                    <ChevronRight className="w-4 h-4" />
                   </div>
-                </div>
-              </div>
-
-              {/* Stats Bar */}
-              <div className="mt-6">
-                <div className="flex items-center justify-between text-sm text-[#6D7280] mb-2">
-                  <span>Performance moyenne</span>
-                  <span className="font-medium text-[#1CA7A6]">+42%</span>
-                </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  {performanceWidths.length > 0 ? (
-                    <motion.div
-                      className="h-full rounded-full"
-                      style={{ backgroundColor: industry.color }}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${performanceWidths[index]}%` }}
-                      transition={{ duration: 1, delay: 0.2 }}
-                      viewport={{ once: true }}
-                    />
-                  ) : (
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        backgroundColor: industry.color,
-                        width: '0%',
-                      }}
-                    />
-                  )}
                 </div>
               </div>
             </motion.div>

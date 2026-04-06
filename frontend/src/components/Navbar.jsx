@@ -47,39 +47,56 @@ const Navbar = () => {
     services: {
       title: 'Nos Services',
       icon: Phone,
-      items: [
+      poles: [
         {
-          title: 'Prise de rendez-vous',
-          description:
-            'Planification de rendez-vous qualifiés pour vos équipes',
-          href: '/services/prise-de-rendez-vous',
+          name: 'Communication',
+          items: [
+            {
+              title: 'Création Graphique',
+              description: 'Logo, charte graphique et identité visuelle',
+              href: '/services/creation-graphique',
+            },
+            {
+              title: 'Développement Web',
+              description: 'Sites vitrines, landing pages et e-commerce',
+              href: '/services/developpement-web',
+            },
+            {
+              title: 'Réseaux Sociaux',
+              description: 'Community management et stratégie éditoriale',
+              href: '/services/gestion-reseaux-sociaux',
+            },
+            {
+              title: 'Rédaction & SEO',
+              description: 'Contenu optimisé et référencement naturel',
+              href: '/services/redaction-contenu-seo',
+            },
+          ],
         },
         {
-          title: 'Qualification de leads',
-          description:
-            'Filtrage et qualification de prospects selon vos critères',
-          href: '/services/qualification-leads',
-        },
-        {
-          title: 'Prospection téléphonique',
-          description: 'Campagnes de prospection ciblées pour votre marché',
-          href: '/services/prospection-telephonique',
-        },
-        {
-          title: 'Relance clients',
-          description:
-            'Réactivation et fidélisation de votre clientèle existante',
-          href: '/services/relance-clients',
-        },
-        {
-          title: 'Enquêtes et sondages',
-          description: 'Collecte de données et feedback pour vos décisions',
-          href: '/services/enquetes-sondages',
-        },
-        {
-          title: 'Renouvellements',
-          description: "Gestion des renouvellements d'abonnements et contrats",
-          href: '/services/renouvellements',
+          name: 'Prospection & Visibilité',
+          items: [
+            {
+              title: 'Prospection B2B',
+              description: 'Ciblage et approche multicanale des décideurs',
+              href: '/services/prospection-commerciale-b2b',
+            },
+            {
+              title: 'Prise de RDV Qualifiés',
+              description: 'Rendez-vous BANT avec les bons interlocuteurs',
+              href: '/services/prise-rdv-qualifies',
+            },
+            {
+              title: 'Relance Clients Inactifs',
+              description: 'Réactivation de votre portefeuille dormant',
+              href: '/services/relance-clients-inactifs',
+            },
+            {
+              title: 'Formation Commerciale',
+              description: 'Cold calling, closing et social selling',
+              href: '/services/formation-commerciale',
+            },
+          ],
         },
       ],
     },
@@ -114,9 +131,9 @@ const Navbar = () => {
           href: '/blogs/technologie-outils',
         },
         {
-          title: 'Législation Québec',
+          title: 'Législation',
           description: 'Conformité et réglementations en vigueur',
-          href: '/blogs/legislation-quebec',
+          href: '/blogs/legislation',
         },
       ],
     },
@@ -126,7 +143,7 @@ const Navbar = () => {
       items: [
         {
           title: 'Qui sommes-nous',
-          description: 'Notre histoire et notre expertise au Québec',
+          description: 'Notre histoire et notre expertise',
           href: '/about/qui-sommes-nous',
         },
         {
@@ -149,11 +166,6 @@ const Navbar = () => {
           description: 'Comment nous garantissons des résultats mesurables',
           href: '/about/notre-processus',
         },
-        {
-          title: 'Carrières',
-          description: 'Rejoignez notre équipe de téléprospecteurs',
-          href: '/about/carrieres',
-        },
       ],
     },
   };
@@ -162,6 +174,7 @@ const Navbar = () => {
     { label: 'Accueil', href: '/', type: 'link' },
     { label: 'Services', type: 'dropdown', key: 'services', href: '/services' },
     { label: 'Blogs', type: 'dropdown', key: 'blogs', href: '/blogs' },
+    { label: 'Carrières', href: '/carrieres', type: 'link' },
     { label: 'À propos', type: 'dropdown', key: 'about', href: '/about' },
     { label: 'Contact', href: '/contact', type: 'link' },
   ];
@@ -265,7 +278,9 @@ const Navbar = () => {
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          className="absolute top-full left-0 mt-2 w-96 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50"
+                          className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
+                            item.key === 'services' ? 'w-[700px]' : 'w-96'
+                          }`}
                         >
                           <div className="p-6">
                             <div className="flex items-center mb-4">
@@ -282,36 +297,82 @@ const Navbar = () => {
                                 {dropdownItems[item.key]?.title || ''}
                               </h3>
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
-                              {dropdownItems[item.key]?.items?.map(
-                                (dropdownItem, index) => (
-                                  <Link
-                                    key={index}
-                                    to={dropdownItem.href}
-                                    className="group p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-                                    onClick={() => setActiveDropdown(null)}
-                                  >
-                                    <div className="flex items-start">
-                                      <div className="w-8 h-8 rounded-lg bg-[#000000]/5 flex items-center justify-center mr-3 group-hover:bg-[#E10C14]/10 transition-colors duration-200">
-                                        <ChevronRight className="w-4 h-4 text-[#000000] group-hover:text-[#E10C14]" />
-                                      </div>
-                                      <div>
-                                        <h4 className="font-medium text-[#000000] mb-1">
-                                          {dropdownItem.title}
-                                        </h4>
-                                        <p className="text-xs text-[#6D7280]">
-                                          {dropdownItem.description}
-                                        </p>
+
+                            {/* Two-pole layout for services */}
+                            {item.key === 'services' &&
+                            dropdownItems[item.key]?.poles ? (
+                              <div className="grid grid-cols-2 gap-6">
+                                {dropdownItems[item.key].poles.map(
+                                  (pole, poleIdx) => (
+                                    <div key={poleIdx}>
+                                      <h4 className="text-sm font-bold text-[#D71C1C] uppercase tracking-wider mb-3 border-b border-gray-100 pb-2">
+                                        {pole.name}
+                                      </h4>
+                                      <div className="space-y-1">
+                                        {pole.items.map(
+                                          (dropdownItem, index) => (
+                                            <Link
+                                              key={index}
+                                              to={dropdownItem.href}
+                                              className="group p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 block"
+                                              onClick={() =>
+                                                setActiveDropdown(null)
+                                              }
+                                            >
+                                              <div className="flex items-start">
+                                                <div className="w-7 h-7 rounded-lg bg-[#000000]/5 flex items-center justify-center mr-3 group-hover:bg-[#E10C14]/10 transition-colors duration-200 shrink-0 mt-0.5">
+                                                  <ChevronRight className="w-3.5 h-3.5 text-[#000000] group-hover:text-[#E10C14]" />
+                                                </div>
+                                                <div>
+                                                  <h4 className="font-medium text-[#000000] text-sm mb-0.5">
+                                                    {dropdownItem.title}
+                                                  </h4>
+                                                  <p className="text-xs text-[#6D7280]">
+                                                    {dropdownItem.description}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </Link>
+                                          ),
+                                        )}
                                       </div>
                                     </div>
-                                  </Link>
-                                ),
-                              )}
-                            </div>
+                                  ),
+                                )}
+                              </div>
+                            ) : (
+                              /* Standard grid for other dropdowns */
+                              <div className="grid grid-cols-2 gap-4">
+                                {dropdownItems[item.key]?.items?.map(
+                                  (dropdownItem, index) => (
+                                    <Link
+                                      key={index}
+                                      to={dropdownItem.href}
+                                      className="group p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                                      onClick={() => setActiveDropdown(null)}
+                                    >
+                                      <div className="flex items-start">
+                                        <div className="w-8 h-8 rounded-lg bg-[#000000]/5 flex items-center justify-center mr-3 group-hover:bg-[#E10C14]/10 transition-colors duration-200">
+                                          <ChevronRight className="w-4 h-4 text-[#000000] group-hover:text-[#E10C14]" />
+                                        </div>
+                                        <div>
+                                          <h4 className="font-medium text-[#000000] mb-1">
+                                            {dropdownItem.title}
+                                          </h4>
+                                          <p className="text-xs text-[#6D7280]">
+                                            {dropdownItem.description}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </Link>
+                                  ),
+                                )}
+                              </div>
+                            )}
                           </div>
                           <div className="bg-gray-50 px-6 py-4 border-t border-gray-100">
                             <Link
-                              to={`/${item.key}`}
+                              to={`/${item.key === 'about' ? 'about' : item.key}`}
                               className="text-[#E10C14] font-medium hover:text-[#000000] transition-colors duration-200 flex items-center"
                               onClick={() => setActiveDropdown(null)}
                             >
@@ -411,28 +472,59 @@ const Navbar = () => {
                             exit={{ opacity: 0, height: 0 }}
                             className="ml-4 mt-2 space-y-3"
                           >
-                            {dropdownItems[item.key]?.items?.map(
-                              (dropdownItem, index) => (
-                                <Link
-                                  key={index}
-                                  to={dropdownItem.href}
-                                  className="block py-2 text-[#6D7280] hover:text-[#000000]"
-                                  onClick={() => {
-                                    setIsMobileMenuOpen(false);
-                                    setActiveDropdown(null);
-                                  }}
-                                >
-                                  <div className="flex items-center">
-                                    <div className="w-6 h-6 rounded bg-[#000000]/5 flex items-center justify-center mr-3">
-                                      <ChevronRight className="w-3 h-3" />
+                            {/* Two-pole layout for services mobile */}
+                            {item.key === 'services' &&
+                            dropdownItems[item.key]?.poles
+                              ? dropdownItems[item.key].poles.map(
+                                  (pole, poleIdx) => (
+                                    <div key={poleIdx} className="mb-3">
+                                      <h4 className="text-xs font-bold text-[#D71C1C] uppercase tracking-wider mb-2 pb-1 border-b border-gray-100">
+                                        {pole.name}
+                                      </h4>
+                                      {pole.items.map((dropdownItem, index) => (
+                                        <Link
+                                          key={index}
+                                          to={dropdownItem.href}
+                                          className="block py-2 text-[#6D7280] hover:text-[#000000]"
+                                          onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            setActiveDropdown(null);
+                                          }}
+                                        >
+                                          <div className="flex items-center">
+                                            <div className="w-6 h-6 rounded bg-[#000000]/5 flex items-center justify-center mr-3">
+                                              <ChevronRight className="w-3 h-3" />
+                                            </div>
+                                            <span>{dropdownItem.title}</span>
+                                          </div>
+                                        </Link>
+                                      ))}
                                     </div>
-                                    <span>{dropdownItem.title}</span>
-                                  </div>
-                                </Link>
-                              ),
-                            )}
+                                  ),
+                                )
+                              : /* Standard items for other dropdowns */
+                                dropdownItems[item.key]?.items?.map(
+                                  (dropdownItem, index) => (
+                                    <Link
+                                      key={index}
+                                      to={dropdownItem.href}
+                                      className="block py-2 text-[#6D7280] hover:text-[#000000]"
+                                      onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setActiveDropdown(null);
+                                      }}
+                                    >
+                                      <div className="flex items-center">
+                                        <div className="w-6 h-6 rounded bg-[#000000]/5 flex items-center justify-center mr-3">
+                                          <ChevronRight className="w-3 h-3" />
+                                        </div>
+                                        <span>{dropdownItem.title}</span>
+                                      </div>
+                                    </Link>
+                                  ),
+                                )}
                             <Link
-                              to={`/${item.key}`}
+                              to={`/${item.key === 'about' ? 'about' : item.key}`}
                               className="block py-2 text-[#E10C14] font-medium"
                               onClick={() => {
                                 setIsMobileMenuOpen(false);
