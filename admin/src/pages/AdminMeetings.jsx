@@ -26,7 +26,12 @@ const AdminMeetings = () => {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [meetings, setMeetings] = useState([]);
-  const [stats, setStats] = useState({ total: 0, enAttente: 0, confirme: 0, annule: 0 });
+  const [stats, setStats] = useState({
+    total: 0,
+    enAttente: 0,
+    confirme: 0,
+    annule: 0,
+  });
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -156,12 +161,19 @@ const AdminMeetings = () => {
 
   const formatDate = (dateStr) => {
     const d = new Date(dateStr);
-    return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+    return d.toLocaleDateString('fr-FR', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
   };
 
   const filteredMeetings = meetings.filter((m) => {
     const matchesSearch =
-      `${m.firstName} ${m.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      `${m.firstName} ${m.lastName}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
       (m.company || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
       (m.email || '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filter === 'all' || m.status === filter;
@@ -180,7 +192,9 @@ const AdminMeetings = () => {
     <div>
       {/* Toast */}
       {message && (
-        <div className={`fixed top-6 right-6 z-50 px-5 py-3 rounded-lg shadow-lg text-white text-sm font-medium ${message.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}>
+        <div
+          className={`fixed top-6 right-6 z-50 px-5 py-3 rounded-lg shadow-lg text-white text-sm font-medium ${message.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}
+        >
           {message.text}
         </div>
       )}
@@ -189,13 +203,23 @@ const AdminMeetings = () => {
       {deleteId && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-8 max-w-md w-full mx-4">
-            <h3 className="text-xl font-bold text-black mb-2">Confirmer la suppression</h3>
-            <p className="text-gray-600 mb-6">Êtes-vous sûr de vouloir supprimer ce rendez-vous ?</p>
+            <h3 className="text-xl font-bold text-black mb-2">
+              Confirmer la suppression
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Êtes-vous sûr de vouloir supprimer ce rendez-vous ?
+            </p>
             <div className="flex gap-3 justify-end">
-              <button onClick={() => setDeleteId(null)} className="px-4 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50">
+              <button
+                onClick={() => setDeleteId(null)}
+                className="px-4 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50"
+              >
                 Annuler
               </button>
-              <button onClick={deleteMeeting} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700">
+              <button
+                onClick={deleteMeeting}
+                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+              >
                 Supprimer
               </button>
             </div>
@@ -206,8 +230,12 @@ const AdminMeetings = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-black">Rendez-vous Planifiés</h1>
-          <p className="text-gray-500 mt-1">Suivez et gérez tous les rendez-vous avec vos clients.</p>
+          <h1 className="text-3xl font-bold text-black">
+            Rendez-vous Planifiés
+          </h1>
+          <p className="text-gray-500 mt-1">
+            Suivez et gérez tous les rendez-vous avec vos clients.
+          </p>
         </div>
         <button
           onClick={() => setShowSettings(!showSettings)}
@@ -222,8 +250,13 @@ const AdminMeetings = () => {
       {showSettings && availability && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-black">Paramètres de disponibilité</h2>
-            <button onClick={() => setShowSettings(false)} className="text-gray-400 hover:text-gray-600">
+            <h2 className="text-lg font-bold text-black">
+              Paramètres de disponibilité
+            </h2>
+            <button
+              onClick={() => setShowSettings(false)}
+              className="text-gray-400 hover:text-gray-600"
+            >
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -231,7 +264,9 @@ const AdminMeetings = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Active Days */}
             <div>
-              <label className="block text-sm font-semibold text-black mb-3">Jours actifs</label>
+              <label className="block text-sm font-semibold text-black mb-3">
+                Jours actifs
+              </label>
               <div className="flex flex-wrap gap-2">
                 {DAY_LABELS.map((label, i) => (
                   <button
@@ -251,25 +286,41 @@ const AdminMeetings = () => {
 
             {/* Hours */}
             <div>
-              <label className="block text-sm font-semibold text-black mb-3">Heures de travail</label>
+              <label className="block text-sm font-semibold text-black mb-3">
+                Heures de travail
+              </label>
               <div className="flex items-center gap-3">
                 <select
                   value={availability.startHour}
-                  onChange={(e) => setAvailability({ ...availability, startHour: parseInt(e.target.value) })}
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      startHour: parseInt(e.target.value),
+                    })
+                  }
                   className="px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C]"
                 >
                   {Array.from({ length: 24 }, (_, i) => (
-                    <option key={i} value={i}>{String(i).padStart(2, '0')}:00</option>
+                    <option key={i} value={i}>
+                      {String(i).padStart(2, '0')}:00
+                    </option>
                   ))}
                 </select>
                 <span className="text-gray-500 font-medium">à</span>
                 <select
                   value={availability.endHour}
-                  onChange={(e) => setAvailability({ ...availability, endHour: parseInt(e.target.value) })}
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      endHour: parseInt(e.target.value),
+                    })
+                  }
                   className="px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C]"
                 >
                   {Array.from({ length: 24 }, (_, i) => i + 1).map((h) => (
-                    <option key={h} value={h}>{String(h).padStart(2, '0')}:00</option>
+                    <option key={h} value={h}>
+                      {String(h).padStart(2, '0')}:00
+                    </option>
                   ))}
                 </select>
               </div>
@@ -277,25 +328,41 @@ const AdminMeetings = () => {
 
             {/* Lunch Break */}
             <div>
-              <label className="block text-sm font-semibold text-black mb-3">Pause déjeuner</label>
+              <label className="block text-sm font-semibold text-black mb-3">
+                Pause déjeuner
+              </label>
               <div className="flex items-center gap-3">
                 <select
                   value={availability.lunchStart ?? 12}
-                  onChange={(e) => setAvailability({ ...availability, lunchStart: parseInt(e.target.value) })}
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      lunchStart: parseInt(e.target.value),
+                    })
+                  }
                   className="px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C]"
                 >
                   {Array.from({ length: 24 }, (_, i) => (
-                    <option key={i} value={i}>{String(i).padStart(2, '0')}:00</option>
+                    <option key={i} value={i}>
+                      {String(i).padStart(2, '0')}:00
+                    </option>
                   ))}
                 </select>
                 <span className="text-gray-500 font-medium">à</span>
                 <select
                   value={availability.lunchEnd ?? 14}
-                  onChange={(e) => setAvailability({ ...availability, lunchEnd: parseInt(e.target.value) })}
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      lunchEnd: parseInt(e.target.value),
+                    })
+                  }
                   className="px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C]"
                 >
                   {Array.from({ length: 24 }, (_, i) => i + 1).map((h) => (
-                    <option key={h} value={h}>{String(h).padStart(2, '0')}:00</option>
+                    <option key={h} value={h}>
+                      {String(h).padStart(2, '0')}:00
+                    </option>
                   ))}
                 </select>
               </div>
@@ -303,12 +370,16 @@ const AdminMeetings = () => {
 
             {/* Slot Duration */}
             <div>
-              <label className="block text-sm font-semibold text-black mb-3">Durée du créneau</label>
+              <label className="block text-sm font-semibold text-black mb-3">
+                Durée du créneau
+              </label>
               <div className="flex gap-3">
                 {[60, 30].map((d) => (
                   <button
                     key={d}
-                    onClick={() => setAvailability({ ...availability, slotDuration: d })}
+                    onClick={() =>
+                      setAvailability({ ...availability, slotDuration: d })
+                    }
                     className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                       availability.slotDuration === d
                         ? 'bg-[#D71C1C] text-white'
@@ -323,13 +394,20 @@ const AdminMeetings = () => {
 
             {/* Max Advance Days */}
             <div>
-              <label className="block text-sm font-semibold text-black mb-3">Réservation max (jours à l&apos;avance)</label>
+              <label className="block text-sm font-semibold text-black mb-3">
+                Réservation max (jours à l&apos;avance)
+              </label>
               <input
                 type="number"
                 min="1"
                 max="90"
                 value={availability.maxAdvanceDays}
-                onChange={(e) => setAvailability({ ...availability, maxAdvanceDays: parseInt(e.target.value) || 30 })}
+                onChange={(e) =>
+                  setAvailability({
+                    ...availability,
+                    maxAdvanceDays: parseInt(e.target.value) || 30,
+                  })
+                }
                 className="px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] w-24"
               />
             </div>
@@ -341,7 +419,11 @@ const AdminMeetings = () => {
               disabled={savingAvailability}
               className="px-6 py-2.5 bg-[#D71C1C] text-white rounded-lg font-semibold hover:bg-[#B01818] transition-colors disabled:opacity-50 flex items-center gap-2"
             >
-              {savingAvailability ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+              {savingAvailability ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Check className="w-4 h-4" />
+              )}
               Enregistrer
             </button>
           </div>
@@ -351,10 +433,34 @@ const AdminMeetings = () => {
       {/* Status Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         {[
-          { key: 'all', label: 'Total', count: stats.total, icon: CalendarCheck, color: 'text-[#D71C1C]' },
-          { key: 'en attente', label: 'En Attente', count: stats.enAttente, icon: Clock, color: 'text-yellow-600' },
-          { key: 'confirmé', label: 'Confirmés', count: stats.confirme, icon: CheckCircle, color: 'text-green-600' },
-          { key: 'annulé', label: 'Annulés', count: stats.annule, icon: XCircle, color: 'text-red-500' },
+          {
+            key: 'all',
+            label: 'Total',
+            count: stats.total,
+            icon: CalendarCheck,
+            color: 'text-[#D71C1C]',
+          },
+          {
+            key: 'en attente',
+            label: 'En Attente',
+            count: stats.enAttente,
+            icon: Clock,
+            color: 'text-yellow-600',
+          },
+          {
+            key: 'confirmé',
+            label: 'Confirmés',
+            count: stats.confirme,
+            icon: CheckCircle,
+            color: 'text-green-600',
+          },
+          {
+            key: 'annulé',
+            label: 'Annulés',
+            count: stats.annule,
+            icon: XCircle,
+            color: 'text-red-500',
+          },
         ].map((card) => (
           <div
             key={card.key}
@@ -365,11 +471,17 @@ const AdminMeetings = () => {
             }`}
             onClick={() => setFilter(card.key)}
           >
-            <card.icon className={`w-8 h-8 mb-3 ${filter === card.key ? 'text-white' : card.color}`} />
-            <div className={`text-2xl font-bold ${filter === card.key ? 'text-white' : 'text-black'}`}>
+            <card.icon
+              className={`w-8 h-8 mb-3 ${filter === card.key ? 'text-white' : card.color}`}
+            />
+            <div
+              className={`text-2xl font-bold ${filter === card.key ? 'text-white' : 'text-black'}`}
+            >
               {card.count}
             </div>
-            <div className={`text-sm ${filter === card.key ? 'text-white/80' : 'text-gray-500'}`}>
+            <div
+              className={`text-sm ${filter === card.key ? 'text-white/80' : 'text-gray-500'}`}
+            >
               {card.label}
             </div>
           </div>
@@ -397,7 +509,9 @@ const AdminMeetings = () => {
             <div className="flex flex-col items-center justify-center text-gray-400">
               <Inbox className="w-12 h-12 mb-3" />
               <p className="text-sm font-medium">Aucun rendez-vous</p>
-              <p className="text-xs mt-1">Les rendez-vous planifiés apparaîtront ici.</p>
+              <p className="text-xs mt-1">
+                Les rendez-vous planifiés apparaîtront ici.
+              </p>
             </div>
           </div>
         ) : (

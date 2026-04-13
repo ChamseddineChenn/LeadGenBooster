@@ -20,8 +20,18 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const DAY_NAMES = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
 const MONTH_NAMES = [
-  'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre',
+  'Janvier',
+  'Février',
+  'Mars',
+  'Avril',
+  'Mai',
+  'Juin',
+  'Juillet',
+  'Août',
+  'Septembre',
+  'Octobre',
+  'Novembre',
+  'Décembre',
 ];
 
 const DEFAULT_AVAILABILITY = {
@@ -70,7 +80,14 @@ const BookingModal = () => {
     setSelectedSlot(null);
     setSlots([]);
     setError(null);
-    setForm({ firstName: '', lastName: '', email: '', phone: '', company: '', notes: '' });
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      notes: '',
+    });
 
     const fetchAvailability = async () => {
       try {
@@ -173,7 +190,8 @@ const BookingModal = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + (availability?.maxAdvanceDays || 30));
 
-  const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+  const getDaysInMonth = (year, month) =>
+    new Date(year, month + 1, 0).getDate();
   const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
 
   const isDateAvailable = (date) => {
@@ -183,17 +201,26 @@ const BookingModal = () => {
     if (!availability.activeDays.includes(date.getDay())) return false;
     if (availability.blockedDates?.length) {
       const dateStr = date.toISOString().split('T')[0];
-      if (availability.blockedDates.some((bd) => new Date(bd).toISOString().split('T')[0] === dateStr)) return false;
+      if (
+        availability.blockedDates.some(
+          (bd) => new Date(bd).toISOString().split('T')[0] === dateStr,
+        )
+      )
+        return false;
     }
     return true;
   };
 
   const prevMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1),
+    );
   };
 
   const nextMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1),
+    );
   };
 
   const renderCalendar = () => {
@@ -210,7 +237,8 @@ const BookingModal = () => {
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       const available = isDateAvailable(date);
-      const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+      const isSelected =
+        selectedDate && date.toDateString() === selectedDate.toDateString();
       const isToday = date.toDateString() === today.toDateString();
 
       cells.push(
@@ -237,7 +265,11 @@ const BookingModal = () => {
   };
 
   const canGoPrev = () => {
-    const prevEnd = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
+    const prevEnd = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth(),
+      0,
+    );
     return prevEnd >= today;
   };
 
@@ -272,9 +304,14 @@ const BookingModal = () => {
             <div className="bg-[#D71C1C] px-5 py-3.5 rounded-t-2xl flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <Calendar className="w-5 h-5 text-white" />
-                <h2 className="text-lg font-bold text-white">Réserver un appel</h2>
+                <h2 className="text-lg font-bold text-white">
+                  Réserver un appel
+                </h2>
               </div>
-              <button onClick={close} className="text-white/80 hover:text-white transition-colors">
+              <button
+                onClick={close}
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <X className="w-6 h-6" />
               </button>
             </div>
@@ -284,7 +321,10 @@ const BookingModal = () => {
               <div className="px-5 pt-4">
                 <div className="flex items-center">
                   {[1, 2, 3].map((s) => (
-                    <div key={s} className={`flex items-center ${s < 3 ? 'flex-1' : ''}`}>
+                    <div
+                      key={s}
+                      className={`flex items-center ${s < 3 ? 'flex-1' : ''}`}
+                    >
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all ${
                           s === step
@@ -297,14 +337,20 @@ const BookingModal = () => {
                         {s < step ? '✓' : s}
                       </div>
                       {s < 3 && (
-                        <div className={`flex-1 h-0.5 mx-2 ${s < step ? 'bg-green-500' : 'bg-gray-200'}`} />
+                        <div
+                          className={`flex-1 h-0.5 mx-2 ${s < step ? 'bg-green-500' : 'bg-gray-200'}`}
+                        />
                       )}
                     </div>
                   ))}
                 </div>
                 <div className="flex mt-1.5 text-xs text-gray-500">
                   {['Date', 'Heure', 'Infos'].map((label, i) => (
-                    <span key={label} className={i < 2 ? 'flex-1' : ''} style={{ paddingLeft: i === 0 ? '0.25rem' : 0 }}>
+                    <span
+                      key={label}
+                      className={i < 2 ? 'flex-1' : ''}
+                      style={{ paddingLeft: i === 0 ? '0.25rem' : 0 }}
+                    >
                       {label}
                     </span>
                   ))}
@@ -316,7 +362,9 @@ const BookingModal = () => {
               {/* Step 1: Calendar */}
               {step === 1 && (
                 <div>
-                  <p className="text-gray-600 text-sm mb-4">Choisissez une date disponible</p>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Choisissez une date disponible
+                  </p>
 
                   {/* Month Navigation */}
                   <div className="flex items-center justify-between mb-4">
@@ -328,9 +376,13 @@ const BookingModal = () => {
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <h3 className="text-lg font-bold text-black">
-                      {MONTH_NAMES[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+                      {MONTH_NAMES[currentMonth.getMonth()]}{' '}
+                      {currentMonth.getFullYear()}
                     </h3>
-                    <button onClick={nextMonth} className="p-2 rounded-lg hover:bg-gray-100">
+                    <button
+                      onClick={nextMonth}
+                      className="p-2 rounded-lg hover:bg-gray-100"
+                    >
                       <ChevronRight className="w-5 h-5" />
                     </button>
                   </div>
@@ -338,14 +390,19 @@ const BookingModal = () => {
                   {/* Day Headers */}
                   <div className="grid grid-cols-7 gap-1 mb-2">
                     {DAY_NAMES.map((d) => (
-                      <div key={d} className="text-center text-xs font-semibold text-gray-500 py-1">
+                      <div
+                        key={d}
+                        className="text-center text-xs font-semibold text-gray-500 py-1"
+                      >
                         {d}
                       </div>
                     ))}
                   </div>
 
                   {/* Calendar Grid */}
-                  <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
+                  <div className="grid grid-cols-7 gap-1">
+                    {renderCalendar()}
+                  </div>
                 </div>
               )}
 
@@ -362,10 +419,14 @@ const BookingModal = () => {
 
                   <div className="flex items-center gap-2 mb-4 bg-[#D71C1C]/5 px-4 py-3 rounded-lg">
                     <Calendar className="w-5 h-5 text-[#D71C1C]" />
-                    <span className="text-sm font-medium text-black capitalize">{formatSelectedDate()}</span>
+                    <span className="text-sm font-medium text-black capitalize">
+                      {formatSelectedDate()}
+                    </span>
                   </div>
 
-                  <p className="text-gray-600 text-sm mb-4">Choisissez un créneau horaire</p>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Choisissez un créneau horaire
+                  </p>
 
                   {loadingSlots ? (
                     <div className="flex items-center justify-center py-12">
@@ -374,7 +435,9 @@ const BookingModal = () => {
                   ) : slots.length === 0 ? (
                     <div className="text-center py-12">
                       <Clock className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-                      <p className="text-gray-500 text-sm">Aucun créneau disponible pour cette date</p>
+                      <p className="text-gray-500 text-sm">
+                        Aucun créneau disponible pour cette date
+                      </p>
                       <button
                         onClick={() => setStep(1)}
                         className="mt-3 text-[#D71C1C] text-sm font-medium hover:underline"
@@ -418,11 +481,15 @@ const BookingModal = () => {
                   <div className="flex flex-wrap gap-3 mb-5">
                     <div className="flex items-center gap-2 bg-[#D71C1C]/5 px-3 py-2 rounded-lg">
                       <Calendar className="w-4 h-4 text-[#D71C1C]" />
-                      <span className="text-sm font-medium capitalize">{formatSelectedDate()}</span>
+                      <span className="text-sm font-medium capitalize">
+                        {formatSelectedDate()}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 bg-[#D71C1C]/5 px-3 py-2 rounded-lg">
                       <Clock className="w-4 h-4 text-[#D71C1C]" />
-                      <span className="text-sm font-medium">{selectedSlot}</span>
+                      <span className="text-sm font-medium">
+                        {selectedSlot}
+                      </span>
                     </div>
                   </div>
 
@@ -436,28 +503,36 @@ const BookingModal = () => {
                   <form onSubmit={handleSubmit} className="space-y-2.5">
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-semibold text-gray-700 mb-1">Prénom *</label>
+                        <label className="block text-xs font-semibold text-gray-700 mb-1">
+                          Prénom *
+                        </label>
                         <div className="relative">
                           <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                           <input
                             type="text"
                             required
                             value={form.firstName}
-                            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                            onChange={(e) =>
+                              setForm({ ...form, firstName: e.target.value })
+                            }
                             className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm"
                             placeholder="Prénom"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-gray-700 mb-1">Nom *</label>
+                        <label className="block text-xs font-semibold text-gray-700 mb-1">
+                          Nom *
+                        </label>
                         <div className="relative">
                           <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                           <input
                             type="text"
                             required
                             value={form.lastName}
-                            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                            onChange={(e) =>
+                              setForm({ ...form, lastName: e.target.value })
+                            }
                             className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm"
                             placeholder="Nom"
                           />
@@ -466,14 +541,18 @@ const BookingModal = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">Email *</label>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Email *
+                      </label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="email"
                           required
                           value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
+                          onChange={(e) =>
+                            setForm({ ...form, email: e.target.value })
+                          }
                           className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm"
                           placeholder="email@exemple.com"
                         />
@@ -481,14 +560,18 @@ const BookingModal = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">Téléphone *</label>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Téléphone *
+                      </label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="tel"
                           required
                           value={form.phone}
-                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                          onChange={(e) =>
+                            setForm({ ...form, phone: e.target.value })
+                          }
                           className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm"
                           placeholder="+33 6 00 00 00 00"
                         />
@@ -496,13 +579,17 @@ const BookingModal = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">Entreprise</label>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Entreprise
+                      </label>
                       <div className="relative">
                         <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="text"
                           value={form.company}
-                          onChange={(e) => setForm({ ...form, company: e.target.value })}
+                          onChange={(e) =>
+                            setForm({ ...form, company: e.target.value })
+                          }
                           className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm"
                           placeholder="Nom de l'entreprise"
                         />
@@ -510,12 +597,16 @@ const BookingModal = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">Notes</label>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Notes
+                      </label>
                       <div className="relative">
                         <FileText className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                         <textarea
                           value={form.notes}
-                          onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                          onChange={(e) =>
+                            setForm({ ...form, notes: e.target.value })
+                          }
                           rows={2}
                           className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#D71C1C] text-sm resize-none"
                           placeholder="Décrivez brièvement votre projet..."
@@ -549,16 +640,23 @@ const BookingModal = () => {
                   >
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                   </motion.div>
-                  <h3 className="text-xl font-bold text-black mb-2">Réservation envoyée !</h3>
+                  <h3 className="text-xl font-bold text-black mb-2">
+                    Réservation envoyée !
+                  </h3>
                   <p className="text-gray-500 text-sm mb-2">
                     Votre demande de rendez-vous a été envoyée avec succès.
                   </p>
                   <div className="bg-gray-50 rounded-lg px-4 py-3 inline-block mb-6">
-                    <p className="text-sm font-medium text-black capitalize">{formatSelectedDate()}</p>
-                    <p className="text-sm text-[#D71C1C] font-bold">{selectedSlot}</p>
+                    <p className="text-sm font-medium text-black capitalize">
+                      {formatSelectedDate()}
+                    </p>
+                    <p className="text-sm text-[#D71C1C] font-bold">
+                      {selectedSlot}
+                    </p>
                   </div>
                   <p className="text-gray-400 text-xs mb-6">
-                    Vous recevrez une confirmation une fois votre rendez-vous validé par notre équipe.
+                    Vous recevrez une confirmation une fois votre rendez-vous
+                    validé par notre équipe.
                   </p>
                   <button
                     onClick={close}

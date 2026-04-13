@@ -73,7 +73,8 @@ const CaseStudies = () => {
     {
       id: 3,
       client: 'Clinique Médicale ABC',
-      quote: 'Nous avons comblé la grande majorité de nos créneaux vacants rapidement.',
+      quote:
+        'Nous avons comblé la grande majorité de nos créneaux vacants rapidement.',
       context:
         'Faible taux de remplissage des nouveaux créneaux de consultation.',
       objective: 'Combler les créneaux vacants avec des nouveaux patients.',

@@ -70,8 +70,12 @@ const NewsletterForm = ({ variant = 'light' }) => {
         <div
           className={`mt-3 flex items-center justify-center gap-2 text-sm ${
             message.type === 'success'
-              ? isDark ? 'text-green-200' : 'text-green-600'
-              : isDark ? 'text-red-200' : 'text-red-600'
+              ? isDark
+                ? 'text-green-200'
+                : 'text-green-600'
+              : isDark
+                ? 'text-red-200'
+                : 'text-red-600'
           }`}
         >
           {message.type === 'success' ? (

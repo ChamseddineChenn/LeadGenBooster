@@ -59,7 +59,10 @@ const SocialProof = () => {
               >
                 <metric.icon
                   className="w-8 h-8"
-                  style={{ color: metric.color === '#000000' ? '#ffffff' : metric.color }}
+                  style={{
+                    color:
+                      metric.color === '#000000' ? '#ffffff' : metric.color,
+                  }}
                 />
               </div>
               <div className="text-3xl font-bold text-white mb-2">

@@ -59,7 +59,9 @@ const Hero = () => {
                   <Phone className="w-6 h-6 text-[#E10C14]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-[#000000]">Volume élevé</div>
+                  <div className="text-2xl font-bold text-[#000000]">
+                    Volume élevé
+                  </div>
                   <div className="text-[#6D7280]">d'appels qualifiés</div>
                 </div>
               </div>
@@ -68,7 +70,9 @@ const Hero = () => {
                   <TrendingUp className="w-6 h-6 text-[#000000]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-[#000000]">Excellent</div>
+                  <div className="text-2xl font-bold text-[#000000]">
+                    Excellent
+                  </div>
                   <div className="text-[#6D7280]">Taux de conversion</div>
                 </div>
               </div>
@@ -99,7 +103,11 @@ const Hero = () => {
                 {/* Metrics */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
-                    { label: 'Leads qualifiés', value: '●●●', color: '#E10C14' },
+                    {
+                      label: 'Leads qualifiés',
+                      value: '●●●',
+                      color: '#E10C14',
+                    },
                     { label: 'Rendez-vous', value: '●●', color: '#000000' },
                     { label: 'Contacts', value: '●●●', color: '#6D7280' },
                     { label: 'Taux réponse', value: '▲▲', color: '#E10C14' },

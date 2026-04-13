@@ -66,7 +66,9 @@ const CTASection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-[#000000] px-10 py-4 rounded-lg font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 inline-flex items-center group"
-              onClick={() => window.dispatchEvent(new Event('openBookingModal'))}
+              onClick={() =>
+                window.dispatchEvent(new Event('openBookingModal'))
+              }
             >
               <Calendar className="w-6 h-6 mr-3" />
               <span>Réserver un appel</span>

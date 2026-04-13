@@ -48,7 +48,10 @@ router.get('/slots', async (req, res) => {
     maxDate.setDate(maxDate.getDate() + availability.maxAdvanceDays);
 
     if (requestedDate < today || requestedDate > maxDate) {
-      return res.json({ slots: [], message: 'Date hors de la plage disponible' });
+      return res.json({
+        slots: [],
+        message: 'Date hors de la plage disponible',
+      });
     }
 
     // Generate time slots (skip lunch break)
@@ -110,10 +113,22 @@ router.get('/availability', async (req, res) => {
 // Book a meeting (public)
 router.post('/', async (req, res) => {
   try {
-    const { firstName, lastName, email, phone, company, service, date, timeSlot, notes } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+      service,
+      date,
+      timeSlot,
+      notes,
+    } = req.body;
 
     if (!firstName || !lastName || !email || !phone || !date || !timeSlot) {
-      return res.status(400).json({ message: 'Tous les champs obligatoires doivent être remplis' });
+      return res
+        .status(400)
+        .json({ message: 'Tous les champs obligatoires doivent être remplis' });
     }
 
     // Verify slot is still available
@@ -128,7 +143,11 @@ router.post('/', async (req, res) => {
     });
 
     if (existing) {
-      return res.status(409).json({ message: 'Ce créneau est déjà réservé. Veuillez en choisir un autre.' });
+      return res
+        .status(409)
+        .json({
+          message: 'Ce créneau est déjà réservé. Veuillez en choisir un autre.',
+        });
     }
 
     const meeting = await Meeting.create({
@@ -144,7 +163,8 @@ router.post('/', async (req, res) => {
     });
 
     res.status(201).json({
-      message: 'Votre rendez-vous a été réservé avec succès. Nous vous confirmerons par email.',
+      message:
+        'Votre rendez-vous a été réservé avec succès. Nous vous confirmerons par email.',
       meeting,
     });
   } catch (error) {
@@ -254,7 +274,16 @@ router.get('/admin/availability', protect, async (req, res) => {
 // Update availability settings
 router.put('/admin/availability', protect, async (req, res) => {
   try {
-    const { activeDays, startHour, endHour, slotDuration, blockedDates, maxAdvanceDays, lunchStart, lunchEnd } = req.body;
+    const {
+      activeDays,
+      startHour,
+      endHour,
+      slotDuration,
+      blockedDates,
+      maxAdvanceDays,
+      lunchStart,
+      lunchEnd,
+    } = req.body;
 
     let availability = await Availability.findOne();
     if (!availability) {
@@ -267,8 +296,10 @@ router.put('/admin/availability', protect, async (req, res) => {
     if (slotDuration !== undefined) availability.slotDuration = slotDuration;
     if (lunchStart !== undefined) availability.lunchStart = lunchStart;
     if (lunchEnd !== undefined) availability.lunchEnd = lunchEnd;
-    if (blockedDates !== undefined) availability.blockedDates = blockedDates.map((d) => new Date(d));
-    if (maxAdvanceDays !== undefined) availability.maxAdvanceDays = maxAdvanceDays;
+    if (blockedDates !== undefined)
+      availability.blockedDates = blockedDates.map((d) => new Date(d));
+    if (maxAdvanceDays !== undefined)
+      availability.maxAdvanceDays = maxAdvanceDays;
 
     await availability.save();
     res.json(availability);

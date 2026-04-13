@@ -345,7 +345,9 @@ const Carrieres = () => {
           </motion.h2>
 
           {error && (
-            <div className="text-center py-8 text-white text-lg bg-white/20 rounded-lg">{error}</div>
+            <div className="text-center py-8 text-white text-lg bg-white/20 rounded-lg">
+              {error}
+            </div>
           )}
 
           {/* Category filter */}

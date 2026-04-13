@@ -334,7 +334,9 @@ const Navbar = () => {
                           animate="visible"
                           exit="exit"
                           className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-2xl shadow-2xl overflow-hidden z-50 ${
-                            item.key === 'services' ? 'w-[750px]' : 'w-96 bg-white border border-gray-100'
+                            item.key === 'services'
+                              ? 'w-[750px]'
+                              : 'w-96 bg-white border border-gray-100'
                           }`}
                         >
                           {/* === SERVICES MEGA MENU === */}
@@ -413,9 +415,7 @@ const Navbar = () => {
                                                   }}
                                                   transition={{
                                                     duration: 0.25,
-                                                    delay:
-                                                      0.08 +
-                                                      index * 0.05,
+                                                    delay: 0.08 + index * 0.05,
                                                   }}
                                                 >
                                                   <Link
@@ -426,9 +426,7 @@ const Navbar = () => {
                                                         : 'border border-transparent hover:border-white/30 hover:bg-white/15'
                                                     }`}
                                                     onClick={() =>
-                                                      setActiveDropdown(
-                                                        null,
-                                                      )
+                                                      setActiveDropdown(null)
                                                     }
                                                   >
                                                     <div
@@ -585,7 +583,9 @@ const Navbar = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="px-6 py-3 border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200"
-              onClick={() => window.dispatchEvent(new Event('openBookingModal'))}
+              onClick={() =>
+                window.dispatchEvent(new Event('openBookingModal'))
+              }
             >
               Réserver un appel
             </motion.button>
@@ -725,13 +725,19 @@ const Navbar = () => {
               <div className="flex flex-col space-y-3 pt-4">
                 <button
                   className="w-full py-3 bg-[#E10C14] text-white font-semibold rounded-lg hover:bg-[#C00A11] transition-colors duration-200"
-                  onClick={() => { setIsMobileMenuOpen(false); navigate('/contact'); }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate('/contact');
+                  }}
                 >
                   Obtenir un devis
                 </button>
                 <button
                   className="w-full py-3 border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200"
-                  onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new Event('openBookingModal')); }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    window.dispatchEvent(new Event('openBookingModal'));
+                  }}
                 >
                   Réserver un appel
                 </button>

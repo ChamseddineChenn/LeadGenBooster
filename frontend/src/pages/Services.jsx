@@ -98,9 +98,7 @@ const ServiceCard = ({ service, index, dark = false }) => {
         {/* Tag badge */}
         <div
           className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-            dark
-              ? 'bg-black/30 text-white/60'
-              : 'bg-[#D71C1C]/8 text-[#D71C1C]'
+            dark ? 'bg-black/30 text-white/60' : 'bg-[#D71C1C]/8 text-[#D71C1C]'
           }`}
         >
           {service.tag}
@@ -128,14 +126,18 @@ const ServiceCard = ({ service, index, dark = false }) => {
           <div className="min-w-0 flex-1">
             <h3
               className={`text-lg font-bold mb-2 leading-tight transition-colors duration-200 ${
-                dark ? 'text-white group-hover:text-white' : 'text-gray-900 group-hover:text-[#D71C1C]'
+                dark
+                  ? 'text-white group-hover:text-white'
+                  : 'text-gray-900 group-hover:text-[#D71C1C]'
               }`}
             >
               {service.title}
             </h3>
             <p
               className={`text-sm leading-relaxed mb-4 ${
-                dark ? 'text-white/60 group-hover:text-white/80' : 'text-gray-500'
+                dark
+                  ? 'text-white/60 group-hover:text-white/80'
+                  : 'text-gray-500'
               }`}
             >
               {service.desc}
