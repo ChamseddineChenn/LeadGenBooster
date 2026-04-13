@@ -6,25 +6,25 @@ const SocialProof = () => {
   const metrics = [
     {
       icon: CheckCircle,
-      value: '+120 000',
-      label: 'appels effectués',
+      value: 'Volume élevé',
+      label: "d'appels qualifiés",
       color: '#E10C14',
     },
     {
       icon: BarChart3,
-      value: '12–35 %',
-      label: 'taux de conversion moyen',
+      value: 'Haut taux',
+      label: 'de conversion',
       color: '#000000',
     },
     {
       icon: Users,
-      value: '200+',
-      label: 'clients satisfaits',
+      value: 'Confiance',
+      label: 'de nos clients',
       color: '#E10C14',
     },
     {
       icon: Clock,
-      value: '< 72h',
+      value: 'Rapide',
       label: 'mise en place',
       color: '#000000',
     },
@@ -40,7 +40,7 @@ const SocialProof = () => {
   ];
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Metrics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -55,17 +55,17 @@ const SocialProof = () => {
             >
               <div
                 className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                style={{ backgroundColor: `${metric.color}15` }}
+                style={{ backgroundColor: `${metric.color}25` }}
               >
                 <metric.icon
                   className="w-8 h-8"
-                  style={{ color: metric.color }}
+                  style={{ color: metric.color === '#000000' ? '#ffffff' : metric.color }}
                 />
               </div>
-              <div className="text-3xl font-bold text-[#0A2846] mb-2">
+              <div className="text-3xl font-bold text-white mb-2">
                 {metric.value}
               </div>
-              <div className="text-[#6D7280] font-medium">{metric.label}</div>
+              <div className="text-gray-400 font-medium">{metric.label}</div>
             </motion.div>
           ))}
         </div>

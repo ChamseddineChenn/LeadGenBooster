@@ -29,7 +29,7 @@ const ServicesOverview = () => {
         'Rapport détaillé des rendez-vous confirmés',
         'Suivi post-rendez-vous inclus',
       ],
-      metrics: '+45% de rendement moyen',
+      metrics: 'Rendement élevé',
       color: '#E10C14',
       hoverColor: '#000000',
       iconColor: '#FFFFFF',
@@ -47,7 +47,7 @@ const ServicesOverview = () => {
         'Relances stratégiques automatisées',
         'Intégration CRM en temps réel',
       ],
-      metrics: 'Taux de qualification: 68%',
+      metrics: 'Qualification rigoureuse',
       color: '#000000',
       hoverColor: '#E10C14',
       iconColor: '#FFFFFF',
@@ -65,7 +65,7 @@ const ServicesOverview = () => {
         'Négociation des taux de rétention',
         'Programme de fidélisation intégré',
       ],
-      metrics: 'Taux de réactivation: 32%',
+      metrics: 'Forte réactivation',
       color: '#E10C14',
       hoverColor: '#000000',
       iconColor: '#FFFFFF',
@@ -83,7 +83,7 @@ const ServicesOverview = () => {
         "Rapports d'insights actionnables",
         "Intégration avec vos outils d'analyse",
       ],
-      metrics: '+1200 répondants/mois',
+      metrics: 'Large volume de répondants',
       color: '#000000',
       hoverColor: '#E10C14',
       iconColor: '#FFFFFF',
@@ -515,16 +515,16 @@ const ServicesOverview = () => {
         >
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">98%</div>
-              <div className="text-white/80">Clients satisfaits</div>
+              <div className="text-5xl font-bold mb-2">Excellente</div>
+              <div className="text-white/80">Satisfaction client</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">24/7</div>
+              <div className="text-5xl font-bold mb-2">Continu</div>
               <div className="text-white/80">Support disponible</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">48h</div>
-              <div className="text-white/80">Déploiement moyen</div>
+              <div className="text-5xl font-bold mb-2">Rapide</div>
+              <div className="text-white/80">Déploiement garanti</div>
             </div>
           </div>
         </motion.div>

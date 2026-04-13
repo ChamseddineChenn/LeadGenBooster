@@ -103,20 +103,20 @@ const About = () => {
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2">500+</div>
+              <div className="text-4xl font-bold mb-2">Nombreux</div>
               <p className="text-white/80">Clients Satisfaits</p>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">10+</div>
-              <p className="text-white/80">Années d'Expérience</p>
+              <div className="text-4xl font-bold mb-2">Experte</div>
+              <p className="text-white/80">Équipe Pluridisciplinaire</p>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">50+</div>
-              <p className="text-white/80">Membres d'Équipe</p>
+              <div className="text-4xl font-bold mb-2">Dédiée</div>
+              <p className="text-white/80">Équipe Passionnée</p>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">1M+</div>
-              <p className="text-white/80">Contacts Générés</p>
+              <div className="text-4xl font-bold mb-2">Fort</div>
+              <p className="text-white/80">Volume de Contacts</p>
             </div>
           </div>
         </div>

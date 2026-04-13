@@ -3,7 +3,8 @@ import { Loader2, Check, AlertCircle } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-const NewsletterForm = () => {
+const NewsletterForm = ({ variant = 'light' }) => {
+  const isDark = variant === 'dark';
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -45,12 +46,20 @@ const NewsletterForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#D71C1C]"
+          className={`flex-1 px-4 py-3 rounded-lg border focus:outline-none ${
+            isDark
+              ? 'bg-white/10 border-white/30 text-white placeholder-white/60 focus:border-white'
+              : 'border-gray-300 focus:border-[#D71C1C]'
+          }`}
         />
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#D71C1C] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#B01818] transition-colors disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+          className={`font-semibold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2 whitespace-nowrap ${
+            isDark
+              ? 'bg-white text-[#D71C1C] hover:bg-gray-100'
+              : 'bg-[#D71C1C] text-white hover:bg-[#B01818]'
+          }`}
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
           S&apos;inscrire
@@ -60,7 +69,9 @@ const NewsletterForm = () => {
       {message && (
         <div
           className={`mt-3 flex items-center justify-center gap-2 text-sm ${
-            message.type === 'success' ? 'text-green-600' : 'text-red-600'
+            message.type === 'success'
+              ? isDark ? 'text-green-200' : 'text-green-600'
+              : isDark ? 'text-red-200' : 'text-red-600'
           }`}
         >
           {message.type === 'success' ? (

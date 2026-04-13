@@ -64,6 +64,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global cursor-pointer on interactive elements */
+button,
+[role='button'],
+a,
+select,
+input[type='submit'],
+input[type='button'],
+input[type='reset'],
+summary {
+  cursor: pointer;
+}
+
 /* Custom utility classes */
 @utility rounded-button {
   border-radius: 8px;

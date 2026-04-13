@@ -21,11 +21,11 @@ const CaseStudies = () => {
     {
       id: 1,
       client: 'Cabinet Immobilier XYZ',
-      quote: 'Nous avons doublé nos rendez-vous en 3 semaines.',
+      quote: 'Nous avons doublé nos rendez-vous en quelques semaines.',
       context:
         'Le cabinet cherchait à étendre sa clientèle dans le marché résidentiel de Montréal.',
       objective:
-        'Générer 15 rendez-vous qualifiés par mois pour les agents immobiliers.',
+        'Générer un maximum de rendez-vous qualifiés par mois pour les agents immobiliers.',
       actions: [
         'Campagne de prospection téléphonique ciblée',
         'Qualification selon le budget et localisation',
@@ -33,13 +33,13 @@ const CaseStudies = () => {
         'Relance systématique des leads chauds',
       ],
       results: [
-        { metric: '30 rendez-vous', label: 'soit +100% vs objectif' },
+        { metric: 'Objectif doublé', label: 'en rendez-vous' },
         {
-          metric: '68% de taux de contact',
+          metric: 'Taux de contact élevé',
           label: 'Performance exceptionnelle',
         },
-        { metric: '42% de conversion', label: 'Leads vers rendez-vous' },
-        { metric: '3,5x ROI', label: 'Retour sur investissement' },
+        { metric: 'Forte conversion', label: 'Leads vers rendez-vous' },
+        { metric: 'Excellent ROI', label: 'Retour sur investissement' },
       ],
       duration: '3 semaines',
       industry: 'Immobilier',
@@ -49,11 +49,11 @@ const CaseStudies = () => {
       id: 2,
       client: 'Assureur Pro Assurance',
       quote:
-        'Notre taux de renouvellement a augmenté de 40% grâce à LeadGen Booster.',
+        'Notre taux de renouvellement a considérablement augmenté grâce à LeadGen Booster.',
       context:
         'Déclin des renouvellements et faible engagement des clients existants.',
       objective:
-        'Améliorer le taux de rétention de 15% et fidéliser la clientèle existante.',
+        'Améliorer significativement le taux de rétention et fidéliser la clientèle existante.',
       actions: [
         'Programme de relance clients avant expiration',
         'Enquête de satisfaction post-renouvellement',
@@ -61,10 +61,10 @@ const CaseStudies = () => {
         'Support téléphonique dédié',
       ],
       results: [
-        { metric: "40% d'augmentation", label: 'taux de renouvellement' },
-        { metric: '92% de satisfaction', label: 'clients contactés' },
-        { metric: '25% de ventes additionnelles', label: 'produits croisés' },
-        { metric: '4,2x ROI', label: 'Retour sur investissement' },
+        { metric: 'Forte hausse', label: 'taux de renouvellement' },
+        { metric: 'Très satisfaits', label: 'clients contactés' },
+        { metric: 'Hausse notable', label: 'ventes additionnelles' },
+        { metric: 'ROI exceptionnel', label: 'Retour sur investissement' },
       ],
       duration: '2 mois',
       industry: 'Assurances',
@@ -73,21 +73,21 @@ const CaseStudies = () => {
     {
       id: 3,
       client: 'Clinique Médicale ABC',
-      quote: 'Nous avons comblé 80% de nos créneaux vacants en 4 semaines.',
+      quote: 'Nous avons comblé la grande majorité de nos créneaux vacants rapidement.',
       context:
         'Faible taux de remplissage des nouveaux créneaux de consultation.',
-      objective: 'Remplir 50% des créneaux vacants avec des nouveaux patients.',
+      objective: 'Combler les créneaux vacants avec des nouveaux patients.',
       actions: [
         'Contact de patients potentiels dans la région',
         'Présentation des spécialités de la clinique',
         'Planification directe des rendez-vous',
-        'Rappel automatique 48h avant consultation',
+        'Rappel automatique avant consultation',
       ],
       results: [
-        { metric: '80% de remplissage', label: 'créneaux vacants comblés' },
-        { metric: '150 nouveaux patients', label: 'acquis en 4 semaines' },
-        { metric: '95% de taux de présence', label: 'aux rendez-vous fixés' },
-        { metric: '5x ROI', label: 'Retour sur investissement' },
+        { metric: 'Remplissage optimal', label: 'créneaux vacants comblés' },
+        { metric: 'Afflux de patients', label: 'acquis rapidement' },
+        { metric: 'Présence quasi-totale', label: 'aux rendez-vous fixés' },
+        { metric: 'ROI remarquable', label: 'Retour sur investissement' },
       ],
       duration: '4 semaines',
       industry: 'Médical',
@@ -108,7 +108,7 @@ const CaseStudies = () => {
   };
 
   return (
-    <section id="cas-client" className="py-20 bg-[#F5F7FA]">
+    <section id="cas-client" className="py-20 bg-white">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-16">

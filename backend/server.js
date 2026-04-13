@@ -69,6 +69,7 @@ app.use('/api/careers', require('./routes/careers'));
 app.use('/api/applications', require('./routes/applications'));
 app.use('/api/newsletter', require('./routes/newsletter'));
 app.use('/api/quotations', require('./routes/quotations'));
+app.use('/api/meetings', require('./routes/meetings'));
 app.use('/api/upload', require('./routes/upload'));
 // app.use('/api/users', require('./routes/users'));
 

@@ -172,10 +172,10 @@ const PricingTeaser = () => {
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: TrendingUp, text: 'Campagnes dès 500 CAD par jour' },
+              { icon: TrendingUp, text: 'Campagnes à tarif compétitif' },
               { icon: Calendar, text: 'Plans mensuels disponibles' },
-              { icon: BarChart, text: 'ROI mesurable dès 30 jours' },
-              { icon: Clock, text: 'Mise en place en 48h' },
+              { icon: BarChart, text: 'ROI mesurable rapidement' },
+              { icon: Clock, text: 'Mise en place rapide' },
             ].map((item, index) => (
               <div key={index} className="flex items-center">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-4">

@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Routes, Route, useSearchParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import BookingModal from './components/BookingModal';
 
 // Pages
 import Landing from './pages/Landing';
@@ -59,6 +61,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-white w-full flex flex-col">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
         <Routes>
@@ -116,6 +119,7 @@ const App = () => {
         </Routes>
       </main>
       <Footer />
+      <BookingModal />
     </div>
   );
 };

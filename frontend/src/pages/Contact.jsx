@@ -62,7 +62,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-white pt-24">
       {/* Hero Section */}
-      <section className="max-w-[1200px] mx-auto px-4 py-16">
+      <section className="bg-white py-16">
+        <div className="max-w-[1200px] mx-auto px-4">
         <div className="text-center mb-16">
           <div className="flex items-center gap-4 mb-8 justify-center">
             <div className="w-1.5 h-10 bg-[#D71C1C] rounded-full" />
@@ -106,7 +107,7 @@ const Contact = () => {
               <p className="text-gray-600 text-sm ml-16">
                 contact@leadgen-booster.com
                 <br />
-                Réponse sous 24h
+                Réponse rapide
               </p>
             </div>
 
@@ -337,19 +338,35 @@ const Contact = () => {
             )}
           </div>
         </div>
+        </div>
       </section>
 
       {/* Map Section */}
-      <section className="bg-gray-100 py-16">
+      <section className="bg-[#D71C1C] py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <h2 className="text-2xl font-bold text-black mb-8 text-center">
+          <h2 className="text-2xl font-bold text-white mb-8 text-center">
             Visitez Notre Bureau
           </h2>
-          <div className="bg-gray-300 rounded-lg h-96 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-16 h-16 text-[#D71C1C] mx-auto mb-4 opacity-50" />
-              <p className="text-gray-600">Carte intégrée ici</p>
-            </div>
+          <div className="rounded-2xl overflow-hidden h-96 shadow-lg relative">
+            <iframe
+              title="LeadGenBooster Location"
+              src="https://maps.google.com/maps?q=36.82101735033054,10.189265387104216&z=16&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=36.82101735033054,10.189265387104216"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-4 right-4 bg-white text-black font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-gray-100 transition-colors flex items-center gap-2"
+            >
+              <MapPin className="w-4 h-4 text-[#D71C1C]" />
+              Obtenir l&apos;itinéraire
+            </a>
           </div>
         </div>
       </section>

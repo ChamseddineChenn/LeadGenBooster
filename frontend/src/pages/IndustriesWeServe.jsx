@@ -68,7 +68,7 @@ const IndustriesWeServe = () => {
   };
 
   return (
-    <section id="industries" className="py-20 bg-[#F5F7FA]">
+    <section id="industries" className="py-20 bg-black">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -77,7 +77,7 @@ const IndustriesWeServe = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="heading-2 mb-4"
+            className="heading-2 mb-4 text-white"
           >
             Secteurs d'activité que nous servons
           </motion.h2>
@@ -86,7 +86,7 @@ const IndustriesWeServe = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="paragraph-lg max-w-3xl mx-auto"
+            className="paragraph-lg max-w-3xl mx-auto text-gray-400!"
           >
             Une expertise adaptée aux spécificités de chaque industrie
           </motion.p>

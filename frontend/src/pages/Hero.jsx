@@ -4,7 +4,7 @@ import { Phone, Target, TrendingUp, ChevronRight } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-[#F5F7FA] overflow-hidden">
+    <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-[#F5F7FA] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -59,8 +59,8 @@ const Hero = () => {
                   <Phone className="w-6 h-6 text-[#E10C14]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-[#000000]">120K+</div>
-                  <div className="text-[#6D7280]">Appels annuels</div>
+                  <div className="text-2xl font-bold text-[#000000]">Volume élevé</div>
+                  <div className="text-[#6D7280]">d'appels qualifiés</div>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -68,8 +68,8 @@ const Hero = () => {
                   <TrendingUp className="w-6 h-6 text-[#000000]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-[#000000]">35%</div>
-                  <div className="text-[#6D7280]">Taux de conversion max</div>
+                  <div className="text-2xl font-bold text-[#000000]">Excellent</div>
+                  <div className="text-[#6D7280]">Taux de conversion</div>
                 </div>
               </div>
             </div>
@@ -99,10 +99,10 @@ const Hero = () => {
                 {/* Metrics */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
-                    { label: 'Leads qualifiés', value: '42', color: '#E10C14' },
-                    { label: 'Rendez-vous', value: '28', color: '#000000' },
-                    { label: 'Contacts', value: '156', color: '#6D7280' },
-                    { label: 'Taux réponse', value: '68%', color: '#E10C14' },
+                    { label: 'Leads qualifiés', value: '●●●', color: '#E10C14' },
+                    { label: 'Rendez-vous', value: '●●', color: '#000000' },
+                    { label: 'Contacts', value: '●●●', color: '#6D7280' },
+                    { label: 'Taux réponse', value: '▲▲', color: '#E10C14' },
                   ].map((metric, index) => (
                     <div
                       key={index}

@@ -1,6 +1,6 @@
 // Navbar.jsx
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as assets from '../assets/assets';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,9 +10,20 @@ import {
   Phone,
   ChevronDown,
   ChevronRight,
+  ArrowRight,
   BookOpen,
   Users,
   Info,
+  Palette,
+  Globe,
+  Share2,
+  PenTool,
+  Target,
+  CalendarCheck,
+  RefreshCw,
+  GraduationCap,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -20,7 +31,20 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleMouseEnter = (key) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setActiveDropdown(key);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200);
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -50,51 +74,63 @@ const Navbar = () => {
       poles: [
         {
           name: 'Communication',
+          tagline: 'Image & Présence digitale',
+          icon: Sparkles,
           items: [
             {
               title: 'Création Graphique',
               description: 'Logo, charte graphique et identité visuelle',
               href: '/services/creation-graphique',
+              icon: Palette,
             },
             {
               title: 'Développement Web',
               description: 'Sites vitrines, landing pages et e-commerce',
               href: '/services/developpement-web',
+              icon: Globe,
             },
             {
               title: 'Réseaux Sociaux',
               description: 'Community management et stratégie éditoriale',
               href: '/services/gestion-reseaux-sociaux',
+              icon: Share2,
             },
             {
               title: 'Rédaction & SEO',
               description: 'Contenu optimisé et référencement naturel',
               href: '/services/redaction-contenu-seo',
+              icon: PenTool,
             },
           ],
         },
         {
           name: 'Prospection & Visibilité',
+          tagline: 'Croissance & Conquête',
+          icon: Zap,
           items: [
             {
               title: 'Prospection B2B',
               description: 'Ciblage et approche multicanale des décideurs',
               href: '/services/prospection-commerciale-b2b',
+              icon: Target,
             },
             {
               title: 'Prise de RDV Qualifiés',
               description: 'Rendez-vous BANT avec les bons interlocuteurs',
               href: '/services/prise-rdv-qualifies',
+              icon: CalendarCheck,
             },
             {
               title: 'Relance Clients Inactifs',
               description: 'Réactivation de votre portefeuille dormant',
               href: '/services/relance-clients-inactifs',
+              icon: RefreshCw,
             },
             {
               title: 'Formation Commerciale',
               description: 'Cold calling, closing et social selling',
               href: '/services/formation-commerciale',
+              icon: GraduationCap,
             },
           ],
         },
@@ -241,7 +277,7 @@ const Navbar = () => {
                 {item.type === 'link' ? (
                   <Link
                     to={item.href}
-                    className={`font-medium transition-colors duration-200 px-2 py-1 ${
+                    className={`font-medium transition-colors duration-200 px-2 py-1 cursor-pointer ${
                       isLinkActive(item.href)
                         ? 'text-[#D71C1C]'
                         : 'text-[#6D7280] hover:text-[#D71C1C]'
@@ -250,26 +286,45 @@ const Navbar = () => {
                     {item.label}
                   </Link>
                 ) : (
-                  <>
-                    <button
-                      onClick={() =>
-                        setActiveDropdown(
-                          activeDropdown === item.key ? null : item.key,
-                        )
-                      }
-                      className={`font-medium transition-colors duration-200 px-2 py-1 flex items-center ${
-                        isLinkActive(item.href)
-                          ? 'text-[#D71C1C]'
-                          : 'text-[#6D7280] hover:text-[#D71C1C]'
-                      }`}
-                    >
-                      {item.label}
-                      <ChevronDown
-                        className={`w-4 h-4 ml-1 transition-transform duration-200 ${
-                          activeDropdown === item.key ? 'rotate-180' : ''
+                  <div
+                    onMouseEnter={() => handleMouseEnter(item.key)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="relative">
+                      <button
+                        onClick={() =>
+                          setActiveDropdown(
+                            activeDropdown === item.key ? null : item.key,
+                          )
+                        }
+                        className={`font-medium transition-colors duration-200 px-2 py-1 flex items-center cursor-pointer ${
+                          isLinkActive(item.href)
+                            ? 'text-[#D71C1C]'
+                            : 'text-[#6D7280] hover:text-[#D71C1C]'
                         }`}
-                      />
-                    </button>
+                      >
+                        {item.label}
+                        <ChevronDown
+                          className={`w-4 h-4 ml-1 transition-transform duration-200 ${
+                            activeDropdown === item.key ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                      {item.key === 'services' && (
+                        <motion.div
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#D71C1C] rounded-full"
+                          animate={{
+                            scaleX: [0, 1, 1, 0],
+                            originX: ['0%', '0%', '100%', '100%'],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
+                        />
+                      )}
+                    </div>
 
                     <AnimatePresence>
                       {activeDropdown === item.key && (
@@ -278,115 +333,239 @@ const Navbar = () => {
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
-                            item.key === 'services' ? 'w-[700px]' : 'w-96'
+                          className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-2xl shadow-2xl overflow-hidden z-50 ${
+                            item.key === 'services' ? 'w-[750px]' : 'w-96 bg-white border border-gray-100'
                           }`}
                         >
-                          <div className="p-6">
-                            <div className="flex items-center mb-4">
-                              <div className="w-10 h-10 rounded-lg bg-[#E10C14]/10 flex items-center justify-center mr-3">
-                                {(() => {
-                                  const IconComponent =
-                                    dropdownItems[item.key]?.icon;
-                                  return IconComponent ? (
-                                    <IconComponent className="w-5 h-5 text-[#E10C14]" />
-                                  ) : null;
-                                })()}
-                              </div>
-                              <h3 className="text-lg font-bold text-[#000000]">
-                                {dropdownItems[item.key]?.title || ''}
-                              </h3>
-                            </div>
-
-                            {/* Two-pole layout for services */}
-                            {item.key === 'services' &&
-                            dropdownItems[item.key]?.poles ? (
-                              <div className="grid grid-cols-2 gap-6">
+                          {/* === SERVICES MEGA MENU === */}
+                          {item.key === 'services' &&
+                          dropdownItems[item.key]?.poles ? (
+                            <div className="relative">
+                              {/* Two-pole split */}
+                              <div className="grid grid-cols-2">
                                 {dropdownItems[item.key].poles.map(
-                                  (pole, poleIdx) => (
-                                    <div key={poleIdx}>
-                                      <h4 className="text-sm font-bold text-[#D71C1C] uppercase tracking-wider mb-3 border-b border-gray-100 pb-2">
-                                        {pole.name}
-                                      </h4>
-                                      <div className="space-y-1">
-                                        {pole.items.map(
-                                          (dropdownItem, index) => (
-                                            <Link
-                                              key={index}
-                                              to={dropdownItem.href}
-                                              className="group p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 block"
-                                              onClick={() =>
-                                                setActiveDropdown(null)
-                                              }
+                                  (pole, poleIdx) => {
+                                    const PoleIcon = pole.icon;
+                                    return (
+                                      <div
+                                        key={poleIdx}
+                                        className={`relative p-5 ${
+                                          poleIdx === 0
+                                            ? 'bg-white'
+                                            : 'bg-gradient-to-br from-[#D71C1C] to-[#B01818]'
+                                        }`}
+                                      >
+                                        {/* Pole header */}
+                                        <div className="flex items-center gap-2.5 mb-4">
+                                          <div
+                                            className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                                              poleIdx === 0
+                                                ? 'bg-[#D71C1C]/10'
+                                                : 'bg-white/20'
+                                            }`}
+                                          >
+                                            <PoleIcon
+                                              className={`w-4.5 h-4.5 ${
+                                                poleIdx === 0
+                                                  ? 'text-[#D71C1C]'
+                                                  : 'text-white'
+                                              }`}
+                                            />
+                                          </div>
+                                          <div>
+                                            <h4
+                                              className={`text-sm font-bold tracking-wide ${
+                                                poleIdx === 0
+                                                  ? 'text-gray-900'
+                                                  : 'text-white'
+                                              }`}
                                             >
-                                              <div className="flex items-start">
-                                                <div className="w-7 h-7 rounded-lg bg-[#000000]/5 flex items-center justify-center mr-3 group-hover:bg-[#E10C14]/10 transition-colors duration-200 shrink-0 mt-0.5">
-                                                  <ChevronRight className="w-3.5 h-3.5 text-[#000000] group-hover:text-[#E10C14]" />
-                                                </div>
-                                                <div>
-                                                  <h4 className="font-medium text-[#000000] text-sm mb-0.5">
-                                                    {dropdownItem.title}
-                                                  </h4>
-                                                  <p className="text-xs text-[#6D7280]">
-                                                    {dropdownItem.description}
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </Link>
-                                          ),
-                                        )}
+                                              {pole.name}
+                                            </h4>
+                                            <p
+                                              className={`text-[10px] uppercase tracking-widest font-medium ${
+                                                poleIdx === 0
+                                                  ? 'text-[#D71C1C]'
+                                                  : 'text-white/50'
+                                              }`}
+                                            >
+                                              {pole.tagline}
+                                            </p>
+                                          </div>
+                                        </div>
+
+                                        {/* Service items */}
+                                        <div className="space-y-1">
+                                          {pole.items.map(
+                                            (dropdownItem, index) => {
+                                              const ItemIcon =
+                                                dropdownItem.icon;
+                                              return (
+                                                <motion.div
+                                                  key={index}
+                                                  initial={{
+                                                    opacity: 0,
+                                                    x: poleIdx === 0 ? -12 : 12,
+                                                  }}
+                                                  animate={{
+                                                    opacity: 1,
+                                                    x: 0,
+                                                  }}
+                                                  transition={{
+                                                    duration: 0.25,
+                                                    delay:
+                                                      0.08 +
+                                                      index * 0.05,
+                                                  }}
+                                                >
+                                                  <Link
+                                                    to={dropdownItem.href}
+                                                    className={`group flex items-center gap-3 p-2.5 rounded-xl transition-all duration-200 ${
+                                                      poleIdx === 0
+                                                        ? 'hover:bg-[#D71C1C]/[0.06] hover:shadow-sm'
+                                                        : 'border border-transparent hover:border-white/30 hover:bg-white/15'
+                                                    }`}
+                                                    onClick={() =>
+                                                      setActiveDropdown(
+                                                        null,
+                                                      )
+                                                    }
+                                                  >
+                                                    <div
+                                                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
+                                                        poleIdx === 0
+                                                          ? 'bg-gray-100 group-hover:bg-[#D71C1C] group-hover:shadow-md group-hover:shadow-[#D71C1C]/25'
+                                                          : 'bg-white/10 group-hover:bg-white group-hover:shadow-md group-hover:shadow-white/20'
+                                                      }`}
+                                                    >
+                                                      <ItemIcon
+                                                        className={`w-4.5 h-4.5 transition-all duration-200 ${
+                                                          poleIdx === 0
+                                                            ? 'text-[#D71C1C] group-hover:text-white'
+                                                            : 'text-white/80 group-hover:text-[#D71C1C]'
+                                                        }`}
+                                                      />
+                                                    </div>
+                                                    <div className="min-w-0">
+                                                      <h4
+                                                        className={`text-sm font-semibold leading-tight mb-0.5 transition-colors duration-200 ${
+                                                          poleIdx === 0
+                                                            ? 'text-gray-800 group-hover:text-[#D71C1C]'
+                                                            : 'text-white group-hover:text-white'
+                                                        }`}
+                                                      >
+                                                        {dropdownItem.title}
+                                                      </h4>
+                                                      <p
+                                                        className={`text-[11px] leading-snug ${
+                                                          poleIdx === 0
+                                                            ? 'text-gray-500'
+                                                            : 'text-white/60'
+                                                        }`}
+                                                      >
+                                                        {
+                                                          dropdownItem.description
+                                                        }
+                                                      </p>
+                                                    </div>
+                                                    <ChevronRight
+                                                      className={`w-3.5 h-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ${
+                                                        poleIdx === 0
+                                                          ? 'text-[#D71C1C]'
+                                                          : 'text-white'
+                                                      }`}
+                                                    />
+                                                  </Link>
+                                                </motion.div>
+                                              );
+                                            },
+                                          )}
+                                        </div>
                                       </div>
-                                    </div>
-                                  ),
+                                    );
+                                  },
                                 )}
                               </div>
-                            ) : (
-                              /* Standard grid for other dropdowns */
-                              <div className="grid grid-cols-2 gap-4">
-                                {dropdownItems[item.key]?.items?.map(
-                                  (dropdownItem, index) => (
-                                    <Link
-                                      key={index}
-                                      to={dropdownItem.href}
-                                      className="group p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      <div className="flex items-start">
-                                        <div className="w-8 h-8 rounded-lg bg-[#000000]/5 flex items-center justify-center mr-3 group-hover:bg-[#E10C14]/10 transition-colors duration-200">
-                                          <ChevronRight className="w-4 h-4 text-[#000000] group-hover:text-[#E10C14]" />
-                                        </div>
-                                        <div>
-                                          <h4 className="font-medium text-[#000000] mb-1">
-                                            {dropdownItem.title}
-                                          </h4>
-                                          <p className="text-xs text-[#6D7280]">
-                                            {dropdownItem.description}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  ),
-                                )}
+
+                              {/* Bottom bar */}
+                              <div className="bg-gray-50 px-5 py-3 flex items-center justify-between border-t border-gray-100">
+                                <span className="text-[11px] text-gray-400 uppercase tracking-widest font-medium">
+                                  2 pôles · 8 expertises
+                                </span>
+                                <Link
+                                  to="/services"
+                                  className="group flex items-center gap-1.5 text-sm font-semibold text-[#D71C1C] hover:text-[#B01818] transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  Tous nos services
+                                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
                               </div>
-                            )}
-                          </div>
-                          <div className="bg-gray-50 px-6 py-4 border-t border-gray-100">
-                            <Link
-                              to={`/${item.key === 'about' ? 'about' : item.key}`}
-                              className="text-[#E10C14] font-medium hover:text-[#000000] transition-colors duration-200 flex items-center"
-                              onClick={() => setActiveDropdown(null)}
-                            >
-                              Voir tous les{' '}
-                              {item.type === 'dropdown'
-                                ? item.label.toLowerCase()
-                                : ''}
-                              <ChevronRight className="w-4 h-4 ml-2" />
-                            </Link>
-                          </div>
+                            </div>
+                          ) : (
+                            /* Standard grid for other dropdowns */
+                            <div>
+                              <div className="p-5">
+                                <div className="flex items-center mb-4">
+                                  <div className="w-9 h-9 rounded-xl bg-[#D71C1C]/10 flex items-center justify-center mr-3">
+                                    {(() => {
+                                      const IconComponent =
+                                        dropdownItems[item.key]?.icon;
+                                      return IconComponent ? (
+                                        <IconComponent className="w-4.5 h-4.5 text-[#D71C1C]" />
+                                      ) : null;
+                                    })()}
+                                  </div>
+                                  <h3 className="text-base font-bold text-gray-900">
+                                    {dropdownItems[item.key]?.title || ''}
+                                  </h3>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                  {dropdownItems[item.key]?.items?.map(
+                                    (dropdownItem, index) => (
+                                      <Link
+                                        key={index}
+                                        to={dropdownItem.href}
+                                        className="group p-2.5 rounded-xl hover:bg-[#D71C1C]/[0.06] transition-all duration-200"
+                                        onClick={() => setActiveDropdown(null)}
+                                      >
+                                        <div className="flex items-start">
+                                          <div className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center mr-2.5 group-hover:bg-[#D71C1C] transition-colors duration-200 shrink-0 mt-0.5">
+                                            <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-white transition-colors" />
+                                          </div>
+                                          <div>
+                                            <h4 className="font-medium text-gray-800 text-sm mb-0.5 group-hover:text-[#D71C1C] transition-colors">
+                                              {dropdownItem.title}
+                                            </h4>
+                                            <p className="text-[11px] text-gray-500 leading-snug">
+                                              {dropdownItem.description}
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </Link>
+                                    ),
+                                  )}
+                                </div>
+                              </div>
+                              <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
+                                <Link
+                                  to={`/${item.key === 'about' ? 'about' : item.key}`}
+                                  className="group flex items-center gap-1.5 text-sm font-semibold text-[#D71C1C] hover:text-[#B01818] transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  Voir tous les{' '}
+                                  {item.type === 'dropdown'
+                                    ? item.label.toLowerCase()
+                                    : ''}
+                                  <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
+                              </div>
+                            </div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </>
+                  </div>
                 )}
               </div>
             ))}
@@ -398,6 +577,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="px-6 py-3 bg-[#E10C14] text-white font-semibold rounded-lg hover:bg-[#C00A11] transition-colors duration-200 shadow-sm"
+              onClick={() => navigate('/contact')}
             >
               Obtenir un devis
             </motion.button>
@@ -405,6 +585,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="px-6 py-3 border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200"
+              onClick={() => window.dispatchEvent(new Event('openBookingModal'))}
             >
               Réserver un appel
             </motion.button>
@@ -544,13 +725,13 @@ const Navbar = () => {
               <div className="flex flex-col space-y-3 pt-4">
                 <button
                   className="w-full py-3 bg-[#E10C14] text-white font-semibold rounded-lg hover:bg-[#C00A11] transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => { setIsMobileMenuOpen(false); navigate('/contact'); }}
                 >
                   Obtenir un devis
                 </button>
                 <button
                   className="w-full py-3 border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new Event('openBookingModal')); }}
                 >
                   Réserver un appel
                 </button>

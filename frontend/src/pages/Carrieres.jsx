@@ -37,14 +37,14 @@ const EmptyState = () => (
         repeat: Infinity,
         ease: 'easeInOut',
       }}
-      className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6"
+      className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-6"
     >
-      <Briefcase className="w-12 h-12 text-gray-400" />
+      <Briefcase className="w-12 h-12 text-white/60" />
     </motion.div>
-    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+    <h3 className="text-2xl font-bold text-white mb-2">
       Aucun poste ouvert pour le moment
     </h3>
-    <p className="text-gray-500 text-center max-w-md">
+    <p className="text-white/80 text-center max-w-md">
       Nous n'avons pas de postes ouverts actuellement, mais nous sommes toujours
       à la recherche de talents. Envoyez-nous votre CV!
     </p>
@@ -181,7 +181,7 @@ const Carrieres = () => {
       </section>
 
       {/* Nos Métiers */}
-      <section className="bg-white py-20 px-4">
+      <section className="bg-[#D71C1C] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -190,8 +190,8 @@ const Carrieres = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-black mb-4">Carrières</h2>
-            <p className="text-lg text-gray-600">
+            <h2 className="text-4xl font-bold text-white mb-4">Carrières</h2>
+            <p className="text-lg text-white/80">
               Découvrez les rôles clés qui composent notre équipe
             </p>
           </motion.div>
@@ -237,7 +237,7 @@ const Carrieres = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group bg-white border-2 border-gray-100 rounded-xl p-8 hover:border-[#D71C1C] hover:shadow-lg transition-all"
+                className="group bg-white border-2 border-white rounded-xl p-8 hover:border-black/20 hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-14 h-14 rounded-xl bg-[#D71C1C]/10 flex items-center justify-center group-hover:bg-[#D71C1C] transition-colors">
@@ -269,7 +269,7 @@ const Carrieres = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-white py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -319,7 +319,7 @@ const Carrieres = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="bg-white rounded-lg p-8 hover:shadow-lg transition-all"
+                className="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all"
               >
                 <benefit.icon className="w-10 h-10 text-[#D71C1C] mb-4" />
                 <h3 className="text-lg font-bold text-black mb-2">
@@ -333,19 +333,19 @@ const Carrieres = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-[#D71C1C]">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold text-black text-center mb-16"
+            className="text-4xl font-bold text-white text-center mb-16"
           >
             Postes Ouverts
           </motion.h2>
 
           {error && (
-            <div className="text-center py-8 text-red-500 text-lg">{error}</div>
+            <div className="text-center py-8 text-white text-lg bg-white/20 rounded-lg">{error}</div>
           )}
 
           {/* Category filter */}
@@ -360,8 +360,8 @@ const Carrieres = () => {
                 onClick={() => setSelectedCategory('all')}
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
                   selectedCategory === 'all'
-                    ? 'bg-[#D71C1C] text-white shadow-lg shadow-red-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-white text-[#D71C1C] shadow-lg'
+                    : 'bg-white/20 text-white hover:bg-white/30'
                 }`}
               >
                 Tous
@@ -372,8 +372,8 @@ const Carrieres = () => {
                   onClick={() => setSelectedCategory(cat.name)}
                   className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
                     selectedCategory === cat.name
-                      ? 'bg-[#D71C1C] text-white shadow-lg shadow-red-200'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-white text-[#D71C1C] shadow-lg'
+                      : 'bg-white/20 text-white hover:bg-white/30'
                   }`}
                 >
                   {cat.name}
@@ -394,7 +394,7 @@ const Carrieres = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="bg-white border-2 border-gray-100 rounded-xl p-8 hover:border-[#D71C1C] hover:shadow-lg transition-all group"
+                  className="bg-white border-2 border-white rounded-xl p-8 hover:border-black/20 hover:shadow-lg transition-all group"
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                     <div className="flex-1">
@@ -454,7 +454,7 @@ const Carrieres = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#D71C1C] py-20 px-4">
+      <section className="bg-black py-20 px-4">
         <div className="max-w-[800px] mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -469,7 +469,7 @@ const Carrieres = () => {
               candidature spontanée, nous aimerions vous connaître.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-[#D71C1C] font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-all">
+              <button className="bg-[#D71C1C] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#B01818] transition-all">
                 Envoyer un CV
               </button>
               <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition-all">
@@ -481,7 +481,7 @@ const Carrieres = () => {
       </section>
 
       {/* FAQ or Stats */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -494,9 +494,9 @@ const Carrieres = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { number: '+50', label: 'Clients Satisfaits' },
-              { number: '98%', label: 'Rétention du Personnel' },
-              { number: '5+ ans', label: 'Leader du Marché' },
+              { number: 'Nombreux', label: 'Clients Satisfaits' },
+              { number: 'Très élevée', label: 'Rétention du Personnel' },
+              { number: 'Expert', label: 'Leader du Marché' },
             ].map((stat, i) => (
               <motion.div
                 key={i}

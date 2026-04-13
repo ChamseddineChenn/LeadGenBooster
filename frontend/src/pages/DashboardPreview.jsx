@@ -14,14 +14,14 @@ const DashboardPreview = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const metrics = [
-    { icon: Activity, label: 'Taux de contact', value: '68%', change: '+12%' },
-    { icon: Users, label: 'Leads qualifiés', value: '156', change: '+24' },
-    { icon: Calendar, label: 'Rendez-vous', value: '42', change: '+8' },
+    { icon: Activity, label: 'Taux de contact', value: 'Élevé', change: '▲' },
+    { icon: Users, label: 'Leads qualifiés', value: 'Croissant', change: '▲' },
+    { icon: Calendar, label: 'Rendez-vous', value: 'Actif', change: '▲' },
     {
       icon: TrendingUp,
       label: 'Taux de conversion',
-      value: '28%',
-      change: '+5%',
+      value: 'Optimal',
+      change: '▲',
     },
   ];
 
@@ -82,7 +82,7 @@ const DashboardPreview = () => {
               {[
                 'Données mises à jour en temps réel',
                 'Export des rapports en PDF/Excel',
-                "Accès 24/7 depuis n'importe quel appareil",
+                "Accès permanent depuis n'importe quel appareil",
                 'Alertes automatiques sur objectifs',
               ].map((feature, index) => (
                 <div key={index} className="flex items-center">
@@ -218,7 +218,7 @@ const DashboardPreview = () => {
                       Activité des appels (7 derniers jours)
                     </h4>
                     <span className="text-white/60 text-sm">
-                      +15% vs semaine dernière
+                      En hausse vs semaine dernière
                     </span>
                   </div>
                   <div className="h-32 flex items-end space-x-2">

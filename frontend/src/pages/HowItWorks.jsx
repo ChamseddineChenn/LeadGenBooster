@@ -45,7 +45,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="processus" className="py-20 bg-[#F5F7FA]">
+    <section id="processus" className="py-20 bg-black">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -54,7 +54,7 @@ const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="heading-2 mb-4"
+            className="heading-2 mb-4 text-white"
           >
             Notre méthode en 4 étapes
           </motion.h2>
@@ -63,7 +63,7 @@ const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="paragraph-lg max-w-3xl mx-auto"
+            className="paragraph-lg max-w-3xl mx-auto text-gray-400!"
           >
             Un processus structuré pour garantir des résultats mesurables et
             durables
@@ -97,18 +97,18 @@ const HowItWorks = () => {
                     </div>
 
                     {/* Step Number */}
-                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-white rounded-full border-4 border-[#F5F7FA] flex items-center justify-center shadow-md">
+                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-white rounded-full border-4 border-black flex items-center justify-center shadow-md">
                       <span className="text-sm font-bold text-[#0A2846]">
                         {step.number}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0A2846] mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
 
-                  <p className="text-[#6D7280]">{step.description}</p>
+                  <p className="text-gray-400">{step.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -133,7 +133,7 @@ const HowItWorks = () => {
               >
                 {/* Step Circle */}
                 <div
-                  className="absolute -left-10 w-12 h-12 rounded-full flex items-center justify-center border-4 border-white shadow-lg"
+                  className="absolute -left-10 w-12 h-12 rounded-full flex items-center justify-center border-4 border-black shadow-lg"
                   style={{ backgroundColor: step.color }}
                 >
                   <step.icon className="w-5 h-5 text-white" />
@@ -142,15 +142,15 @@ const HowItWorks = () => {
                 {/* Content */}
                 <div className="ml-8">
                   <div className="flex items-center mb-2">
-                    <span className="text-sm font-bold text-[#0A2846] mr-3">
+                    <span className="text-sm font-bold text-white mr-3">
                       {step.number}
                     </span>
-                    <h3 className="text-lg font-bold text-[#0A2846]">
+                    <h3 className="text-lg font-bold text-white">
                       {step.title}
                     </h3>
                   </div>
 
-                  <p className="text-[#6D7280]">{step.description}</p>
+                  <p className="text-gray-400">{step.description}</p>
                 </div>
               </motion.div>
             ))}

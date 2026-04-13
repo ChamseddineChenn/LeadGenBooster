@@ -85,9 +85,9 @@ const Blogs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-24">
+    <div className="min-h-screen bg-gray-50 pt-24">
       {/* Hero Section */}
-      <section className="max-w-[1200px] mx-auto px-4 py-16">
+      <section className="bg-white max-w-[1200px] mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="flex items-center gap-4 mb-8 justify-center">
             <div className="w-1.5 h-10 bg-[#D71C1C] rounded-full" />
@@ -209,17 +209,17 @@ const Blogs = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="bg-gray-50 py-16 mt-16">
+      <section className="bg-[#D71C1C] py-16 mt-16">
         <div className="max-w-[600px] mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-black mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Ne manquez aucun Article
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-white/80 mb-8">
             Inscrivez-vous à notre newsletter pour recevoir les derniers
             articles, conseils et ressources directement dans votre boîte de
             réception.
           </p>
-          <NewsletterForm />
+          <NewsletterForm variant="dark" />
         </div>
       </section>
     </div>

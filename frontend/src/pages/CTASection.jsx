@@ -49,7 +49,7 @@ const CTASection = () => {
               {[
                 'Diagnostic gratuit',
                 'Proposition sur mesure',
-                'Démarrage en 48h',
+                'Démarrage rapide',
               ].map((benefit, index) => (
                 <div
                   key={index}
@@ -66,6 +66,7 @@ const CTASection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-[#000000] px-10 py-4 rounded-lg font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 inline-flex items-center group"
+              onClick={() => window.dispatchEvent(new Event('openBookingModal'))}
             >
               <Calendar className="w-6 h-6 mr-3" />
               <span>Réserver un appel</span>
@@ -74,8 +75,7 @@ const CTASection = () => {
 
             {/* Secondary Text */}
             <p className="text-white/70 mt-8 text-sm">
-              Aucun engagement • Première consultation gratuite • Réponse sous
-              24h
+              Aucun engagement • Première consultation gratuite • Réponse rapide
             </p>
           </motion.div>
 
@@ -89,10 +89,10 @@ const CTASection = () => {
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { value: '98%', label: 'Clients satisfaits' },
-                { value: '48h', label: 'Temps de mise en place' },
-                { value: '24/7', label: 'Support disponible' },
-                { value: '15min', label: 'Appel de diagnostic' },
+                { value: 'Très élevé', label: 'Taux de satisfaction' },
+                { value: 'Rapide', label: 'Mise en place' },
+                { value: 'Rapide', label: 'Temps de réponse' },
+                { value: 'Gratuit', label: 'Appel de diagnostic' },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl font-bold mb-2">{stat.value}</div>

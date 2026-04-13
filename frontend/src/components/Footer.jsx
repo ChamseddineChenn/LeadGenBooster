@@ -186,9 +186,6 @@ const Footer = () => {
               </a>
             </p>
           </div>
-          <div className="text-gray-400 text-sm">
-            Conçu et construit avec ❤️ par Code Anvil
-          </div>
         </div>
       </div>
     </footer>
