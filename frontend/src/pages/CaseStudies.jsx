@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Quote,
   Target,
@@ -312,7 +313,12 @@ const CaseStudies = () => {
             <p className="text-[#6D7280] mb-4">
               Vous voulez des résultats similaires ?
             </p>
-            <button className="btn-primary">
+            <button
+              onClick={() =>
+                window.dispatchEvent(new Event('openBookingModal'))
+              }
+              className="btn-primary"
+            >
               Réserver un diagnostic gratuit
             </button>
           </div>

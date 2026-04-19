@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Facebook,
+  Instagram,
+} from 'lucide-react';
 import * as assets from '../assets/assets';
 
 const Footer = () => {
@@ -13,42 +20,48 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center mb-5 gap-2">
               <img
                 src={assets.logoWhite}
                 alt="Lead Gen Booster"
-                className="h-10 w-auto"
+                className="h-15 w-auto"
               />
             </div>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+            <p className="text-gray-400 max-w-60 text-shadow-md mb-6 leading-relaxed">
               Votre partenaire de confiance pour la génération de leads et la
               prospection commerciale.
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/leadgenbooster"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/leadgenbooster"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/leadgenbooster"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"
               >
-                <Twitter className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-bold mb-6">Services</h3>
+            <h3 className="text-white text-2xl font-bold mb-6">Services</h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -94,8 +107,8 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div>
-            <h3 className="text-white font-bold mb-6">Entreprise</h3>
+          <div className="ml-5">
+            <h3 className="text-white text-2xl font-bold mb-6">Entreprise</h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -142,13 +155,13 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-bold mb-6">Contact</h3>
+            <h3 className="text-white text-2xl font-bold mb-6">Contact</h3>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#D71C1C] flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-gray-400 text-sm">98 635 324</p>
-                  <p className="text-gray-500 text-xs">Lun-Ven: 9h-18h</p>
+                  <p className="text-gray-500 text-sm">Lun-Ven: 9h-18h</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -177,13 +190,19 @@ const Footer = () => {
           <div className="text-gray-400 text-sm text-center md:text-left mb-6 md:mb-0">
             <p>
               © {currentYear} Lead Gen Booster. Tous les droits réservés. |{' '}
-              <a href="#" className="hover:text-[#D71C1C] transition-colors">
+              <Link
+                to="/contact"
+                className="hover:text-[#D71C1C] transition-colors"
+              >
                 Politique de Confidentialité
-              </a>{' '}
+              </Link>{' '}
               |{' '}
-              <a href="#" className="hover:text-[#D71C1C] transition-colors">
+              <Link
+                to="/contact"
+                className="hover:text-[#D71C1C] transition-colors"
+              >
                 Conditions d'Utilisation
-              </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Building2,
   Home,
@@ -105,7 +106,7 @@ const IndustriesWeServe = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white rounded-2xl p-8 shadow-soft hover:shadow-elevation transition-all duration-300 cursor-pointer group"
+              className="bg-white rounded-2xl p-8 shadow-soft hover:shadow-elevation transition-all duration-300 group"
             >
               <div className="flex items-start space-x-6">
                 {/* Industry Icon */}
@@ -125,10 +126,6 @@ const IndustriesWeServe = () => {
                     {industry.name}
                   </h3>
                   <p className="text-[#6D7280] mb-4">{industry.description}</p>
-                  <div className="flex items-center text-[#1CA7A6] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-sm mr-2">En savoir plus</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -153,7 +150,9 @@ const IndustriesWeServe = () => {
                 Nos experts adaptent leurs méthodes à vos besoins spécifiques.
                 Contactez-nous pour une analyse gratuite.
               </p>
-              <button className="btn-outline">Consulter un expert</button>
+              <Link to="/contact" className="btn-outline">
+                Consulter un expert
+              </Link>
             </div>
           </div>
         </motion.div>

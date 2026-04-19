@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Search,
   Settings,
@@ -74,7 +75,7 @@ const HowItWorks = () => {
         <div className="hidden lg:block">
           <div className="relative">
             {/* Connecting Line */}
-            <div className="absolute left-0 right-0 top-12 h-0.5 bg-[#E10C14]/20 z-0"></div>
+            <div className="absolute left-0 right-0 top-12 h-1 bg-[#E10C14]/50 z-0"></div>
 
             {/* Steps */}
             <div className="grid grid-cols-4 gap-8 relative z-10">
@@ -165,10 +166,13 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <button className="btn-primary inline-flex items-center group">
+          <Link
+            to="/contact"
+            className="btn-primary inline-flex items-center group"
+          >
             <span>Démarrer votre projet</span>
             <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

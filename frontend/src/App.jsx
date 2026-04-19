@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Routes, Route, useSearchParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -34,24 +33,13 @@ import RelanceClientsInactifs from './pages/services/RelanceClientsInactifs';
 import FormationCommerciale from './pages/services/FormationCommerciale';
 
 const App = () => {
-  const [searchParams] = useSearchParams();
+  const maintenance = (import.meta.env.VITE_MAINTENANCE || 'false') === 'true';
 
-  // Initialize devMode from URL or localStorage
-  useEffect(() => {
-    const urlDevMode = searchParams.get('devMode') === 'true';
-    if (urlDevMode) {
-      localStorage.setItem('devMode', 'true');
-    }
-  }, [searchParams]);
-
-  // Check localStorage for devMode
-  const devMode = localStorage.getItem('devMode') === 'true';
-
-  // Allow newsletter routes regardless of devMode
+  // Allow newsletter routes regardless of maintenance mode
   const isNewsletterRoute = window.location.pathname.startsWith('/newsletter/');
 
-  // If not in devMode and not on newsletter route, show under construction
-  if (!devMode && !isNewsletterRoute) {
+  // If in maintenance and not on newsletter route, show under construction
+  if (maintenance && !isNewsletterRoute) {
     return (
       <div className="min-h-screen bg-white w-full">
         <UnderConstruction />

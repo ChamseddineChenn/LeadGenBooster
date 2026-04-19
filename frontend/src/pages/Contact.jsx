@@ -344,9 +344,9 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="bg-[#D71C1C] py-16">
+      <section className="bg-[#f2f2f2] py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">
+          <h2 className="text-2xl font-bold text-black mb-8 text-center">
             Visitez Notre Bureau
           </h2>
           <div className="rounded-2xl overflow-hidden h-96 shadow-lg relative">

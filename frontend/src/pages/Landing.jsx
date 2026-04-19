@@ -4,7 +4,8 @@ import ServicesOverview from './ServicesOverview';
 import HowItWorks from './HowItWorks';
 import DashboardPreview from './DashboardPreview';
 import IndustriesWeServe from './IndustriesWeServe';
-import CaseStudies from './CaseStudies';
+// import CaseStudies from './CaseStudies';
+import Packs from './Packs';
 import CTASection from './CTASection';
 
 const Landing = () => {
@@ -16,7 +17,8 @@ const Landing = () => {
       <HowItWorks />
       <DashboardPreview />
       <IndustriesWeServe />
-      <CaseStudies />
+      {/* <CaseStudies /> */}
+      <Packs />
       <CTASection />
     </div>
   );

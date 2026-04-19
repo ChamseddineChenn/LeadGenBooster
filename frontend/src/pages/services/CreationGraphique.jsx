@@ -31,15 +31,21 @@ const CreationGraphique = () => {
               </h1>
             </div>
 
-            <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mb-6">
-              Transformez votre vision en une identité visuelle inoubliable
+            <p className="text-xl text-gray-700 leading-relaxed max-w-5xl mb-6">
+              Transformez votre vision en une identité visuelle inoubliable.{' '}
+              <br />
+              Nous concevons des marques qui inspirent confiance, se démarquent
+              de la concurrence et parlent directement à vos clients. De la
+              conception de votre logo à l'élaboration d'une charte graphique
+              complète, chaque détail est pensé pour refléter l'ADN de votre
+              entreprise et renforcer votre positionnement .
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Why Section */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div {...fadeUp}>
             <h2 className="text-3xl font-bold text-black mb-6">
@@ -140,7 +146,7 @@ const CreationGraphique = () => {
       </section>
 
       {/* Method */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             {...fadeUp}

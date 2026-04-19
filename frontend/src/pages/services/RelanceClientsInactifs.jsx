@@ -44,7 +44,7 @@ const RelanceClientsInactifs = () => {
       </section>
 
       {/* Why reactivate */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div {...fadeUp}>
             <h2 className="text-3xl font-bold text-black mb-6">
@@ -129,7 +129,7 @@ const RelanceClientsInactifs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center bg-white border-2 border-gray-100 rounded-xl p-6"
+                className="text-center bg-[#f2f2f2] border-2 border-gray-100 rounded-xl p-6"
               >
                 <div className="w-12 h-12 rounded-full bg-[#D71C1C] text-white font-bold flex items-center justify-center mx-auto mb-4">
                   {i + 1}
@@ -143,7 +143,7 @@ const RelanceClientsInactifs = () => {
       </section>
 
       {/* Closing */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
             {...fadeUp}

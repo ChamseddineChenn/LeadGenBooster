@@ -116,7 +116,7 @@ const Carrieres = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-48 pb-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -165,7 +165,7 @@ const Carrieres = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition-shadow"
+                className="bg-[#f2f2f2] rounded-lg p-8 text-center hover:shadow-lg transition-shadow"
               >
                 <item.icon className="w-12 h-12 text-[#D71C1C] mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-black mb-3">
@@ -319,7 +319,7 @@ const Carrieres = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all"
+                className="bg-[#f2f2f2] rounded-lg p-8 hover:shadow-lg transition-all"
               >
                 <benefit.icon className="w-10 h-10 text-[#D71C1C] mb-4" />
                 <h3 className="text-lg font-bold text-black mb-2">
@@ -471,12 +471,18 @@ const Carrieres = () => {
               candidature spontanée, nous aimerions vous connaître.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-[#D71C1C] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#B01818] transition-all">
+              <Link
+                to="/contact"
+                className="bg-[#D71C1C] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#B01818] transition-all text-center"
+              >
                 Envoyer un CV
-              </button>
-              <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition-all">
+              </Link>
+              <Link
+                to="/contact"
+                className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition-all text-center"
+              >
                 Nous Contacter
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>

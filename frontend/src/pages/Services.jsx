@@ -78,7 +78,12 @@ const prospectionServices = [
   },
 ];
 
-const ServiceCard = ({ service, index, dark = false }) => {
+const ServiceCard = ({
+  service,
+  index,
+  dark = false,
+  communication = false,
+}) => {
   const Icon = service.icon;
   return (
     <motion.div
@@ -91,14 +96,20 @@ const ServiceCard = ({ service, index, dark = false }) => {
         to={service.href}
         className={`group relative block rounded-3xl p-6 transition-all duration-300 h-full overflow-hidden ${
           dark
-            ? 'bg-black/20 border-2 border-black/20 hover:border-black/60 hover:bg-black/30 hover:shadow-xl hover:shadow-black/10'
+            ? communication
+              ? 'bg-black/20 border-2 border-white/25 hover:border-white/60 hover:bg-black/30 hover:shadow-xl hover:shadow-black/10'
+              : 'bg-black/20 border-2 border-black/20 hover:border-black/60 hover:bg-black/30 hover:shadow-xl hover:shadow-black/10'
             : 'bg-white border-2 border-gray-100 hover:border-[#D71C1C]/40 hover:shadow-xl hover:shadow-[#D71C1C]/8'
         }`}
       >
         {/* Tag badge */}
         <div
           className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-            dark ? 'bg-black/30 text-white/60' : 'bg-[#D71C1C]/8 text-[#D71C1C]'
+            dark
+              ? communication
+                ? 'bg-[#D71C1C]/15 text-[#D71C1C]'
+                : 'bg-black/30 text-white/60'
+              : 'bg-[#D71C1C]/8 text-[#D71C1C]'
           }`}
         >
           {service.tag}
@@ -145,7 +156,9 @@ const ServiceCard = ({ service, index, dark = false }) => {
             <span
               className={`inline-flex items-center gap-1.5 font-semibold text-sm transition-all duration-200 ${
                 dark
-                  ? 'text-white/70 group-hover:text-white group-hover:gap-2.5'
+                  ? communication
+                    ? 'text-[#D71C1C] group-hover:text-[#D71C1C] group-hover:gap-2.5'
+                    : 'text-white/70 group-hover:text-white group-hover:gap-2.5'
                   : 'text-[#D71C1C] group-hover:gap-2.5'
               }`}
             >
@@ -204,14 +217,14 @@ const Services = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex-1 bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm"
+              className="flex-1 bg-black rounded-[2rem] p-8 lg:p-10 shadow-sm border-2 border-white/20"
             >
               <div className="flex items-center gap-4 mb-2">
-                <div className="w-12 h-12 rounded-2xl bg-[#D71C1C]/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-[#D71C1C]/20 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-[#D71C1C]" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-white uppercase">
                     Communication
                   </h2>
                   <p className="text-xs uppercase tracking-widest text-[#D71C1C] font-semibold">
@@ -219,13 +232,19 @@ const Services = () => {
                   </p>
                 </div>
               </div>
-              <p className="text-gray-500 mb-8 ml-16">
+              <p className="text-white/60 mb-8 ml-16">
                 Construisez une image de marque forte et une présence digitale
                 qui convertit.
               </p>
               <div className="grid grid-cols-1 gap-4">
                 {communicationServices.map((service, i) => (
-                  <ServiceCard key={i} service={service} index={i} />
+                  <ServiceCard
+                    key={i}
+                    service={service}
+                    index={i}
+                    dark
+                    communication
+                  />
                 ))}
               </div>
             </motion.div>
@@ -243,7 +262,7 @@ const Services = () => {
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-white uppercase">
                     Prospection & Visibilité
                   </h2>
                   <p className="text-xs uppercase tracking-widest text-white/60 font-semibold">

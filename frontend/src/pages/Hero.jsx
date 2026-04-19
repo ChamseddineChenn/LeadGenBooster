@@ -1,14 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Phone, Target, TrendingUp, ChevronRight } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-[#F5F7FA] overflow-hidden">
+    <section className="pb-16 md:pb-24 bg-[#F5F7FA] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
+            className="pt-44 "
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -35,21 +37,19 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <Link
+                to="/contact"
                 className="px-8 py-4 bg-[#E10C14] text-white font-semibold rounded-lg hover:bg-[#C00A11] transition-colors duration-200 shadow-lg flex items-center justify-center space-x-2"
               >
                 <span>Demander un devis</span>
                 <ChevronRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="px-8 py-4 bg-white border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200 shadow-sm"
+              </Link>
+              <Link
+                to="/services"
+                className="px-8 py-4 bg-white border-2 border-[#000000] text-[#000000] font-semibold rounded-lg hover:bg-[#000000]/5 transition-all duration-200 shadow-sm text-center"
               >
-                Voir nos résultats
-              </motion.button>
+                Voir nos services
+              </Link>
             </div>
 
             {/* Stats */}

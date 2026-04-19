@@ -75,7 +75,7 @@ const About = () => {
               <Link
                 key={index}
                 to={section.href}
-                className="group bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all duration-300 hover:bg-white cursor-pointer"
+                className="group bg-[#f2f2f2] rounded-lg p-8 hover:shadow-lg transition-all duration-300 hover:bg-black cursor-pointer"
               >
                 <div className="mb-6">
                   <div className="w-16 h-16 rounded-lg bg-[#D71C1C]/10 flex items-center justify-center group-hover:bg-[#D71C1C]/20 transition-colors">
@@ -85,7 +85,7 @@ const About = () => {
                 <h3 className="text-xl font-bold text-black mb-3 group-hover:text-[#D71C1C] transition-colors">
                   {section.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                <p className="text-gray-600 group-hover:text-white transition-colors text-sm mb-6 leading-relaxed">
                   {section.description}
                 </p>
                 <div className="flex items-center text-[#D71C1C] font-semibold group-hover:gap-2 transition-all">

@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   CheckCircle,
   Star,
@@ -147,8 +148,9 @@ const PricingTeaser = () => {
               </div>
 
               {/* CTA Button */}
-              <button
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+              <Link
+                to="/contact"
+                className={`block w-full py-3 rounded-lg font-semibold transition-all duration-300 text-center ${
                   plan.popular
                     ? 'bg-[#FF9B42] text-white hover:bg-[#FF8B2E]'
                     : 'border-2 border-[#1CA7A6] text-[#1CA7A6] hover:bg-[#1CA7A6] hover:text-white'
@@ -157,7 +159,7 @@ const PricingTeaser = () => {
                 {plan.name === 'Solution sur mesure'
                   ? 'Demander un devis'
                   : 'Commencer maintenant'}
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -195,10 +197,13 @@ const PricingTeaser = () => {
               Nos experts analysent vos besoins gratuitement et vous
               recommandent la solution la plus adaptée à vos objectifs.
             </p>
-            <button className="btn-primary bg-white text-[#0A2846] hover:bg-gray-100">
+            <Link
+              to="/contact"
+              className="btn-primary bg-white text-[#0A2846] hover:bg-gray-100 inline-flex items-center"
+            >
               <Users className="w-5 h-5 mr-2" />
               Obtenir une estimation gratuite
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Activity,
   Users,
@@ -94,7 +95,9 @@ const DashboardPreview = () => {
               ))}
             </div>
 
-            <button className="btn-secondary m-2">Demander une démo</button>
+            <Link to="/contact" className="btn-secondary m-2">
+              Demander une démo
+            </Link>
           </motion.div>
 
           {/* Right - Dashboard Preview */}

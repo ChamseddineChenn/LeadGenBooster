@@ -30,6 +30,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [hoveredNav, setHoveredNav] = useState(null);
   const dropdownRef = useRef(null);
   const hoverTimeoutRef = useRef(null);
   const location = useLocation();
@@ -144,32 +145,32 @@ const Navbar = () => {
           title: 'Conseils de vente',
           description:
             'Techniques et stratégies pour améliorer vos conversions',
-          href: '/blogs/conseils-vente',
+          href: '/blogs',
         },
         {
           title: 'Tendances du marché',
           description: 'Analyses des dernières tendances en télémarketing',
-          href: '/blogs/tendances-marche',
+          href: '/blogs',
         },
         {
           title: 'Études de cas',
           description: "Retours d'expérience et réussites de nos clients",
-          href: '/blogs/etudes-de-cas',
+          href: '/blogs',
         },
         {
           title: 'Guide du téléprospecteur',
           description: 'Meilleures pratiques et scripts efficaces',
-          href: '/blogs/guide-teleprospecteur',
+          href: '/blogs',
         },
         {
           title: 'Technologie et outils',
           description: 'Revue des meilleurs outils pour la prospection',
-          href: '/blogs/technologie-outils',
+          href: '/blogs',
         },
         {
           title: 'Législation',
           description: 'Conformité et réglementations en vigueur',
-          href: '/blogs/legislation',
+          href: '/blogs',
         },
       ],
     },
@@ -275,20 +276,39 @@ const Navbar = () => {
             {navItems.map((item) => (
               <div key={item.label} className="relative">
                 {item.type === 'link' ? (
-                  <Link
-                    to={item.href}
-                    className={`font-medium transition-colors duration-200 px-2 py-1 cursor-pointer ${
-                      isLinkActive(item.href)
-                        ? 'text-[#D71C1C]'
-                        : 'text-[#6D7280] hover:text-[#D71C1C]'
-                    }`}
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setHoveredNav(item.label)}
+                    onMouseLeave={() => setHoveredNav(null)}
                   >
-                    {item.label}
-                  </Link>
+                    <Link
+                      to={item.href}
+                      className={`font-medium transition-colors duration-200 px-2 py-1 cursor-pointer ${
+                        isLinkActive(item.href)
+                          ? 'text-[#D71C1C]'
+                          : 'text-[#6D7280] hover:text-[#D71C1C]'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#D71C1C] rounded-full"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: hoveredNav === item.label ? 1 : 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      style={{ originX: 0 }}
+                    />
+                  </div>
                 ) : (
                   <div
-                    onMouseEnter={() => handleMouseEnter(item.key)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={() => {
+                      handleMouseEnter(item.key);
+                      setHoveredNav(item.label);
+                    }}
+                    onMouseLeave={() => {
+                      handleMouseLeave();
+                      setHoveredNav(null);
+                    }}
                   >
                     <div className="relative">
                       <button
@@ -310,20 +330,13 @@ const Navbar = () => {
                           }`}
                         />
                       </button>
-                      {item.key === 'services' && (
-                        <motion.div
-                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#D71C1C] rounded-full"
-                          animate={{
-                            scaleX: [0, 1, 1, 0],
-                            originX: ['0%', '0%', '100%', '100%'],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
-                        />
-                      )}
+                      <motion.div
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#D71C1C] rounded-full"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: hoveredNav === item.label ? 1 : 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                        style={{ originX: 0 }}
+                      />
                     </div>
 
                     <AnimatePresence>
@@ -354,7 +367,7 @@ const Navbar = () => {
                                         className={`relative p-5 ${
                                           poleIdx === 0
                                             ? 'bg-white'
-                                            : 'bg-gradient-to-br from-[#D71C1C] to-[#B01818]'
+                                            : 'bg-[#f2f2f2]'
                                         }`}
                                       >
                                         {/* Pole header */}
@@ -363,23 +376,23 @@ const Navbar = () => {
                                             className={`w-9 h-9 rounded-xl flex items-center justify-center ${
                                               poleIdx === 0
                                                 ? 'bg-[#D71C1C]/10'
-                                                : 'bg-white/20'
+                                                : 'bg-[#D71C1C]/10'
                                             }`}
                                           >
                                             <PoleIcon
                                               className={`w-4.5 h-4.5 ${
                                                 poleIdx === 0
                                                   ? 'text-[#D71C1C]'
-                                                  : 'text-white'
+                                                  : 'text-[#D71C1C]'
                                               }`}
                                             />
                                           </div>
                                           <div>
                                             <h4
-                                              className={`text-sm font-bold tracking-wide ${
+                                              className={`text-base font-bold tracking-wide uppercase ${
                                                 poleIdx === 0
                                                   ? 'text-gray-900'
-                                                  : 'text-white'
+                                                  : 'text-gray-900'
                                               }`}
                                             >
                                               {pole.name}
@@ -388,7 +401,7 @@ const Navbar = () => {
                                               className={`text-[10px] uppercase tracking-widest font-medium ${
                                                 poleIdx === 0
                                                   ? 'text-[#D71C1C]'
-                                                  : 'text-white/50'
+                                                  : 'text-[#D71C1C]'
                                               }`}
                                             >
                                               {pole.tagline}
@@ -423,7 +436,7 @@ const Navbar = () => {
                                                     className={`group flex items-center gap-3 p-2.5 rounded-xl transition-all duration-200 ${
                                                       poleIdx === 0
                                                         ? 'hover:bg-[#D71C1C]/[0.06] hover:shadow-sm'
-                                                        : 'border border-transparent hover:border-white/30 hover:bg-white/15'
+                                                        : 'hover:bg-black/[0.06] hover:shadow-sm'
                                                     }`}
                                                     onClick={() =>
                                                       setActiveDropdown(null)
@@ -433,14 +446,14 @@ const Navbar = () => {
                                                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
                                                         poleIdx === 0
                                                           ? 'bg-gray-100 group-hover:bg-[#D71C1C] group-hover:shadow-md group-hover:shadow-[#D71C1C]/25'
-                                                          : 'bg-white/10 group-hover:bg-white group-hover:shadow-md group-hover:shadow-white/20'
+                                                          : 'bg-gray-200 group-hover:bg-[#D71C1C] group-hover:shadow-md group-hover:shadow-[#D71C1C]/25'
                                                       }`}
                                                     >
                                                       <ItemIcon
                                                         className={`w-4.5 h-4.5 transition-all duration-200 ${
                                                           poleIdx === 0
                                                             ? 'text-[#D71C1C] group-hover:text-white'
-                                                            : 'text-white/80 group-hover:text-[#D71C1C]'
+                                                            : 'text-[#D71C1C] group-hover:text-white'
                                                         }`}
                                                       />
                                                     </div>
@@ -449,7 +462,7 @@ const Navbar = () => {
                                                         className={`text-sm font-semibold leading-tight mb-0.5 transition-colors duration-200 ${
                                                           poleIdx === 0
                                                             ? 'text-gray-800 group-hover:text-[#D71C1C]'
-                                                            : 'text-white group-hover:text-white'
+                                                            : 'text-gray-800 group-hover:text-[#D71C1C]'
                                                         }`}
                                                       >
                                                         {dropdownItem.title}
@@ -458,7 +471,7 @@ const Navbar = () => {
                                                         className={`text-[11px] leading-snug ${
                                                           poleIdx === 0
                                                             ? 'text-gray-500'
-                                                            : 'text-white/60'
+                                                            : 'text-gray-500'
                                                         }`}
                                                       >
                                                         {
@@ -470,7 +483,7 @@ const Navbar = () => {
                                                       className={`w-3.5 h-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ${
                                                         poleIdx === 0
                                                           ? 'text-[#D71C1C]'
-                                                          : 'text-white'
+                                                          : 'text-[#D71C1C]'
                                                       }`}
                                                     />
                                                   </Link>
