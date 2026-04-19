@@ -56,7 +56,7 @@ const DashboardPreview = () => {
   return (
     <section id="resultats" className="py-20 bg-white">
       <div className="container">
-        <div className="grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
