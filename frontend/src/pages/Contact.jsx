@@ -82,7 +82,7 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-6">
               {/* Phone */}
-              <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-[#f2f2f2] p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-12 h-12 rounded-lg bg-[#D71C1C] flex items-center justify-center">
                     <Phone className="w-6 h-6 text-white" />
@@ -97,7 +97,7 @@ const Contact = () => {
               </div>
 
               {/* Email */}
-              <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-[#f2f2f2] p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-12 h-12 rounded-lg bg-[#D71C1C] flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
@@ -112,7 +112,7 @@ const Contact = () => {
               </div>
 
               {/* Address */}
-              <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-[#f2f2f2] p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-12 h-12 rounded-lg bg-[#D71C1C] flex items-center justify-center">
                     <MapPin className="w-6 h-6 text-white" />
@@ -130,7 +130,7 @@ const Contact = () => {
             {/* Quotation Form */}
             <div className="lg:col-span-2">
               {success ? (
-                <div className="bg-gray-50 p-12 rounded-lg flex flex-col items-center justify-center text-center">
+                <div className="bg-[#f2f2f2] p-12 rounded-lg flex flex-col items-center justify-center text-center">
                   <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
                   <h3 className="text-2xl font-bold text-black mb-2">
                     Demande envoyée !
@@ -149,7 +149,7 @@ const Contact = () => {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="bg-gray-50 p-8 rounded-lg space-y-6"
+                  className="bg-[#f2f2f2] p-8 rounded-lg space-y-6"
                 >
                   <h2 className="text-xl font-bold text-black mb-2">
                     Demande de Devis

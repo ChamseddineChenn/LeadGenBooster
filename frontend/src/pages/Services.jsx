@@ -97,8 +97,8 @@ const ServiceCard = ({
         className={`group relative block rounded-3xl p-6 transition-all duration-300 h-full overflow-hidden ${
           dark
             ? communication
-              ? 'bg-black/20 border-2 border-white/25 hover:border-white/60 hover:bg-black/30 hover:shadow-xl hover:shadow-black/10'
-              : 'bg-black/20 border-2 border-black/20 hover:border-black/60 hover:bg-black/30 hover:shadow-xl hover:shadow-black/10'
+              ? 'bg-[#ececec] border-2 border-[#e3e3e3] hover:border-[#D71C1C]/35 hover:bg-[#e7e7e7] hover:shadow-xl hover:shadow-black/5'
+              : 'bg-black/10 border-2 border-black/10 hover:border-black/30 hover:bg-black/15 hover:shadow-xl hover:shadow-black/10'
             : 'bg-white border-2 border-gray-100 hover:border-[#D71C1C]/40 hover:shadow-xl hover:shadow-[#D71C1C]/8'
         }`}
       >
@@ -108,7 +108,7 @@ const ServiceCard = ({
             dark
               ? communication
                 ? 'bg-[#D71C1C]/15 text-[#D71C1C]'
-                : 'bg-black/30 text-white/60'
+                : 'bg-black/20 text-white'
               : 'bg-[#D71C1C]/8 text-[#D71C1C]'
           }`}
         >
@@ -120,14 +120,18 @@ const ServiceCard = ({
           <div
             className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${
               dark
-                ? 'bg-black/30 group-hover:bg-black group-hover:shadow-lg group-hover:shadow-black/20'
-                : 'bg-gray-50 group-hover:bg-[#D71C1C] group-hover:shadow-lg group-hover:shadow-[#D71C1C]/25'
+                ? communication
+                  ? 'bg-white group-hover:bg-white/95 group-hover:shadow-lg group-hover:shadow-white/15'
+                  : 'bg-black/20 group-hover:bg-black/30 group-hover:shadow-lg group-hover:shadow-black/20'
+                : 'bg-[#f2f2f2] group-hover:bg-[#D71C1C] group-hover:shadow-lg group-hover:shadow-[#D71C1C]/25'
             }`}
           >
             <Icon
               className={`w-6 h-6 transition-all duration-300 ${
                 dark
-                  ? 'text-white/70 group-hover:text-white'
+                  ? communication
+                    ? 'text-[#D71C1C] group-hover:text-[#D71C1C]'
+                    : 'text-white/70 group-hover:text-white'
                   : 'text-[#D71C1C] group-hover:text-white'
               }`}
             />
@@ -138,7 +142,9 @@ const ServiceCard = ({
             <h3
               className={`text-lg font-bold mb-2 leading-tight transition-colors duration-200 ${
                 dark
-                  ? 'text-white group-hover:text-white'
+                  ? communication
+                    ? 'text-gray-900 group-hover:text-[#D71C1C]'
+                    : 'text-white group-hover:text-white'
                   : 'text-gray-900 group-hover:text-[#D71C1C]'
               }`}
             >
@@ -147,7 +153,9 @@ const ServiceCard = ({
             <p
               className={`text-sm leading-relaxed mb-4 ${
                 dark
-                  ? 'text-white/60 group-hover:text-white/80'
+                  ? communication
+                    ? 'text-gray-700 group-hover:text-gray-800'
+                    : 'text-white group-hover:text-white'
                   : 'text-gray-500'
               }`}
             >
@@ -158,7 +166,7 @@ const ServiceCard = ({
                 dark
                   ? communication
                     ? 'text-[#D71C1C] group-hover:text-[#D71C1C] group-hover:gap-2.5'
-                    : 'text-white/70 group-hover:text-white group-hover:gap-2.5'
+                    : 'text-white group-hover:text-white group-hover:gap-2.5'
                   : 'text-[#D71C1C] group-hover:gap-2.5'
               }`}
             >
@@ -181,7 +189,7 @@ const ServiceCard = ({
 
 const Services = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f2f2f2]">
       {/* Hero */}
       <section className="pt-32 pb-20 px-4 bg-white">
         <div className="max-w-[1200px] mx-auto text-center">
@@ -217,22 +225,22 @@ const Services = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex-1 bg-black rounded-[2rem] p-8 lg:p-10 shadow-sm border-2 border-white/20"
+              className="flex-1 bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm border-2 border-white/80"
             >
-              <div className="flex items-center gap-4 mb-2">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-[#D71C1C]/20 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-[#D71C1C]" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white uppercase">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 uppercase mb-3">
                     Communication
                   </h2>
-                  <p className="text-xs uppercase tracking-widest text-[#D71C1C] font-semibold">
+                  <p className="text-[17px] uppercase tracking-widest text-[#D71C1C] font-semibold">
                     Image & Présence digitale
                   </p>
                 </div>
               </div>
-              <p className="text-white/60 mb-8 ml-16">
+              <p className="text-gray-700 mb-10 ml-16">
                 Construisez une image de marque forte et une présence digitale
                 qui convertit.
               </p>
@@ -257,20 +265,20 @@ const Services = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="flex-1 bg-gradient-to-br from-[#D71C1C] to-[#B01818] rounded-[2rem] p-8 lg:p-10 shadow-sm"
             >
-              <div className="flex items-center gap-4 mb-2">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-black/20 flex items-center justify-center">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white uppercase">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-white uppercase mb-3">
                     Prospection & Visibilité
                   </h2>
-                  <p className="text-xs uppercase tracking-widest text-white/60 font-semibold">
+                  <p className="text-[17px] uppercase tracking-widest text-white font-semibold">
                     Croissance & Conquête
                   </p>
                 </div>
               </div>
-              <p className="text-white/70 mb-8 ml-16">
+              <p className="text-white mb-10 ml-16">
                 Générez des opportunités commerciales qualifiées et développez
                 votre portefeuille clients.
               </p>
@@ -292,7 +300,7 @@ const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative bg-gray-900 rounded-[2rem] p-10 md:p-14 text-center overflow-hidden"
+            className="relative bg-black rounded-[2rem] p-10 md:p-14 text-center overflow-hidden"
           >
             {/* Decorative red glow */}
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#D71C1C]/20 rounded-full blur-3xl" />

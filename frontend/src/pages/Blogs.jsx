@@ -85,7 +85,7 @@ const Blogs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24">
+    <div className="min-h-screen bg-[#f2f2f2] pt-24">
       {/* Hero Section */}
       <section className="bg-white max-w-[1200px] mx-auto px-4 py-16">
         <div className="text-center mb-16">

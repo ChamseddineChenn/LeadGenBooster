@@ -78,7 +78,7 @@ const QuiSommesNous = () => {
       </section>
 
       {/* Notre Essence */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
             {...fadeUp}

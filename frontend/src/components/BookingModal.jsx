@@ -646,7 +646,7 @@ const BookingModal = () => {
                   <p className="text-gray-500 text-sm mb-2">
                     Votre demande de rendez-vous a été envoyée avec succès.
                   </p>
-                  <div className="bg-gray-50 rounded-lg px-4 py-3 inline-block mb-6">
+                  <div className="bg-[#f2f2f2] rounded-lg px-4 py-3 inline-block mb-6">
                     <p className="text-sm font-medium text-black capitalize">
                       {formatSelectedDate()}
                     </p>

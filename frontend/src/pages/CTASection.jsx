@@ -92,7 +92,7 @@ const CTASection = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 { value: 'Très élevé', label: 'Taux de satisfaction' },
-                { value: 'Rapide', label: 'Mise en place' },
+                { value: 'Efficace', label: 'Mise en place' },
                 { value: 'Rapide', label: 'Temps de réponse' },
                 { value: 'Gratuit', label: 'Appel de diagnostic' },
               ].map((stat, index) => (

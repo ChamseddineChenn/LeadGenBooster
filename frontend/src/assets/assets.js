@@ -5,9 +5,11 @@ export { default as logoWhite } from './LOGO LEADGEN BOOSTER BLANC.svg';
 
 // Image Assets
 export { default as heroPlaceholder } from './Hero_Placeholder.jpg';
+export { default as bannerImage } from './Banner.jpg';
 
 // Icon Assets
 export { default as reactIcon } from './react.svg';
 export { default as strategieIcon } from './Stratégie.svg';
 export { default as partenaireIcon } from './Partenaire.svg';
 export { default as croissanceIcon } from './Croissance.svg';
+export { default as tickIcon } from './TickIcon.png';

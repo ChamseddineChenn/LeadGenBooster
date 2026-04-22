@@ -1,3 +1,4 @@
+import Banner from './Banner';
 import Hero from './Hero';
 import SocialProof from './SocialProof';
 import ServicesOverview from './ServicesOverview';
@@ -11,6 +12,7 @@ import CTASection from './CTASection';
 const Landing = () => {
   return (
     <div>
+      <Banner />
       <Hero />
       <SocialProof />
       <ServicesOverview />

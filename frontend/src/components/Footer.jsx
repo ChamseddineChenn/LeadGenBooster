@@ -33,7 +33,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://www.linkedin.com/company/leadgenbooster"
+                href="https://www.linkedin.com/company/lead-gen-booster/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"
@@ -41,7 +41,7 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://www.facebook.com/leadgenbooster"
+                href="https://www.facebook.com/profile.php?id=61584634036102"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"
@@ -49,7 +49,7 @@ const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://www.instagram.com/leadgenbooster"
+                href="https://www.instagram.com/leadgenbooster?igsh=MWFncHpneWJuZGJmNQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#D71C1C] transition-colors"

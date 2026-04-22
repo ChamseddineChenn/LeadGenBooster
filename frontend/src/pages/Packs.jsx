@@ -5,7 +5,7 @@ import { Check, Phone, Mail, Sparkles } from 'lucide-react';
 
 const packs = [
   {
-    name: 'Essential',
+    name: 'ESSENTIAL',
     tagline: 'Idéal pour une présence essentielle',
     features: [
       'Conception de 2 Postes / Semaine',
@@ -16,7 +16,7 @@ const packs = [
     tier: 'basic',
   },
   {
-    name: 'Performance',
+    name: 'PERFORMANCE',
     tagline: 'Parfait pour renforcer votre engagement',
     features: [
       'Conception de 3 Postes / Semaine',
@@ -28,7 +28,7 @@ const packs = [
     tier: 'mid',
   },
   {
-    name: 'Premium',
+    name: 'PREMIUM',
     tagline: 'La solution complète pour maximiser votre impact',
     features: [
       'Conception de 5 Postes / Semaine',
@@ -50,33 +50,33 @@ const PackCard = ({ pack, index }) => {
 
   // Card styles (no backdrop-blur for performance)
   const cardGlass = isBasic
-    ? 'bg-gray-50 border-gray-200 hover:border-gray-300 shadow-lg shadow-gray-200/50'
+    ? 'bg-[#edecec] border-gray-300 hover:border-gray-300 shadow-lg shadow-gray-200/50'
     : isMid
       ? 'bg-[#fef2f2] border-[#D71C1C]/20 hover:border-[#D71C1C]/40 shadow-lg shadow-[#D71C1C]/10'
-      : 'bg-gradient-to-br from-gray-900 to-[#1a0508] border-[#D71C1C]/30 hover:border-[#D71C1C]/60 shadow-xl shadow-[#D71C1C]/15';
+      : 'bg-black from-gray-900 to-[#1a0508] border-[#D71C1C]/30 hover:border-[#D71C1C]/60 shadow-xl shadow-[#D71C1C]/15';
 
   // Header label
   const headerStyle = isBasic
-    ? 'bg-gray-100 text-gray-700'
+    ? 'bg-white text-gray-700'
     : isMid
       ? 'bg-[#D71C1C]/15 text-[#D71C1C]'
       : 'bg-[#D71C1C] text-white';
 
   // Check icon colour + glow
   const checkStyle = isBasic
-    ? 'text-gray-400'
+    ? 'text-[#D71C1C]'
     : isMid
       ? 'text-[#D71C1C] drop-shadow-[0_0_4px_rgba(215,28,28,0.5)]'
       : 'text-[#D71C1C] drop-shadow-[0_0_6px_rgba(215,28,28,0.7)]';
 
   const featureColor = isBasic
-    ? 'text-gray-600'
+    ? 'text-gray-800'
     : isMid
       ? 'text-gray-700'
       : 'text-white/90';
 
   const taglineColor = isBasic
-    ? 'text-gray-400'
+    ? 'text-[#D71C1C]'
     : isMid
       ? 'text-[#D71C1C]/70'
       : 'text-[#D71C1C]';
@@ -179,7 +179,7 @@ const PackCard = ({ pack, index }) => {
             to="/contact"
             className={`block w-full text-center py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
               isBasic
-                ? 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 border border-gray-200'
+                ? 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 border border-gray-400'
                 : isMid
                   ? 'bg-[#D71C1C]/15 text-[#D71C1C] hover:bg-[#D71C1C]/25 border border-[#D71C1C]/20'
                   : 'bg-[#D71C1C] text-white hover:bg-[#D71C1C]/90 shadow-lg shadow-[#D71C1C]/25 hover:shadow-[#D71C1C]/40 border border-[#D71C1C]/60'
@@ -282,7 +282,7 @@ const Packs = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-gray-400 text-xs"
+          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-gray-400 text-md"
         >
           <div className="flex items-center gap-2">
             <Phone className="w-3.5 h-3.5" />

@@ -134,7 +134,7 @@ const NotreEquipe = () => {
       </section>
 
       {/* Team Title */}
-      <section className="bg-gray-50 py-6 px-4">
+      <section className="bg-[#f2f2f2] py-6 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             {...fadeUp}
@@ -149,7 +149,7 @@ const NotreEquipe = () => {
       {poles.map((pole, poleIndex) => (
         <section
           key={poleIndex}
-          className={`py-20 px-4 ${poleIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
+          className={`py-20 px-4 ${poleIndex % 2 === 0 ? 'bg-white' : 'bg-[#f2f2f2]'}`}
         >
           <div className="max-w-[1200px] mx-auto">
             <motion.div

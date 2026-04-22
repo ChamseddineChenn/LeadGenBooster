@@ -361,7 +361,7 @@ const CareerDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           id="postuler"
-          className="bg-gray-50 rounded-2xl p-8 md:p-10"
+          className="bg-[#f2f2f2] rounded-2xl p-8 md:p-10"
         >
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-black mb-2">

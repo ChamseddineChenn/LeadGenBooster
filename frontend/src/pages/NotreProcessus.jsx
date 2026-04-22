@@ -114,7 +114,7 @@ const NotreProcessus = () => {
                 <div
                   className={`flex flex-col md:flex-row gap-6 md:gap-10 items-start p-8 md:p-10 rounded-2xl transition-all hover:shadow-lg ${
                     index % 2 === 0
-                      ? 'bg-gray-50'
+                      ? 'bg-[#f2f2f2]'
                       : 'bg-white border-2 border-gray-100'
                   }`}
                 >

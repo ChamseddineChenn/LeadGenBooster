@@ -108,7 +108,7 @@ const NotreMission = () => {
       </section>
 
       {/* Engagements */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-[#f2f2f2] py-20 px-4">
         <div className="max-w-[1200px] mx-auto">
           <motion.div {...fadeUp} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">

@@ -253,7 +253,7 @@ const Carrieres = () => {
                     {role.mission}
                   </p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-4 flex items-start gap-3">
+                <div className="bg-[#f2f2f2] rounded-lg p-4 flex items-start gap-3">
                   <Wrench className="w-5 h-5 text-[#D71C1C] shrink-0 mt-0.5" />
                   <div>
                     <span className="text-sm font-semibold text-gray-800">

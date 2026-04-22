@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BookingModal from './components/BookingModal';
+import BackToTopButton from './components/BackToTopButton';
 
 // Pages
 import Landing from './pages/Landing';
@@ -107,6 +108,7 @@ const App = () => {
         </Routes>
       </main>
       <Footer />
+      <BackToTopButton />
       <BookingModal />
     </div>
   );

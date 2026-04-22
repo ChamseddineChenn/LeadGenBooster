@@ -499,7 +499,7 @@ const Navbar = () => {
                               </div>
 
                               {/* Bottom bar */}
-                              <div className="bg-gray-50 px-5 py-3 flex items-center justify-between border-t border-gray-100">
+                              <div className="bg-[#f2f2f2] px-5 py-3 flex items-center justify-between border-t border-gray-100">
                                 <span className="text-[11px] text-gray-400 uppercase tracking-widest font-medium">
                                   2 pôles · 8 expertises
                                 </span>
@@ -558,7 +558,7 @@ const Navbar = () => {
                                   )}
                                 </div>
                               </div>
-                              <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
+                              <div className="bg-[#f2f2f2] px-5 py-3 border-t border-gray-100">
                                 <Link
                                   to={`/${item.key === 'about' ? 'about' : item.key}`}
                                   className="group flex items-center gap-1.5 text-sm font-semibold text-[#D71C1C] hover:text-[#B01818] transition-colors"
