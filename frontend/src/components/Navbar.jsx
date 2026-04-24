@@ -264,11 +264,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img
-              src={assets.logoMain}
-              alt="LeadGen Booster"
-              className="h-20 w-auto"
-            />
+            <Link to="/">
+              <img
+                src={assets.logoMain}
+                alt="LeadGen Booster"
+                className="h-20 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

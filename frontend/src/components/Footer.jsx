@@ -21,11 +21,13 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center mb-5 gap-2">
-              <img
-                src={assets.logoWhite}
-                alt="Lead Gen Booster"
-                className="h-15 w-auto"
-              />
+              <Link to="/">
+                <img
+                  src={assets.logoWhite}
+                  alt="Lead Gen Booster"
+                  className="h-15 w-auto"
+                />
+              </Link>
             </div>
             <p className="text-gray-400 max-w-60 text-shadow-md mb-6 leading-relaxed">
               Votre partenaire de confiance pour la génération de leads et la

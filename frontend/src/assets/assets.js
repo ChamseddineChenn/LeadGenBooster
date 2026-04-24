@@ -13,3 +13,4 @@ export { default as strategieIcon } from './Stratégie.svg';
 export { default as partenaireIcon } from './Partenaire.svg';
 export { default as croissanceIcon } from './Croissance.svg';
 export { default as tickIcon } from './TickIcon.png';
+export { default as curvedarrowicon } from './CurvedArrowIcon.svg';
