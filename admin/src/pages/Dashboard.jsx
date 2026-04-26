@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Eye,
   CalendarCheck,
@@ -7,10 +8,51 @@ import {
   ArrowDownRight,
   Inbox,
 } from 'lucide-react';
+import { useAuth } from '../context/useAuth';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Dashboard = () => {
-  const stats = [
-    {
+  const { accessToken } = useAuth();
+  const [upcomingMeetings, setUpcomingMeetings] = useState([]);
+  const [recentQuotations, setRecentQuotations] = useState([]);
+
+  useEffect(() => {
+    if (!accessToken) return;
+
+    const fetchDashboardData = async () => {
+      try {
+        const [meetingsRes, quotationsRes] = await Promise.all([
+          fetch(`${API_URL}/meetings/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
+          fetch(`${API_URL}/quotations/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
+        ]);
+
+        if (meetingsRes.ok) {
+          const data = await meetingsRes.json();
+          const now = new Date();
+          const oneWeekLater = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          const upcoming = (data.meetings || [])
+            .filter((m) => {
+              const d = new Date(m.date);
+              return d >= now && d <= oneWeekLater && m.status !== 'annulé';
+            })
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .slice(0, 5);
+          setUpcomingMeetings(upcoming);
+        }
+
+        if (quotationsRes.ok) {
+          const data = await quotationsRes.json();
+          setRecentQuotations((data.quotations || []).slice(0, 5));
+        }
+      } catch {
+        // silently fail — dashboard is non-critical
+      }
+    };
+
+    fetchDashboardData();
+  }, [accessToken]);
+  const stats = [    {
       title: 'Visiteurs ce mois',
       value: '0',
       change: '—',
@@ -40,8 +82,8 @@ const Dashboard = () => {
     },
   ];
 
-  const recentMeetings = [];
-  const recentQuotations = [];
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString('fr-CA', { day: 'numeric', month: 'short', year: 'numeric' });
 
   return (
     <div>
@@ -96,8 +138,9 @@ const Dashboard = () => {
             <h2 className="text-lg font-bold text-black">
               Prochains Rendez-vous
             </h2>
+            <span className="text-xs text-gray-400">7 prochains jours</span>
           </div>
-          {recentMeetings.length === 0 ? (
+          {upcomingMeetings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-gray-400">
               <Inbox className="w-12 h-12 mb-3" />
               <p className="text-sm font-medium">Aucun rendez-vous</p>
@@ -120,25 +163,25 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {recentMeetings.map((meeting, index) => (
+                  {upcomingMeetings.map((meeting) => (
                     <tr
-                      key={index}
+                      key={meeting._id}
                       className="hover:bg-gray-50 transition-colors"
                     >
                       <td className="px-6 py-4">
                         <div className="font-medium text-black text-sm">
-                          {meeting.name}
+                          {meeting.firstName} {meeting.lastName}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {meeting.company}
+                          {meeting.company || meeting.email}
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-700">
-                          {meeting.date}
+                          {formatDate(meeting.date)}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {meeting.time}
+                          {meeting.timeSlot}
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -165,8 +208,7 @@ const Dashboard = () => {
           <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 className="text-lg font-bold text-black">Derniers Devis</h2>
           </div>
-          {recentQuotations.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-gray-400">
+          {recentQuotations.length === 0 ? (            <div className="flex flex-col items-center justify-center py-12 text-gray-400">
               <Inbox className="w-12 h-12 mb-3" />
               <p className="text-sm font-medium">Aucun devis</p>
               <p className="text-xs mt-1">Les devis apparaîtront ici.</p>
@@ -188,22 +230,22 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {recentQuotations.map((quote, index) => (
+                  {recentQuotations.map((quote) => (
                     <tr
-                      key={index}
+                      key={quote._id}
                       className="hover:bg-gray-50 transition-colors"
                     >
                       <td className="px-6 py-4">
                         <div className="font-medium text-black text-sm">
-                          {quote.id}
+                          #{quote._id.slice(-6).toUpperCase()}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {quote.client}
+                          {quote.firstName} {quote.lastName}
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm font-semibold text-black">
-                          {quote.amount}
+                          {quote.budget || '—'}
                         </div>
                         <div className="text-xs text-gray-500">
                           {quote.service}
@@ -212,11 +254,13 @@ const Dashboard = () => {
                       <td className="px-6 py-4">
                         <span
                           className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${
-                            quote.status === 'accepté'
+                            quote.status === 'terminé'
                               ? 'bg-green-100 text-green-700'
-                              : quote.status === 'envoyé'
+                              : quote.status === 'en cours'
                                 ? 'bg-blue-100 text-blue-700'
-                                : 'bg-yellow-100 text-yellow-700'
+                                : quote.status === 'rejeté'
+                                  ? 'bg-red-100 text-red-700'
+                                  : 'bg-yellow-100 text-yellow-700'
                           }`}
                         >
                           {quote.status}

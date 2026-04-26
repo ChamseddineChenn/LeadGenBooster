@@ -87,6 +87,9 @@ const CreateBlog = () => {
   const [excerpt, setExcerpt] = useState('');
   const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('conseils');
+  const [coverImage, setCoverImage] = useState(null); // URL (existing or preview)
+  const [coverImageFile, setCoverImageFile] = useState(null); // File to upload
+  const [coverImagePublicId, setCoverImagePublicId] = useState(null);
   const [contentBlocks, setContentBlocks] = useState([]);
   const [originalContentBlocks, setOriginalContentBlocks] = useState([]);
   const [isPublished, setIsPublished] = useState(false);
@@ -140,6 +143,8 @@ const CreateBlog = () => {
         setAuthor(blog.author || '');
         setCategory(blog.category || 'conseils');
         setIsPublished(blog.isPublished || false);
+        setCoverImage(blog.coverImage || null);
+        setCoverImagePublicId(blog.coverImagePublicId || null);
         const blocks = (blog.contentBlocks || []).map((block) => ({
           ...block,
           id: block._id || `block-${block.order}-${Date.now()}`,
@@ -255,6 +260,10 @@ const CreateBlog = () => {
       setSaveMessage({ type: 'error', text: "L'auteur est requis." });
       return;
     }
+    if (!coverImage && !coverImageFile) {
+      setSaveMessage({ type: 'error', text: "L'image de couverture est requise." });
+      return;
+    }
 
     setIsSaving(true);
     setSaveMessage(null);
@@ -272,6 +281,38 @@ const CreateBlog = () => {
         });
         setIsSaving(false);
         return;
+      }
+
+      // Step 0: Upload cover image if a new file was selected
+      let finalCoverImage = coverImage;
+      let finalCoverImagePublicId = coverImagePublicId;
+
+      if (coverImageFile) {
+        const coverFormData = new FormData();
+        coverFormData.append('image', coverImageFile);
+        const coverRes = await fetch(`${API_URL}/upload`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}` },
+          body: coverFormData,
+        });
+        const coverData = await coverRes.json();
+        if (!coverRes.ok) {
+          setSaveMessage({ type: 'error', text: coverData.message || "Erreur lors de l'upload de la couverture." });
+          setIsSaving(false);
+          return;
+        }
+        // Delete old cover image from Cloudinary if replacing
+        if (isEditMode && coverImagePublicId) {
+          try {
+            await fetch(`${API_URL}/upload/delete`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+              body: JSON.stringify({ publicId: coverImagePublicId }),
+            });
+          } catch {}
+        }
+        finalCoverImage = coverData.url;
+        finalCoverImagePublicId = coverData.publicId;
       }
 
       // Step 1: Upload all image blocks to Cloudinary
@@ -382,6 +423,8 @@ const CreateBlog = () => {
         excerpt,
         author,
         category,
+        coverImage: finalCoverImage,
+        coverImagePublicId: finalCoverImagePublicId,
         contentBlocks: formattedBlocks,
         isPublished,
       };
@@ -603,9 +646,52 @@ const CreateBlog = () => {
         />
       </div>
 
+      {/* Cover Image */}
+      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+        <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+          Image de couverture *
+        </label>
+        <p className="text-xs text-gray-400 mb-3">
+          Dimensions optimales : <span className="font-semibold text-gray-500">800 × 400 px</span> (ratio 2:1) — cette image s'affiche sur la carte de l'article.
+        </p>
+        <div className="flex items-start gap-4">
+          {coverImage && (
+            <div className="relative shrink-0">
+              <img
+                src={coverImage}
+                alt="Couverture"
+                className="h-24 w-48 object-cover rounded-lg border border-gray-200"
+              />
+              <button
+                type="button"
+                onClick={() => { setCoverImage(null); setCoverImageFile(null); setCoverImagePublicId(null); }}
+                className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600"
+              >
+                ×
+              </button>
+            </div>
+          )}
+          <label className="flex flex-col items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-[#D71C1C] hover:text-[#D71C1C] transition-all cursor-pointer text-sm">
+            <ImageIcon className="w-5 h-5" />
+            <span>{coverImage ? 'Remplacer l\'image' : 'Choisir une image'}</span>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setCoverImageFile(file);
+                  setCoverImage(URL.createObjectURL(file));
+                }
+              }}
+            />
+          </label>
+        </div>
+      </div>
+
       {/* Category + Author row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">        <div className="bg-white border border-gray-200 rounded-lg p-6">
           <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
             Catégorie *
           </label>

@@ -69,6 +69,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    coverImagePublicId: {
+      type: String,
+      default: null,
+    },
     coverGradient: {
       type: String,
       default: 'bg-gradient-to-br from-[#D71C1C] to-[#B01818]',
