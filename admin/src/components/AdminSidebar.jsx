@@ -8,6 +8,7 @@ import {
   CalendarCheck,
   FileSpreadsheet,
   Mail,
+  BookOpen,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -55,6 +56,11 @@ const AdminSidebar = ({ onCollapse }) => {
       label: 'Newsletter',
       icon: Mail,
       href: '/newsletter',
+    },
+    {
+      label: 'Guides',
+      icon: BookOpen,
+      href: '/guides',
     },
   ];
 

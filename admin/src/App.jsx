@@ -16,6 +16,7 @@ import AdminApplications from './pages/AdminApplications';
 import ApplicationDetail from './pages/ApplicationDetail';
 import QuotationDetail from './pages/QuotationDetail';
 import LoadingPage from './pages/LoadingPage';
+import Guides from './pages/Guides';
 
 const ProtectedRoute = ({ children }) => {
   const { admin, loading } = useAuth();
@@ -67,6 +68,7 @@ const App = () => {
         <Route path="quotations" element={<AdminQuotations />} />
         <Route path="quotations/:id" element={<QuotationDetail />} />
         <Route path="newsletter" element={<AdminNewsletter />} />
+        <Route path="guides" element={<Guides />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

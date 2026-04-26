@@ -75,7 +75,7 @@ const Login = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@leadgenbooster.ca"
+                  placeholder="email@example.com"
                   required
                   className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D71C1C]/20 focus:border-[#D71C1C] transition-colors"
                 />
