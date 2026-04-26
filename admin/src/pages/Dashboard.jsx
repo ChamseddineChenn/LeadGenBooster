@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import {
-  Eye,
+  Users,
   CalendarCheck,
   FileText,
-  Mail,
+  BookOpen,
   ArrowUpRight,
   ArrowDownRight,
   Inbox,
@@ -16,22 +16,34 @@ const Dashboard = () => {
   const { accessToken } = useAuth();
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [recentQuotations, setRecentQuotations] = useState([]);
+  const [statsData, setStatsData] = useState({
+    totalMeetings: 0,
+    plannedMeetings: 0,
+    totalQuotations: 0,
+    blogsThisMonth: 0,
+  });
 
   useEffect(() => {
     if (!accessToken) return;
 
     const fetchDashboardData = async () => {
       try {
-        const [meetingsRes, quotationsRes] = await Promise.all([
+        const [meetingsRes, quotationsRes, blogsRes] = await Promise.all([
           fetch(`${API_URL}/meetings/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
           fetch(`${API_URL}/quotations/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
+          fetch(`${API_URL}/blogs/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
         ]);
+
+        let allMeetings = [];
+        let allQuotations = [];
+        let allBlogs = [];
 
         if (meetingsRes.ok) {
           const data = await meetingsRes.json();
+          allMeetings = data.meetings || [];
           const now = new Date();
           const oneWeekLater = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-          const upcoming = (data.meetings || [])
+          const upcoming = allMeetings
             .filter((m) => {
               const d = new Date(m.date);
               return d >= now && d <= oneWeekLater && m.status !== 'annulé';
@@ -43,8 +55,29 @@ const Dashboard = () => {
 
         if (quotationsRes.ok) {
           const data = await quotationsRes.json();
-          setRecentQuotations((data.quotations || []).slice(0, 5));
+          allQuotations = data.quotations || [];
+          setRecentQuotations(allQuotations.slice(0, 5));
         }
+
+        if (blogsRes.ok) {
+          const data = await blogsRes.json();
+          allBlogs = data.blogs || data || [];
+        }
+
+        // Compute stats
+        const now = new Date();
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+        setStatsData({
+          totalMeetings: allMeetings.length,
+          plannedMeetings: allMeetings.filter(
+            (m) => m.status === 'planifié' || m.status === 'confirmé'
+          ).length,
+          totalQuotations: allQuotations.length,
+          blogsThisMonth: allBlogs.filter(
+            (b) => new Date(b.createdAt) >= startOfMonth
+          ).length,
+        });
       } catch {
         // silently fail — dashboard is non-critical
       }
@@ -52,33 +85,34 @@ const Dashboard = () => {
 
     fetchDashboardData();
   }, [accessToken]);
-  const stats = [    {
-      title: 'Visiteurs ce mois',
-      value: '0',
+  const stats = [
+    {
+      title: 'Total rendez-vous',
+      value: statsData.totalMeetings.toString(),
       change: '—',
       trend: 'up',
-      icon: Eye,
+      icon: Users,
     },
     {
       title: 'Rendez-vous planifiés',
-      value: '0',
+      value: statsData.plannedMeetings.toString(),
       change: '—',
       trend: 'up',
       icon: CalendarCheck,
     },
     {
       title: 'Demandes de devis',
-      value: '0',
+      value: statsData.totalQuotations.toString(),
       change: '—',
       trend: 'up',
       icon: FileText,
     },
     {
-      title: 'Abonnés Newsletter',
-      value: '0',
+      title: 'Articles ce mois',
+      value: statsData.blogsThisMonth.toString(),
       change: '—',
       trend: 'up',
-      icon: Mail,
+      icon: BookOpen,
     },
   ];
 
