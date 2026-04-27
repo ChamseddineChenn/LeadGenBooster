@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const multer = require('multer');
 const Newsletter = require('../models/Newsletter');
 const { sendMail } = require('../utils/mailer');
 const { protect } = require('../middleware/auth');
 
 const FRONTEND_CLIENT_URL =
   process.env.FRONTEND_CLIENT_URL || 'http://localhost:5173';
+
+// Multer: store attachments in memory (max 10 MB per file, max 5 files)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 },
+}).array('attachments', 5);
 
 // ============ PUBLIC ROUTES ============
 
@@ -210,56 +217,106 @@ router.delete('/admin/:id', protect, async (req, res) => {
 });
 
 // Send campaign email to all confirmed subscribers (admin)
-router.post('/admin/campaign', protect, async (req, res) => {
-  try {
-    const { subject, content } = req.body;
-
-    if (!subject || !content) {
-      return res
-        .status(400)
-        .json({ message: 'Le sujet et le contenu sont requis' });
+router.post('/admin/campaign', protect, (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ message: 'Erreur fichier : ' + err.message });
     }
 
-    const subscribers = await Newsletter.find({
-      isConfirmed: true,
-      unsubscribed: false,
-    });
+    try {
+      const { subject, content } = req.body;
 
-    if (subscribers.length === 0) {
-      return res.status(400).json({ message: 'Aucun abonné confirmé' });
-    }
-
-    let sent = 0;
-    let failed = 0;
-
-    for (const sub of subscribers) {
-      try {
-        const unsubscribeUrl = `${FRONTEND_CLIENT_URL}/newsletter/desabonner?token=${sub.unsubscribeToken}`;
-        await sendMail({
-          to: sub.email,
-          subject,
-          html: buildCampaignEmail(content, unsubscribeUrl),
-        });
-        sent++;
-      } catch (err) {
-        console.error(`Failed to send to ${sub.email}:`, err.message);
-        failed++;
+      if (!subject || !content) {
+        return res
+          .status(400)
+          .json({ message: 'Le sujet et le contenu sont requis' });
       }
-    }
 
-    res.json({
-      message: `Campagne envoyée : ${sent} email(s) envoyé(s), ${failed} échec(s)`,
-      sent,
-      failed,
-      total: subscribers.length,
-    });
-  } catch (error) {
-    console.error('Campaign send error:', error);
-    res.status(500).json({ message: 'Erreur serveur' });
-  }
+      const subscribers = await Newsletter.find({
+        isConfirmed: true,
+        unsubscribed: false,
+      });
+
+      if (subscribers.length === 0) {
+        return res.status(400).json({ message: 'Aucun abonné confirmé' });
+      }
+
+      // Build nodemailer attachments from uploaded files
+      const attachments = (req.files || []).map((file) => ({
+        filename: file.originalname,
+        content: file.buffer,
+        contentType: file.mimetype,
+      }));
+
+      // Convert Quill HTML to email-safe HTML (inline styles)
+      const emailSafeContent = quillToEmailHtml(content);
+
+      let sent = 0;
+      let failed = 0;
+
+      for (const sub of subscribers) {
+        try {
+          const unsubscribeUrl = `${FRONTEND_CLIENT_URL}/newsletter/desabonner?token=${sub.unsubscribeToken}`;
+          await sendMail({
+            to: sub.email,
+            subject,
+            html: buildCampaignEmail(emailSafeContent, unsubscribeUrl),
+            attachments,
+          });
+          sent++;
+        } catch (mailErr) {
+          console.error(`Failed to send to ${sub.email}:`, mailErr.message);
+          failed++;
+        }
+      }
+
+      res.json({
+        message: `Campagne envoyée : ${sent} email(s) envoyé(s), ${failed} échec(s)`,
+        sent,
+        failed,
+        total: subscribers.length,
+      });
+    } catch (error) {
+      console.error('Campaign send error:', error);
+      res.status(500).json({ message: 'Erreur serveur' });
+    }
+  });
 });
 
 // ============ EMAIL TEMPLATES ============
+
+/**
+ * Convert Quill-generated HTML to email-client-safe HTML.
+ * Quill uses CSS classes (ql-align-center, ql-indent-*) and <img> tags that
+ * are stripped by most email clients. This function converts them to
+ * inline styles so alignment and images survive.
+ */
+function quillToEmailHtml(html) {
+  if (!html) return html;
+
+  // Replace Quill alignment classes with inline text-align styles
+  let result = html
+    .replace(
+      /class="([^"]*\bql-align-center\b[^"]*)"/g,
+      'class="$1" style="text-align:center;"',
+    )
+    .replace(
+      /class="([^"]*\bql-align-right\b[^"]*)"/g,
+      'class="$1" style="text-align:right;"',
+    )
+    .replace(
+      /class="([^"]*\bql-align-justify\b[^"]*)"/g,
+      'class="$1" style="text-align:justify;"',
+    );
+
+  // Ensure <img> tags have max-width so they don't overflow
+  result = result.replace(
+    /<img(?![^>]*style=)/gi,
+    '<img style="max-width:100%;height:auto;display:block;"',
+  );
+
+  return result;
+}
 
 function buildConfirmationEmail(confirmUrl) {
   return `

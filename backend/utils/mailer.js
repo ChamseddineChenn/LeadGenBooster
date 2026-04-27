@@ -12,13 +12,14 @@ const createTransporter = () => {
   });
 };
 
-const sendMail = async ({ to, subject, html }) => {
+const sendMail = async ({ to, subject, html, attachments }) => {
   const transporter = createTransporter();
   const mailOptions = {
     from: `"${process.env.SMTP_FROM_NAME || 'LeadGenBooster'}" <${process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER}>`,
     to,
     subject,
     html,
+    ...(attachments && attachments.length > 0 ? { attachments } : {}),
   };
   return transporter.sendMail(mailOptions);
 };

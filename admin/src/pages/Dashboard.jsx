@@ -29,9 +29,15 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const [meetingsRes, quotationsRes, blogsRes] = await Promise.all([
-          fetch(`${API_URL}/meetings/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
-          fetch(`${API_URL}/quotations/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
-          fetch(`${API_URL}/blogs/admin/all`, { headers: { Authorization: `Bearer ${accessToken}` } }),
+          fetch(`${API_URL}/meetings/admin/all`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }),
+          fetch(`${API_URL}/quotations/admin/all`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }),
+          fetch(`${API_URL}/blogs/admin/all`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }),
         ]);
 
         let allMeetings = [];
@@ -42,7 +48,9 @@ const Dashboard = () => {
           const data = await meetingsRes.json();
           allMeetings = data.meetings || [];
           const now = new Date();
-          const oneWeekLater = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          const oneWeekLater = new Date(
+            now.getTime() + 7 * 24 * 60 * 60 * 1000,
+          );
           const upcoming = allMeetings
             .filter((m) => {
               const d = new Date(m.date);
@@ -71,11 +79,11 @@ const Dashboard = () => {
         setStatsData({
           totalMeetings: allMeetings.length,
           plannedMeetings: allMeetings.filter(
-            (m) => m.status === 'planifié' || m.status === 'confirmé'
+            (m) => m.status === 'planifié' || m.status === 'confirmé',
           ).length,
           totalQuotations: allQuotations.length,
           blogsThisMonth: allBlogs.filter(
-            (b) => new Date(b.createdAt) >= startOfMonth
+            (b) => new Date(b.createdAt) >= startOfMonth,
           ).length,
         });
       } catch {
@@ -117,7 +125,11 @@ const Dashboard = () => {
   ];
 
   const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString('fr-CA', { day: 'numeric', month: 'short', year: 'numeric' });
+    new Date(dateStr).toLocaleDateString('fr-CA', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
 
   return (
     <div>
@@ -242,7 +254,8 @@ const Dashboard = () => {
           <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 className="text-lg font-bold text-black">Derniers Devis</h2>
           </div>
-          {recentQuotations.length === 0 ? (            <div className="flex flex-col items-center justify-center py-12 text-gray-400">
+          {recentQuotations.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-gray-400">
               <Inbox className="w-12 h-12 mb-3" />
               <p className="text-sm font-medium">Aucun devis</p>
               <p className="text-xs mt-1">Les devis apparaîtront ici.</p>

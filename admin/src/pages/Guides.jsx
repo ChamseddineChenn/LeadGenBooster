@@ -31,7 +31,7 @@ const SECTIONS = [
         content: [
           {
             type: 'intro',
-            text: 'Le Dashboard est la première page que vous voyez après la connexion. Il vous donne une vision instantanée de l\'activité de la plateforme.',
+            text: "Le Dashboard est la première page que vous voyez après la connexion. Il vous donne une vision instantanée de l'activité de la plateforme.",
           },
           {
             type: 'heading',
@@ -52,7 +52,7 @@ const SECTIONS = [
           },
           {
             type: 'text',
-            text: 'Ce tableau affiche les rendez-vous non annulés des 7 prochains jours, triés du plus proche au plus lointain (maximum 5). S\'il n\'y en a pas, un message vide s\'affiche.',
+            text: "Ce tableau affiche les rendez-vous non annulés des 7 prochains jours, triés du plus proche au plus lointain (maximum 5). S'il n'y en a pas, un message vide s'affiche.",
           },
           {
             type: 'heading',
@@ -99,14 +99,14 @@ const SECTIONS = [
           {
             type: 'list',
             items: [
-              '<strong>Œil (aperçu)</strong> — ouvre une prévisualisation de l\'article tel qu\'il apparaîtra sur le site.',
-              '<strong>Crayon (modifier)</strong> — ouvre le formulaire d\'édition avec toutes les données existantes pré-remplies.',
-              '<strong>Corbeille (supprimer)</strong> — demande une confirmation puis supprime définitivement l\'article et son image de couverture sur Cloudinary.',
+              "<strong>Œil (aperçu)</strong> — ouvre une prévisualisation de l'article tel qu'il apparaîtra sur le site.",
+              "<strong>Crayon (modifier)</strong> — ouvre le formulaire d'édition avec toutes les données existantes pré-remplies.",
+              "<strong>Corbeille (supprimer)</strong> — demande une confirmation puis supprime définitivement l'article et son image de couverture sur Cloudinary.",
             ],
           },
           {
             type: 'note',
-            text: 'La suppression est irréversible. L\'image de couverture hébergée sur Cloudinary est également supprimée.',
+            text: "La suppression est irréversible. L'image de couverture hébergée sur Cloudinary est également supprimée.",
           },
         ],
       },
@@ -125,7 +125,7 @@ const SECTIONS = [
           {
             type: 'steps',
             items: [
-              '<strong>Titre principal</strong> — titre de l\'article, affiché en grand sur la page de l\'article et dans les cartes de liste. Champ obligatoire.',
+              "<strong>Titre principal</strong> — titre de l'article, affiché en grand sur la page de l'article et dans les cartes de liste. Champ obligatoire.",
               '<strong>Extrait</strong> — résumé court (1-2 phrases) affiché dans les cartes de prévisualisation sur le site. Champ obligatoire.',
             ],
           },
@@ -138,13 +138,13 @@ const SECTIONS = [
             items: [
               'Cliquez sur la zone "Choisir une image de couverture".',
               'Sélectionnez une image depuis votre ordinateur (JPG, PNG, WebP recommandés).',
-              'Dimensions optimales : <strong>800 × 400 px</strong> (ratio 2:1). C\'est la taille exacte des cartes du blog sur le site.',
-              'Une miniature de prévisualisation apparaît. Cliquez sur le <strong>×</strong> pour changer l\'image.',
+              "Dimensions optimales : <strong>800 × 400 px</strong> (ratio 2:1). C'est la taille exacte des cartes du blog sur le site.",
+              "Une miniature de prévisualisation apparaît. Cliquez sur le <strong>×</strong> pour changer l'image.",
             ],
           },
           {
             type: 'warning',
-            text: 'L\'image de couverture est obligatoire. Vous ne pouvez pas sauvegarder sans elle.',
+            text: "L'image de couverture est obligatoire. Vous ne pouvez pas sauvegarder sans elle.",
           },
           {
             type: 'heading',
@@ -168,14 +168,14 @@ const SECTIONS = [
           {
             type: 'list',
             items: [
-              '<strong>Titre (H2)</strong> — sous-titre de section dans l\'article. Vous pouvez personnaliser sa couleur.',
+              "<strong>Titre (H2)</strong> — sous-titre de section dans l'article. Vous pouvez personnaliser sa couleur.",
               '<strong>Paragraphe</strong> — texte riche avec éditeur Quill (gras, italique, listes, liens, etc.).',
-              '<strong>Image</strong> — image insérée dans le corps de l\'article, hébergée sur Cloudinary.',
+              "<strong>Image</strong> — image insérée dans le corps de l'article, hébergée sur Cloudinary.",
             ],
           },
           {
             type: 'text',
-            text: 'Chaque bloc peut être réordonné (flèches ↑↓) et supprimé (×). Il n\'y a pas de limite de blocs.',
+            text: "Chaque bloc peut être réordonné (flèches ↑↓) et supprimé (×). Il n'y a pas de limite de blocs.",
           },
           {
             type: 'heading',
@@ -197,14 +197,14 @@ const SECTIONS = [
         content: [
           {
             type: 'intro',
-            text: 'Depuis la liste des articles, cliquez sur l\'icône crayon d\'un article pour l\'ouvrir en mode édition.',
+            text: "Depuis la liste des articles, cliquez sur l'icône crayon d'un article pour l'ouvrir en mode édition.",
           },
           {
             type: 'list',
             items: [
               'Tous les champs sont pré-remplis avec les données existantes.',
-              'L\'image de couverture actuelle est affichée en miniature. Si vous en téléversez une nouvelle, l\'ancienne sera supprimée de Cloudinary automatiquement.',
-              'Les blocs de contenu existants sont chargés dans l\'ordre. Vous pouvez les modifier, en ajouter ou en supprimer.',
+              "L'image de couverture actuelle est affichée en miniature. Si vous en téléversez une nouvelle, l'ancienne sera supprimée de Cloudinary automatiquement.",
+              "Les blocs de contenu existants sont chargés dans l'ordre. Vous pouvez les modifier, en ajouter ou en supprimer.",
               'Seuls les blocs images <em>modifiés</em> (nouvelle image choisie) seront re-uploadés — les autres images existantes sont conservées.',
               'Cliquez sur <strong>"Sauvegarder"</strong> pour enregistrer les modifications.',
             ],
@@ -225,19 +225,19 @@ const SECTIONS = [
     topics: [
       {
         id: 'careers-list',
-        title: 'Gérer les offres d\'emploi',
+        title: "Gérer les offres d'emploi",
         content: [
           {
             type: 'intro',
-            text: 'La page Carrières liste toutes les offres d\'emploi créées. Vous pouvez les filtrer par statut, les prévisualiser, modifier ou supprimer.',
+            text: "La page Carrières liste toutes les offres d'emploi créées. Vous pouvez les filtrer par statut, les prévisualiser, modifier ou supprimer.",
           },
           {
             type: 'list',
             items: [
               '<strong>Publiées</strong> — offres visibles sur la page Carrières du site public.',
               '<strong>Brouillons</strong> — offres sauvegardées mais non visibles.',
-              '<strong>Aperçu (œil)</strong> — prévisualise la fiche de poste telle qu\'elle apparaîtra sur le site.',
-              '<strong>Modifier (crayon)</strong> — ouvre le formulaire d\'édition pré-rempli.',
+              "<strong>Aperçu (œil)</strong> — prévisualise la fiche de poste telle qu'elle apparaîtra sur le site.",
+              "<strong>Modifier (crayon)</strong> — ouvre le formulaire d'édition pré-rempli.",
               '<strong>Supprimer (corbeille)</strong> — confirmation puis suppression définitive.',
             ],
           },
@@ -245,7 +245,7 @@ const SECTIONS = [
       },
       {
         id: 'careers-create',
-        title: 'Créer une offre d\'emploi',
+        title: "Créer une offre d'emploi",
         content: [
           {
             type: 'intro',
@@ -278,7 +278,7 @@ const SECTIONS = [
             items: [
               '<strong>Responsabilités</strong> — ce que le candidat devra faire au quotidien.',
               '<strong>Exigences</strong> — compétences et qualifications requises.',
-              '<strong>Avantages</strong> — ce que l\'entreprise offre (télétravail, assurances, etc.).',
+              "<strong>Avantages</strong> — ce que l'entreprise offre (télétravail, assurances, etc.).",
             ],
           },
           {
@@ -289,8 +289,8 @@ const SECTIONS = [
             type: 'list',
             items: [
               '<strong>Salaire</strong> — fourchette min/max (ex. : 60 000 $ – 80 000 $). Le toggle "Afficher le salaire" contrôle sa visibilité publique.',
-              '<strong>Date de clôture</strong> — date limite de candidature. Passé cette date, l\'offre peut rester en ligne mais sera clairement expirée.',
-              '<strong>Publié</strong> — toggle pour rendre l\'offre visible sur le site immédiatement.',
+              "<strong>Date de clôture</strong> — date limite de candidature. Passé cette date, l'offre peut rester en ligne mais sera clairement expirée.",
+              "<strong>Publié</strong> — toggle pour rendre l'offre visible sur le site immédiatement.",
             ],
           },
           {
@@ -316,7 +316,7 @@ const SECTIONS = [
         content: [
           {
             type: 'intro',
-            text: 'La page Candidatures regroupe toutes les candidatures reçues via le site. Chaque candidature est liée à une offre d\'emploi.',
+            text: "La page Candidatures regroupe toutes les candidatures reçues via le site. Chaque candidature est liée à une offre d'emploi.",
           },
           {
             type: 'heading',
@@ -337,7 +337,7 @@ const SECTIONS = [
             type: 'list',
             items: [
               'Nom complet du candidat, email et téléphone.',
-              'Poste visé (titre de l\'offre liée).',
+              "Poste visé (titre de l'offre liée).",
               'Date de candidature.',
               'Statut actuel (badge coloré).',
             ],
@@ -354,7 +354,7 @@ const SECTIONS = [
         content: [
           {
             type: 'intro',
-            text: 'La page détail d\'une candidature affiche toutes les informations du candidat et vous permet de gérer son suivi.',
+            text: "La page détail d'une candidature affiche toutes les informations du candidat et vous permet de gérer son suivi.",
           },
           {
             type: 'heading',
@@ -373,7 +373,7 @@ const SECTIONS = [
           {
             type: 'steps',
             items: [
-              'Pour changer le statut, cliquez sur l\'un des boutons de statut en haut de la fiche. Le changement est enregistré immédiatement.',
+              "Pour changer le statut, cliquez sur l'un des boutons de statut en haut de la fiche. Le changement est enregistré immédiatement.",
               'Pour télécharger le CV, cliquez sur le bouton <strong>"Télécharger le CV"</strong> (si le candidat en a fourni un).',
               'Pour ajouter une note interne, rédigez-la dans le champ <strong>"Commentaire admin"</strong> et cliquez sur <strong>"Sauvegarder"</strong>. Ce commentaire n\'est visible que par vous.',
               'Pour supprimer la candidature, cliquez sur le bouton rouge "Supprimer" et confirmez.',
@@ -433,7 +433,7 @@ const SECTIONS = [
         content: [
           {
             type: 'intro',
-            text: 'Depuis la liste, chaque rendez-vous affiche les informations du client et des boutons d\'action rapide.',
+            text: "Depuis la liste, chaque rendez-vous affiche les informations du client et des boutons d'action rapide.",
           },
           {
             type: 'heading',
@@ -496,8 +496,8 @@ const SECTIONS = [
           {
             type: 'list',
             items: [
-              '<strong>Durée d\'un créneau</strong> — en minutes (ex. : 30 ou 60). Détermine la granularité des créneaux proposés.',
-              '<strong>Réservation max à l\'avance</strong> — nombre de jours maximum que les visiteurs peuvent réserver à l\'avance.',
+              "<strong>Durée d'un créneau</strong> — en minutes (ex. : 30 ou 60). Détermine la granularité des créneaux proposés.",
+              "<strong>Réservation max à l'avance</strong> — nombre de jours maximum que les visiteurs peuvent réserver à l'avance.",
             ],
           },
           {
@@ -506,7 +506,7 @@ const SECTIONS = [
           },
           {
             type: 'text',
-            text: 'Ajoutez des dates spécifiques où vous n\'êtes pas disponible (congés, jours fériés, etc.). Ces dates seront grisées dans le calendrier des visiteurs.',
+            text: "Ajoutez des dates spécifiques où vous n'êtes pas disponible (congés, jours fériés, etc.). Ces dates seront grisées dans le calendrier des visiteurs.",
           },
           {
             type: 'steps',
@@ -541,7 +541,7 @@ const SECTIONS = [
             type: 'list',
             items: [
               '<strong>Nouveau</strong> (bleu) — reçu, non encore ouvert.',
-              '<strong>Vu</strong> (gris) — ouvert par l\'admin.',
+              "<strong>Vu</strong> (gris) — ouvert par l'admin.",
               '<strong>En cours</strong> (violet) — traitement en cours.',
               '<strong>Terminé</strong> (vert) — devis finalisé ou projet conclu.',
               '<strong>Rejeté</strong> (rouge) — demande refusée.',
@@ -593,7 +593,7 @@ const SECTIONS = [
             items: [
               'Rédigez vos notes internes dans le champ "Commentaire admin" (ex. : montant proposé, détails de l\'échange).',
               'Cliquez sur <strong>"Sauvegarder"</strong> pour enregistrer.',
-              'Ce commentaire est uniquement visible par vous dans l\'admin.',
+              "Ce commentaire est uniquement visible par vous dans l'admin.",
             ],
           },
           {
@@ -633,9 +633,9 @@ const SECTIONS = [
           {
             type: 'list',
             items: [
-              '<strong>Confirmé</strong> (vert) — l\'abonné a cliqué sur le lien de confirmation dans l\'email reçu. Il recevra les campagnes.',
+              "<strong>Confirmé</strong> (vert) — l'abonné a cliqué sur le lien de confirmation dans l'email reçu. Il recevra les campagnes.",
               '<strong>En attente</strong> (jaune) — inscription soumise mais email non encore confirmé.',
-              '<strong>Désabonné</strong> (rouge) — abonné qui s\'est désinscrit. Ne reçoit plus rien.',
+              "<strong>Désabonné</strong> (rouge) — abonné qui s'est désinscrit. Ne reçoit plus rien.",
             ],
           },
           {
@@ -656,9 +656,9 @@ const SECTIONS = [
           {
             type: 'steps',
             items: [
-              'Cliquez sur la corbeille à côté de l\'abonné.',
-              'Confirmez la suppression dans la fenêtre qui s\'ouvre.',
-              'L\'abonné est retiré définitivement de la base de données.',
+              "Cliquez sur la corbeille à côté de l'abonné.",
+              "Confirmez la suppression dans la fenêtre qui s'ouvre.",
+              "L'abonné est retiré définitivement de la base de données.",
             ],
           },
           {
@@ -683,16 +683,16 @@ const SECTIONS = [
             type: 'steps',
             items: [
               'Cliquez sur le bouton <strong>"Envoyer une campagne"</strong> (icône avion en papier) en haut de la page.',
-              'Une fenêtre modale s\'ouvre avec deux champs.',
+              "Une fenêtre modale s'ouvre avec deux champs.",
               'Dans <strong>"Sujet"</strong>, saisissez l\'objet de l\'email (ce que les destinataires verront dans leur boîte de réception).',
               'Dans <strong>"Contenu"</strong>, rédigez le corps de l\'email avec l\'éditeur de texte riche (titres, gras, listes, liens, images).',
               'Cliquez sur <strong>"Envoyer"</strong>.',
-              'Un résumé s\'affiche : nombre d\'emails envoyés avec succès et nombre d\'échecs éventuels.',
+              "Un résumé s'affiche : nombre d'emails envoyés avec succès et nombre d'échecs éventuels.",
             ],
           },
           {
             type: 'warning',
-            text: 'L\'envoi est immédiat et ne peut pas être annulé. Relisez soigneusement le contenu avant de confirmer.',
+            text: "L'envoi est immédiat et ne peut pas être annulé. Relisez soigneusement le contenu avant de confirmer.",
           },
           {
             type: 'note',
@@ -732,7 +732,10 @@ const BlockRenderer = ({ block }) => {
       return (
         <ul className="space-y-1.5 mb-4 pl-4">
           {block.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-gray-600"
+            >
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#D71C1C] flex-shrink-0" />
               <span dangerouslySetInnerHTML={{ __html: item }} />
             </li>
@@ -743,7 +746,10 @@ const BlockRenderer = ({ block }) => {
       return (
         <ol className="space-y-2 mb-4 pl-2">
           {block.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
+            <li
+              key={i}
+              className="flex items-start gap-3 text-sm text-gray-600"
+            >
               <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#D71C1C] text-white text-xs font-bold flex items-center justify-center mt-0.5">
                 {i + 1}
               </span>
@@ -826,7 +832,8 @@ const Guides = () => {
       const firstTopicId = section.topics[0].id;
       setOpenTopics((prev) => ({
         ...prev,
-        [firstTopicId]: prev[firstTopicId] !== undefined ? prev[firstTopicId] : true,
+        [firstTopicId]:
+          prev[firstTopicId] !== undefined ? prev[firstTopicId] : true,
       }));
     }
   }, [openSection]);
@@ -838,7 +845,10 @@ const Guides = () => {
   const handleSectionClick = (sectionId) => {
     setOpenSection(sectionId);
     setTimeout(() => {
-      sectionRefs.current[sectionId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      sectionRefs.current[sectionId]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }, 50);
   };
 
@@ -854,7 +864,9 @@ const Guides = () => {
               <BookOpen className="w-4 h-4 text-[#D71C1C]" />
               <span className="font-semibold text-black text-sm">Guides</span>
             </div>
-            <p className="text-xs text-gray-400 mt-0.5">Sélectionnez un module</p>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Sélectionnez un module
+            </p>
           </div>
           <nav className="py-2">
             {SECTIONS.map((section) => {
@@ -870,7 +882,9 @@ const Guides = () => {
                       : 'text-gray-600 hover:bg-gray-50 hover:text-black'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#D71C1C]' : section.color}`} />
+                  <Icon
+                    className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#D71C1C]' : section.color}`}
+                  />
                   {section.label}
                 </button>
               );
@@ -885,14 +899,18 @@ const Guides = () => {
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-1">
             {activeSection && (
-              <activeSection.icon className={`w-6 h-6 ${activeSection.color}`} />
+              <activeSection.icon
+                className={`w-6 h-6 ${activeSection.color}`}
+              />
             )}
             <h1 className="text-2xl font-bold text-black">
               {activeSection?.label}
             </h1>
           </div>
           <p className="text-gray-500 text-sm">
-            {activeSection?.topics.length} guide{activeSection?.topics.length !== 1 ? 's' : ''} disponible{activeSection?.topics.length !== 1 ? 's' : ''}
+            {activeSection?.topics.length} guide
+            {activeSection?.topics.length !== 1 ? 's' : ''} disponible
+            {activeSection?.topics.length !== 1 ? 's' : ''}
           </p>
         </div>
 

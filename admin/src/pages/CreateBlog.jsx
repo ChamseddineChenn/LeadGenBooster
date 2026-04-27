@@ -25,9 +25,9 @@ const CATEGORIES = [
   { value: 'conseils', label: 'Conseils' },
   { value: 'tendances', label: 'Tendances' },
   { value: 'etudes', label: 'Études de cas' },
-  { value: 'guide', label: 'Guide' },
-  { value: 'technologie', label: 'Technologie' },
-  { value: 'legislation', label: 'Législation' },
+  { value: 'temoignages', label: 'Témoignages' },
+  { value: 'portfolio', label: 'Portfolio' },
+  { value: 'faq', label: 'FAQ' },
 ];
 
 /**
@@ -261,7 +261,10 @@ const CreateBlog = () => {
       return;
     }
     if (!coverImage && !coverImageFile) {
-      setSaveMessage({ type: 'error', text: "L'image de couverture est requise." });
+      setSaveMessage({
+        type: 'error',
+        text: "L'image de couverture est requise.",
+      });
       return;
     }
 
@@ -297,7 +300,11 @@ const CreateBlog = () => {
         });
         const coverData = await coverRes.json();
         if (!coverRes.ok) {
-          setSaveMessage({ type: 'error', text: coverData.message || "Erreur lors de l'upload de la couverture." });
+          setSaveMessage({
+            type: 'error',
+            text:
+              coverData.message || "Erreur lors de l'upload de la couverture.",
+          });
           setIsSaving(false);
           return;
         }
@@ -306,7 +313,10 @@ const CreateBlog = () => {
           try {
             await fetch(`${API_URL}/upload/delete`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+              },
               body: JSON.stringify({ publicId: coverImagePublicId }),
             });
           } catch {}
@@ -652,7 +662,9 @@ const CreateBlog = () => {
           Image de couverture *
         </label>
         <p className="text-xs text-gray-400 mb-3">
-          Dimensions optimales : <span className="font-semibold text-gray-500">800 × 400 px</span> (ratio 2:1) — cette image s'affiche sur la carte de l'article.
+          Dimensions optimales :{' '}
+          <span className="font-semibold text-gray-500">800 × 400 px</span>{' '}
+          (ratio 2:1) — cette image s'affiche sur la carte de l'article.
         </p>
         <div className="flex items-start gap-4">
           {coverImage && (
@@ -664,7 +676,11 @@ const CreateBlog = () => {
               />
               <button
                 type="button"
-                onClick={() => { setCoverImage(null); setCoverImageFile(null); setCoverImagePublicId(null); }}
+                onClick={() => {
+                  setCoverImage(null);
+                  setCoverImageFile(null);
+                  setCoverImagePublicId(null);
+                }}
                 className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600"
               >
                 ×
@@ -673,7 +689,9 @@ const CreateBlog = () => {
           )}
           <label className="flex flex-col items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-[#D71C1C] hover:text-[#D71C1C] transition-all cursor-pointer text-sm">
             <ImageIcon className="w-5 h-5" />
-            <span>{coverImage ? 'Remplacer l\'image' : 'Choisir une image'}</span>
+            <span>
+              {coverImage ? "Remplacer l'image" : 'Choisir une image'}
+            </span>
             <input
               type="file"
               accept="image/*"
@@ -691,7 +709,9 @@ const CreateBlog = () => {
       </div>
 
       {/* Category + Author row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">        <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        {' '}
+        <div className="bg-white border border-gray-200 rounded-lg p-6">
           <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
             Catégorie *
           </label>

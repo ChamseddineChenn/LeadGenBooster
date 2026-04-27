@@ -14,6 +14,7 @@ import {
   Send,
   AlertCircle,
   Check,
+  Paperclip,
 } from 'lucide-react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
@@ -68,6 +69,7 @@ const AdminNewsletter = () => {
   const [showCampaign, setShowCampaign] = useState(false);
   const [campaignSubject, setCampaignSubject] = useState('');
   const [campaignContent, setCampaignContent] = useState('');
+  const [campaignAttachments, setCampaignAttachments] = useState([]);
   const [sendingCampaign, setSendingCampaign] = useState(false);
   const [campaignResult, setCampaignResult] = useState(null);
 
@@ -161,16 +163,18 @@ const AdminNewsletter = () => {
     setSendingCampaign(true);
     setCampaignResult(null);
     try {
+      const formData = new FormData();
+      formData.append('subject', campaignSubject);
+      formData.append('content', campaignContent);
+      campaignAttachments.forEach((file) => formData.append('attachments', file));
+
       const res = await fetch(`${API_URL}/newsletter/admin/campaign`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
+          // Do NOT set Content-Type — browser sets it with boundary for FormData
         },
-        body: JSON.stringify({
-          subject: campaignSubject,
-          content: campaignContent,
-        }),
+        body: formData,
       });
       const data = await res.json();
       if (res.ok) {
@@ -189,6 +193,7 @@ const AdminNewsletter = () => {
     setShowCampaign(false);
     setCampaignSubject('');
     setCampaignContent('');
+    setCampaignAttachments([]);
     setCampaignResult(null);
   };
 
@@ -517,6 +522,45 @@ const AdminNewsletter = () => {
                     placeholder="Rédigez le contenu de votre campagne..."
                   />
                 </div>
+              </div>
+
+              {/* Attachments */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                  Pièces jointes <span className="font-normal text-gray-400">(optionnel, max 5 fichiers × 10 Mo)</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer w-fit px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg hover:border-[#D71C1C] hover:bg-red-50/40 transition-colors text-sm text-gray-600">
+                  <Paperclip className="w-4 h-4" />
+                  Ajouter des fichiers
+                  <input
+                    type="file"
+                    multiple
+                    className="hidden"
+                    onChange={(e) => {
+                      const files = Array.from(e.target.files || []);
+                      setCampaignAttachments((prev) => [...prev, ...files].slice(0, 5));
+                      e.target.value = '';
+                    }}
+                  />
+                </label>
+                {campaignAttachments.length > 0 && (
+                  <ul className="mt-2 space-y-1">
+                    {campaignAttachments.map((file, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                        <Paperclip className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                        <span className="truncate max-w-[300px]">{file.name}</span>
+                        <span className="text-xs text-gray-400">({(file.size / 1024).toFixed(0)} Ko)</span>
+                        <button
+                          type="button"
+                          onClick={() => setCampaignAttachments((prev) => prev.filter((_, idx) => idx !== i))}
+                          className="ml-auto text-gray-400 hover:text-red-600 transition-colors"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
 

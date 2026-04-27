@@ -268,7 +268,7 @@ const Navbar = () => {
               <img
                 src={assets.logoMain}
                 alt="LeadGen Booster"
-                className="h-20 w-auto"
+                className="h-[88px] w-auto"
               />
             </Link>
           </div>
@@ -285,7 +285,7 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.href}
-                      className={`font-medium transition-colors duration-200 px-2 py-1 cursor-pointer ${
+                      className={`text-lg font-medium transition-colors duration-200 px-2 py-1 cursor-pointer ${
                         isLinkActive(item.href)
                           ? 'text-[#D71C1C]'
                           : 'text-[#6D7280] hover:text-[#D71C1C]'
@@ -319,7 +319,7 @@ const Navbar = () => {
                             activeDropdown === item.key ? null : item.key,
                           )
                         }
-                        className={`font-medium transition-colors duration-200 px-2 py-1 flex items-center cursor-pointer ${
+                        className={`text-lg font-medium transition-colors duration-200 px-2 py-1 flex items-center cursor-pointer ${
                           isLinkActive(item.href)
                             ? 'text-[#D71C1C]'
                             : 'text-[#6D7280] hover:text-[#D71C1C]'
