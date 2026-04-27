@@ -108,9 +108,10 @@ const Blogs = () => {
             { label: 'Tous', value: 'all' },
             { label: 'Conseils', value: 'conseils' },
             { label: 'Tendances', value: 'tendances' },
-            { label: 'Études', value: 'etudes' },
-            { label: 'Technologie', value: 'technologie' },
-            { label: 'Législation', value: 'legislation' },
+            { label: 'Études de cas', value: 'etudes' },
+            { label: 'Témoignages', value: 'temoignages' },
+            { label: 'Portfolio', value: 'portfolio' },
+            { label: 'FAQ', value: 'faq' },
           ].map((category) => (
             <button
               key={category.value}

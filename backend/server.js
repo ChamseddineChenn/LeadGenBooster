@@ -28,6 +28,10 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:5175',
+  // Always allow production domains regardless of env var
+  'https://leadgen-booster.com',
+  'https://www.leadgen-booster.com',
+  'https://admin.leadgen-booster.com',
 ];
 
 app.use(

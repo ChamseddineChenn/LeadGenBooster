@@ -333,7 +333,7 @@ const Carrieres = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section className="py-20 px-4 bg-[#D71C1C]">
+      <section id="postes-ouverts" className="py-20 px-4 bg-[#D71C1C]">
         <div className="max-w-[1200px] mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -471,12 +471,12 @@ const Carrieres = () => {
               candidature spontanée, nous aimerions vous connaître.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/carrieres"
+              <button
+                onClick={() => document.getElementById('postes-ouverts')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-[#D71C1C] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#B01818] transition-all text-center"
               >
                 Envoyer un CV
-              </Link>
+              </button>
               <Link
                 to="/contact"
                 className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition-all text-center"

@@ -217,14 +217,20 @@ router.delete('/admin/:id', protect, async (req, res) => {
 });
 
 // Send campaign email to all confirmed subscribers (admin)
-router.post('/admin/campaign', protect, (req, res) => {
-  upload(req, res, async (err) => {
-    if (err) {
-      return res.status(400).json({ message: 'Erreur fichier : ' + err.message });
-    }
-
+router.post(
+  '/admin/campaign',
+  protect,
+  (req, res, next) => {
+    upload(req, res, (err) => {
+      if (err) {
+        return res.status(400).json({ message: 'Erreur fichier : ' + err.message });
+      }
+      next();
+    });
+  },
+  async (req, res) => {
     try {
-      const { subject, content } = req.body;
+      const { subject, content } = req.body || {};
 
       if (!subject || !content) {
         return res
@@ -280,8 +286,8 @@ router.post('/admin/campaign', protect, (req, res) => {
       console.error('Campaign send error:', error);
       res.status(500).json({ message: 'Erreur serveur' });
     }
-  });
-});
+  },
+);
 
 // ============ EMAIL TEMPLATES ============
 
