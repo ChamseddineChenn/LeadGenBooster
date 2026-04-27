@@ -36,7 +36,7 @@ const quillModules = {
     [{ color: [] }, { background: [] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
     [{ align: [] }],
-    ['link', 'image'],
+    ['link'],
     ['clean'],
   ],
 };
@@ -52,7 +52,6 @@ const quillFormats = [
   'list',
   'align',
   'link',
-  'image',
 ];
 
 const AdminNewsletter = () => {
@@ -82,52 +81,6 @@ const AdminNewsletter = () => {
 
   // Feedback message
   const [message, setMessage] = useState(null);
-
-  // Auto-upload any base64 data URI images that Quill embeds by default.
-  // This catches images inserted via the toolbar button, paste, or drag-and-drop.
-  // Gmail / Outlook block data: URIs; uploading to Cloudinary gives a real URL.
-  const handleCampaignContentChange = useCallback(
-    async (value) => {
-      if (!value.includes('data:image/')) {
-        setCampaignContent(value);
-        return;
-      }
-
-      const pattern = /src="(data:image\/[^;]+;base64,[^"]+)"/g;
-      const matches = [...value.matchAll(pattern)];
-      let updated = value;
-
-      for (const [, base64Src] of matches) {
-        try {
-          const [header, b64data] = base64Src.split(',');
-          const mime = header.replace('data:', '').replace(';base64', '');
-          const binary = atob(b64data);
-          const bytes = new Uint8Array(binary.length);
-          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-          const ext = mime.split('/')[1] || 'png';
-          const file = new File([bytes], `newsletter-image.${ext}`, { type: mime });
-
-          const formData = new FormData();
-          formData.append('image', file);
-
-          const res = await fetch(`${API_URL}/upload`, {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${accessToken}` },
-            body: formData,
-          });
-          const json = await res.json();
-          if (res.ok && json.url) {
-            updated = updated.replace(base64Src, json.url);
-          }
-        } catch (err) {
-          console.error('Newsletter image auto-upload failed:', err);
-        }
-      }
-
-      setCampaignContent(updated);
-    },
-    [accessToken],
-  );
 
   const fetchSubscribers = useCallback(async () => {
     try {
@@ -569,7 +522,7 @@ const AdminNewsletter = () => {
                   <ReactQuill
                     theme="snow"
                     value={campaignContent}
-                    onChange={handleCampaignContentChange}
+                    onChange={setCampaignContent}
                     modules={quillModules}
                     formats={quillFormats}
                     placeholder="Rédigez le contenu de votre campagne..."
