@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Search,
   Trash2,
@@ -25,7 +25,21 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 // Use inline-style alignment so text-align survives in email clients.
 // Class-based ql-align-* is stripped by Gmail / Outlook.
 const AlignStyle = Quill.import('attributors/style/align');
-Quill.register(AlignStyle, true);
+if (AlignStyle) Quill.register(AlignStyle, true);
+
+// Static modules — no custom toolbar handler needed because images are
+// auto-uploaded via the onChange handler below (catches paste/drag-drop too).
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ color: [] }, { background: [] }],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ align: [] }],
+    ['link', 'image'],
+    ['clean'],
+  ],
+};
 
 const quillFormats = [
   'header',
@@ -69,58 +83,50 @@ const AdminNewsletter = () => {
   // Feedback message
   const [message, setMessage] = useState(null);
 
-  // Quill editor ref for custom image handler
-  const quillRef = useRef(null);
-
-  // Custom image handler: upload to Cloudinary instead of embedding base64.
-  // Base64 data URIs are blocked by Gmail / Outlook.
-  const imageHandler = useCallback(() => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return;
-      const formData = new FormData();
-      formData.append('image', file);
-      try {
-        const res = await fetch(`${API_URL}/upload`, {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${accessToken}` },
-          body: formData,
-        });
-        const data = await res.json();
-        if (res.ok && data.url) {
-          const quill = quillRef.current?.getEditor();
-          if (quill) {
-            const range = quill.getSelection(true);
-            quill.insertEmbed(range.index, 'image', data.url);
-            quill.setSelection(range.index + 1);
-          }
-        }
-      } catch (err) {
-        console.error('Newsletter image upload failed:', err);
+  // Auto-upload any base64 data URI images that Quill embeds by default.
+  // This catches images inserted via the toolbar button, paste, or drag-and-drop.
+  // Gmail / Outlook block data: URIs; uploading to Cloudinary gives a real URL.
+  const handleCampaignContentChange = useCallback(
+    async (value) => {
+      if (!value.includes('data:image/')) {
+        setCampaignContent(value);
+        return;
       }
-    };
-  }, [accessToken]);
 
-  const quillModules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ color: [] }, { background: [] }],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ align: [] }],
-          ['link', 'image'],
-          ['clean'],
-        ],
-        handlers: { image: imageHandler },
-      },
-    }),
-    [imageHandler],
+      const pattern = /src="(data:image\/[^;]+;base64,[^"]+)"/g;
+      const matches = [...value.matchAll(pattern)];
+      let updated = value;
+
+      for (const [, base64Src] of matches) {
+        try {
+          const [header, b64data] = base64Src.split(',');
+          const mime = header.replace('data:', '').replace(';base64', '');
+          const binary = atob(b64data);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          const ext = mime.split('/')[1] || 'png';
+          const file = new File([bytes], `newsletter-image.${ext}`, { type: mime });
+
+          const formData = new FormData();
+          formData.append('image', file);
+
+          const res = await fetch(`${API_URL}/upload`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${accessToken}` },
+            body: formData,
+          });
+          const json = await res.json();
+          if (res.ok && json.url) {
+            updated = updated.replace(base64Src, json.url);
+          }
+        } catch (err) {
+          console.error('Newsletter image auto-upload failed:', err);
+        }
+      }
+
+      setCampaignContent(updated);
+    },
+    [accessToken],
   );
 
   const fetchSubscribers = useCallback(async () => {
@@ -561,10 +567,9 @@ const AdminNewsletter = () => {
                 </label>
                 <div className="rounded-lg border border-gray-200 overflow-hidden [&_.ql-toolbar]:border-0 [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-gray-200 [&_.ql-container]:border-0 [&_.ql-editor]:min-h-[250px] [&_.ql-editor]:text-sm">
                   <ReactQuill
-                    ref={quillRef}
                     theme="snow"
                     value={campaignContent}
-                    onChange={setCampaignContent}
+                    onChange={handleCampaignContentChange}
                     modules={quillModules}
                     formats={quillFormats}
                     placeholder="Rédigez le contenu de votre campagne..."
