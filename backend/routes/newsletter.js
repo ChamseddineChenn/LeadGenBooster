@@ -300,26 +300,45 @@ router.post(
 function quillToEmailHtml(html) {
   if (!html) return html;
 
-  // Replace Quill alignment classes with inline text-align styles
-  let result = html
-    .replace(
-      /class="([^"]*\bql-align-center\b[^"]*)"/g,
-      'class="$1" style="text-align:center;"',
-    )
-    .replace(
-      /class="([^"]*\bql-align-right\b[^"]*)"/g,
-      'class="$1" style="text-align:right;"',
-    )
-    .replace(
-      /class="([^"]*\bql-align-justify\b[^"]*)"/g,
-      'class="$1" style="text-align:justify;"',
-    );
+  let result = html;
 
-  // Ensure <img> tags have max-width so they don't overflow
-  result = result.replace(
-    /<img(?![^>]*style=)/gi,
-    '<img style="max-width:100%;height:auto;display:block;"',
-  );
+  // Convert Quill class-based alignment → inline text-align styles.
+  // This is a safety net for any content that was created before the
+  // AlignStyle attributor was registered on the frontend.
+  //
+  // Two-pass per alignment value:
+  //   Pass A: tag already has style="..." → append to it (no double style attr)
+  //   Pass B: tag has no style → add style="text-align:..."
+  const alignMap = {
+    'ql-align-center': 'center',
+    'ql-align-right': 'right',
+    'ql-align-justify': 'justify',
+  };
+
+  for (const [cls, align] of Object.entries(alignMap)) {
+    const clsRe = cls.replace('-', '\\-'); // escape for regex
+    // Pass A: merge into existing style attribute
+    result = result.replace(
+      new RegExp(`(<[a-z][^>]*\\bstyle=")([^"]*)"([^>]*\\b${clsRe}\\b[^>]*>)`, 'gi'),
+      (_, tagOpen, existingStyle, rest) =>
+        `${tagOpen}${existingStyle};text-align:${align};"${rest}`,
+    );
+    // Pass B: add new style attribute (only if no style attr already present)
+    result = result.replace(
+      new RegExp(`(<[a-z][^>]*\\b${clsRe}\\b[^>]*?)(/?>)`, 'gi'),
+      (match, tagBody, close) => {
+        if (/\bstyle=/i.test(tagBody)) return match; // already handled in Pass A
+        return `${tagBody} style="text-align:${align};"${close}`;
+      },
+    );
+  }
+
+  // Make <img> responsive and block-level so it doesn't overflow email templates.
+  // Only add style when not already present to avoid duplicating.
+  result = result.replace(/<img\b([^>]*)>/gi, (match, attrs) => {
+    if (/\bstyle=/i.test(attrs)) return match;
+    return `<img${attrs} style="max-width:100%;height:auto;display:block;">`;
+  });
 
   return result;
 }

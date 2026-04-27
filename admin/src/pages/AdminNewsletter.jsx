@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import {
   Search,
   Trash2,
@@ -16,23 +16,16 @@ import {
   Check,
   Paperclip,
 } from 'lucide-react';
-import ReactQuill from 'react-quill-new';
+import ReactQuill, { Quill } from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { useAuth } from '../context/useAuth';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-const quillModules = {
-  toolbar: [
-    [{ header: [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ color: [] }, { background: [] }],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ align: [] }],
-    ['link', 'image'],
-    ['clean'],
-  ],
-};
+// Use inline-style alignment so text-align survives in email clients.
+// Class-based ql-align-* is stripped by Gmail / Outlook.
+const AlignStyle = Quill.import('attributors/style/align');
+Quill.register(AlignStyle, true);
 
 const quillFormats = [
   'header',
@@ -75,6 +68,60 @@ const AdminNewsletter = () => {
 
   // Feedback message
   const [message, setMessage] = useState(null);
+
+  // Quill editor ref for custom image handler
+  const quillRef = useRef(null);
+
+  // Custom image handler: upload to Cloudinary instead of embedding base64.
+  // Base64 data URIs are blocked by Gmail / Outlook.
+  const imageHandler = useCallback(() => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const res = await fetch(`${API_URL}/upload`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}` },
+          body: formData,
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          const quill = quillRef.current?.getEditor();
+          if (quill) {
+            const range = quill.getSelection(true);
+            quill.insertEmbed(range.index, 'image', data.url);
+            quill.setSelection(range.index + 1);
+          }
+        }
+      } catch (err) {
+        console.error('Newsletter image upload failed:', err);
+      }
+    };
+  }, [accessToken]);
+
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ color: [] }, { background: [] }],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }],
+          ['link', 'image'],
+          ['clean'],
+        ],
+        handlers: { image: imageHandler },
+      },
+    }),
+    [imageHandler],
+  );
 
   const fetchSubscribers = useCallback(async () => {
     try {
@@ -514,6 +561,7 @@ const AdminNewsletter = () => {
                 </label>
                 <div className="rounded-lg border border-gray-200 overflow-hidden [&_.ql-toolbar]:border-0 [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-gray-200 [&_.ql-container]:border-0 [&_.ql-editor]:min-h-[250px] [&_.ql-editor]:text-sm">
                   <ReactQuill
+                    ref={quillRef}
                     theme="snow"
                     value={campaignContent}
                     onChange={setCampaignContent}
