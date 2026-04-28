@@ -223,7 +223,9 @@ router.post(
   (req, res, next) => {
     upload(req, res, (err) => {
       if (err) {
-        return res.status(400).json({ message: 'Erreur fichier : ' + err.message });
+        return res
+          .status(400)
+          .json({ message: 'Erreur fichier : ' + err.message });
       }
       next();
     });
@@ -319,7 +321,10 @@ function quillToEmailHtml(html) {
     const clsRe = cls.replace('-', '\\-'); // escape for regex
     // Pass A: merge into existing style attribute
     result = result.replace(
-      new RegExp(`(<[a-z][^>]*\\bstyle=")([^"]*)"([^>]*\\b${clsRe}\\b[^>]*>)`, 'gi'),
+      new RegExp(
+        `(<[a-z][^>]*\\bstyle=")([^"]*)"([^>]*\\b${clsRe}\\b[^>]*>)`,
+        'gi',
+      ),
       (_, tagOpen, existingStyle, rest) =>
         `${tagOpen}${existingStyle};text-align:${align};"${rest}`,
     );

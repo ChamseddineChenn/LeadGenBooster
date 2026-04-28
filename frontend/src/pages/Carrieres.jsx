@@ -472,7 +472,11 @@ const Carrieres = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => document.getElementById('postes-ouverts')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById('postes-ouverts')
+                    ?.scrollIntoView({ behavior: 'smooth' })
+                }
                 className="bg-[#D71C1C] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#B01818] transition-all text-center"
               >
                 Envoyer un CV

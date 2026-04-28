@@ -6,6 +6,7 @@ export { default as logoWhite } from './LOGO LEADGEN BOOSTER BLANC.svg';
 // Image Assets
 export { default as heroPlaceholder } from './Hero_Placeholder.jpg';
 export { default as bannerImage } from './Banner.jpg';
+export { default as mobileBannerImage } from './Mobile-Banner-640-720px.jpg';
 
 // Icon Assets
 export { default as reactIcon } from './react.svg';

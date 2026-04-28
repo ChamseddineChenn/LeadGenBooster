@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import * as assets from '../assets/assets';
 
-const BulletTickIcon = () => (
+const BulletTickIcon = ({ size = 'h-8 w-8' }) => (
   <span
     aria-hidden="true"
-    className="mt-0.5 h-8 w-8 shrink-0"
+    className={`mt-0.5 shrink-0 ${size}`}
     style={{
       backgroundColor: '#D71C1C',
       WebkitMaskImage: `url(${assets.tickIcon})`,
@@ -26,15 +26,27 @@ const Banner = () => {
       aria-label="Banniere principale"
     >
       <div className="relative w-full">
+
+        {/* ── Desktop banner image (sm and above) ── */}
         <img
           src={assets.bannerImage}
           alt="Banniere Presence digitale 360"
-          className="block w-full h-auto max-w-none"
+          className="hidden sm:block w-full h-auto max-w-none"
           loading="eager"
           decoding="async"
         />
 
-        <div className="absolute inset-0 grid grid-cols-2 items-center gap-[8%] px-[6%] md:px-[7%] lg:pr-[2%] lg:pl-[4%]">
+        {/* ── Mobile banner image (below sm — covers phones up to ~639px) ── */}
+        <img
+          src={assets.mobileBannerImage}
+          alt="Banniere Presence digitale 360"
+          className="block sm:hidden w-full h-auto max-w-none"
+          loading="eager"
+          decoding="async"
+        />
+
+        {/* ── Desktop content overlay (sm and above) ── */}
+        <div className="hidden sm:grid absolute inset-0 grid-cols-2 items-center gap-[8%] px-[6%] md:px-[7%] lg:pr-[2%] lg:pl-[4%]">
           {/* Left content block */}
           <div className="w-full text-white">
             <h2 className="text-lg md:text-3xl lg:text-7xl font-extrabold leading-[1.05] mb-6 md:mb-16 ml-[8%]">
@@ -114,6 +126,67 @@ const Banner = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Mobile content overlay (below sm) ── */}
+        {/* Mobile banner: top half = red, bottom half = dark */}
+        <div className="sm:hidden absolute inset-0 flex flex-col">
+
+          {/* Top half — over the red zone */}
+          {/* "On les trouve." uses white text here (red bg); black would also work but white reads cleaner */}
+          <div className="h-1/2 flex flex-col justify-center px-5 text-white">
+            <p className="text-sm font-extrabold leading-tight mb-1">
+              Vos prochains clients vous cherchent.
+            </p>
+            <h3 className="text-2xl font-extrabold leading-tight mb-2 text-white">
+              On les trouve.
+            </h3>
+            <div className="w-10 border-t-2 border-white/80 mb-2" />
+            <p className="text-[11px] font-medium leading-snug mb-4">
+              Des prospects qualifiés,<br />
+              chaque semaine. Sans effort de votre part.
+            </p>
+            <Link
+              to="/contact"
+              className="self-start border-2 rounded px-3 py-1.5 border-white text-[10px] font-extrabold tracking-wide uppercase hover:border-black hover:text-black transition-colors"
+            >
+              COMMENCER MAINTENANT
+            </Link>
+          </div>
+
+          {/* Bottom half — over the dark zone */}
+          <div className="h-1/2 flex flex-col justify-center px-5 text-white">
+            <h2 className="text-xl font-extrabold leading-tight mb-3">
+              Présence digitale{' '}
+              <span className="font-black text-[#D71C1C]">360°</span>
+            </h2>
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-2 text-[11px] font-medium leading-tight mb-4">
+              <li className="flex items-center gap-1.5">
+                <BulletTickIcon size="h-5 w-5" />
+                <span>Identité Visuelle</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <BulletTickIcon size="h-5 w-5" />
+                <span>Réseaux Sociaux</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <BulletTickIcon size="h-5 w-5" />
+                <span>Contenu & SEO</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <BulletTickIcon size="h-5 w-5" />
+                <span>Développement Web</span>
+              </li>
+            </ul>
+            <Link
+              to="/services"
+              className="self-start border-2 rounded px-3 py-1.5 border-[#D71C1C] text-[10px] font-extrabold tracking-wide uppercase hover:text-[#D71C1C] transition-colors"
+            >
+              DÉCOUVRIR NOS SERVICES
+            </Link>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

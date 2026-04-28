@@ -352,7 +352,7 @@ const Contact = () => {
           <div className="rounded-2xl overflow-hidden h-96 shadow-lg relative">
             <iframe
               title="LeadGenBooster Location"
-              src="https://maps.google.com/maps?q=36.82101735033054,10.189265387104216&z=16&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3194.04!2d10.1892284!3d36.8210525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd35ce36afd093%3A0x1f5e2dbb8cab5fe9!2sLead%20Gen%20Booster!5e0!3m2!1sfr!2stn!4v1745827200000!5m2!1sfr!2stn"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -361,7 +361,7 @@ const Contact = () => {
               referrerPolicy="no-referrer-when-downgrade"
             />
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=36.82101735033054,10.189265387104216"
+              href="https://www.google.com/maps/place/Lead+Gen+Booster/@36.8210525,10.1892284,17z/data=!3m1!4b1!4m6!3m5!1s0x12fd35ce36afd093:0x1f5e2dbb8cab5fe9!8m2!3d36.8210525!4d10.1892284!16s%2Fg%2F11z5xcrh86"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute bottom-4 right-4 bg-white text-black font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-gray-100 transition-colors flex items-center gap-2"

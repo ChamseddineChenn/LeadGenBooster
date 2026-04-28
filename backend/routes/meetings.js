@@ -144,11 +144,9 @@ router.post('/', async (req, res) => {
     });
 
     if (existing) {
-      return res
-        .status(409)
-        .json({
-          message: 'Ce créneau est déjà réservé. Veuillez en choisir un autre.',
-        });
+      return res.status(409).json({
+        message: 'Ce créneau est déjà réservé. Veuillez en choisir un autre.',
+      });
     }
 
     const meeting = await Meeting.create({
@@ -220,12 +218,15 @@ router.patch('/admin/:id/status', protect, async (req, res) => {
     // Send notification email to client on confirm or cancel
     if (status === 'confirmé' || status === 'annulé') {
       try {
-        const dateFormatted = new Date(meeting.date).toLocaleDateString('fr-CA', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-        });
+        const dateFormatted = new Date(meeting.date).toLocaleDateString(
+          'fr-CA',
+          {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          },
+        );
         await sendMail({
           to: meeting.email,
           subject:
@@ -343,7 +344,9 @@ router.put('/admin/availability', protect, async (req, res) => {
 function buildMeetingStatusEmail(meeting, status, dateFormatted) {
   const isConfirmed = status === 'confirmé';
   const headerBg = isConfirmed ? '#16a34a' : '#D71C1C';
-  const headerTitle = isConfirmed ? 'Rendez-vous Confirmé ✓' : 'Rendez-vous Annulé';
+  const headerTitle = isConfirmed
+    ? 'Rendez-vous Confirmé ✓'
+    : 'Rendez-vous Annulé';
   const bodyText = isConfirmed
     ? `Nous avons le plaisir de vous confirmer votre rendez-vous avec l'équipe LeadGen Booster. Vous trouverez ci-dessous les détails de votre rendez-vous.`
     : `Nous vous informons que votre rendez-vous a été annulé. Si vous souhaitez en planifier un nouveau, n'hésitez pas à nous recontacter via notre site.`;
@@ -368,7 +371,9 @@ function buildMeetingStatusEmail(meeting, status, dateFormatted) {
                   <p style="color:#333;font-size:16px;margin:0 0 8px;">Bonjour <strong>${meeting.firstName} ${meeting.lastName}</strong>,</p>
                   <p style="color:#555;line-height:1.7;margin:0 0 28px;font-size:15px;">${bodyText}</p>
 
-                  ${isConfirmed ? `
+                  ${
+                    isConfirmed
+                      ? `
                   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f9fafb;border-radius:10px;border:1px solid #e5e7eb;margin-bottom:28px;">
                     <tr>
                       <td style="padding:24px;">
@@ -385,21 +390,27 @@ function buildMeetingStatusEmail(meeting, status, dateFormatted) {
                               <span style="color:#111;font-size:15px;font-weight:bold;">${meeting.timeSlot}</span>
                             </td>
                           </tr>
-                          ${meeting.service ? `
+                          ${
+                            meeting.service
+                              ? `
                           <tr>
                             <td style="padding:8px 0;">
                               <span style="color:#6b7280;font-size:13px;display:block;">Service</span>
                               <span style="color:#111;font-size:15px;">${meeting.service}</span>
                             </td>
-                          </tr>` : ''}
+                          </tr>`
+                              : ''
+                          }
                         </table>
                       </td>
                     </tr>
                   </table>
                   <p style="color:#555;font-size:14px;line-height:1.6;margin:0 0 28px;">Si vous avez des questions ou si vous devez modifier votre rendez-vous, contactez-nous à <a href="mailto:contact@leadgen-booster.com" style="color:#D71C1C;">contact@leadgen-booster.com</a>.</p>
-                  ` : `
+                  `
+                      : `
                   <p style="color:#555;font-size:14px;line-height:1.6;margin:0 0 28px;">Pour planifier un nouveau rendez-vous, rendez-vous sur <a href="https://leadgen-booster.com" style="color:#D71C1C;">leadgen-booster.com</a>.</p>
-                  `}
+                  `
+                  }
                 </td>
               </tr>
               <tr>
