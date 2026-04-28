@@ -256,8 +256,8 @@ const Navbar = () => {
       ref={dropdownRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 max-w-[100vw] ${
         isScrolled
-          ? 'bg-white shadow-lg py-3'
-          : 'bg-white/95 backdrop-blur-sm py-5'
+          ? 'bg-white shadow-lg py-1 md:py-3'
+          : 'bg-white/95 backdrop-blur-sm py-1 md:py-5'
       }`}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,7 +268,7 @@ const Navbar = () => {
               <img
                 src={assets.logoMain}
                 alt="LeadGen Booster"
-                className="h-[88px] w-auto"
+                className="h-12 sm:h-[88px] w-auto"
               />
             </Link>
           </div>
@@ -608,13 +608,13 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-[#000000]"
+            className="md:hidden text-[#000000] pl-4"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-7 h-7" />
             )}
           </button>
         </div>
