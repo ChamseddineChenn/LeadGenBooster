@@ -6,8 +6,6 @@
 set -euo pipefail  # exit on error, unset vars, or pipe failures
 
 REPO_DIR="/var/www/leadgenbooster"
-FRONTEND_DIST="/var/www/leadgenbooster-frontend"
-ADMIN_DIST="/var/www/leadgenbooster-admin"
 BACKEND_PM2_NAME="leadgenbooster-backend"
 
 # Resolve pm2 — works whether installed globally or via nvm
@@ -21,19 +19,11 @@ cd "$REPO_DIR/frontend"
 npm ci
 npm run build
 
-echo ">>> Publishing frontend to $FRONTEND_DIST..."
-rm -rf "$FRONTEND_DIST"
-cp -r dist "$FRONTEND_DIST"
-
 # ── Admin ─────────────────────────────────────────────────────────────────────
 echo ">>> Building admin..."
 cd "$REPO_DIR/admin"
 npm ci
 npm run build
-
-echo ">>> Publishing admin to $ADMIN_DIST..."
-rm -rf "$ADMIN_DIST"
-cp -r dist "$ADMIN_DIST"
 
 # ── Backend ───────────────────────────────────────────────────────────────────
 echo ">>> Installing backend dependencies..."
