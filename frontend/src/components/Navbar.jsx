@@ -142,35 +142,29 @@ const Navbar = () => {
       icon: BookOpen,
       items: [
         {
-          title: 'Conseils de vente',
-          description:
-            'Techniques et stratégies pour améliorer vos conversions',
-          href: '/blogs',
-        },
-        {
-          title: 'Tendances du marché',
-          description: 'Analyses des dernières tendances en télémarketing',
+          title: 'Conseils & Tendances',
+          description: 'Techniques, stratégies et tendances du marché',
           href: '/blogs',
         },
         {
           title: 'Études de cas',
           description: "Retours d'expérience et réussites de nos clients",
-          href: '/blogs',
+          href: '/blogs?category=etudes',
         },
         {
-          title: 'Guide du téléprospecteur',
-          description: 'Meilleures pratiques et scripts efficaces',
-          href: '/blogs',
+          title: 'Témoignages',
+          description: 'Ce que disent nos clients de notre travail',
+          href: '/blogs?category=temoignages',
         },
         {
-          title: 'Technologie et outils',
-          description: 'Revue des meilleurs outils pour la prospection',
-          href: '/blogs',
+          title: 'Portfolio',
+          description: 'Nos réalisations et projets récents',
+          href: '/blogs?category=portfolio',
         },
         {
-          title: 'Législation',
-          description: 'Conformité et réglementations en vigueur',
-          href: '/blogs',
+          title: 'FAQ',
+          description: 'Réponses aux questions les plus fréquentes',
+          href: '/blogs?category=faq',
         },
       ],
     },

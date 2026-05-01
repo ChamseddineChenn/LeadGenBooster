@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Calendar, User, BookOpen, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NewsletterForm from '../components/NewsletterForm';
@@ -43,7 +43,10 @@ const LoadingState = () => (
 );
 
 const Blogs = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchParams] = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState(
+    searchParams.get('category') || 'all'
+  );
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
