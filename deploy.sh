@@ -13,6 +13,11 @@ PM2=$(command -v pm2 || echo "$HOME/.npm-global/bin/pm2")
 
 echo "=== [$(date)] Deploy started ==="
 
+# ── Pull latest code ──────────────────────────────────────────────────────────
+echo ">>> Pulling latest code..."
+cd "$REPO_DIR"
+git pull origin main
+
 # ── Frontend ──────────────────────────────────────────────────────────────────
 echo ">>> Building frontend..."
 cd "$REPO_DIR/frontend"
