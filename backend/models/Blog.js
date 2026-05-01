@@ -56,9 +56,9 @@ const blogSchema = new mongoose.Schema(
         'conseils',
         'tendances',
         'etudes',
-        'guide',
-        'technologie',
-        'legislation',
+        'temoignages',
+        'portfolio',
+        'faq',
       ],
     },
     author: {
