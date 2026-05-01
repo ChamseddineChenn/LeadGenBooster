@@ -27,6 +27,11 @@ const careerSchema = new mongoose.Schema(
       required: [true, "Le type d'emploi est requis"],
       enum: ['temps-plein', 'temps-partiel', 'contrat', 'stage'],
     },
+    shortDescription: {
+      type: String,
+      required: [true, 'La description courte est requise'],
+      maxlength: [300, 'La description courte ne peut pas dépasser 300 caractères'],
+    },
     description: {
       type: String,
       required: [true, 'La description est requise'],

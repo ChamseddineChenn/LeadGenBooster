@@ -35,6 +35,7 @@ const CreateCareer = () => {
   const [showCustomCategory, setShowCustomCategory] = useState(false);
   const [location, setLocation] = useState('Montréal, QC');
   const [type, setType] = useState('temps-plein');
+  const [shortDescription, setShortDescription] = useState('');
   const [description, setDescription] = useState('');
   const [responsibilities, setResponsibilities] = useState(['']);
   const [requirements, setRequirements] = useState(['']);
@@ -91,6 +92,7 @@ const CreateCareer = () => {
         setCategory(data.category || '');
         setLocation(data.location || 'Montréal, QC');
         setType(data.type || 'temps-plein');
+        setShortDescription(data.shortDescription || '');
         setDescription(data.description || '');
         setResponsibilities(
           data.responsibilities?.length > 0 ? data.responsibilities : [''],
@@ -169,6 +171,10 @@ const CreateCareer = () => {
       setSaveMessage({ type: 'error', text: 'La catégorie est requise.' });
       return;
     }
+    if (!shortDescription.trim()) {
+      setSaveMessage({ type: 'error', text: 'La description courte est requise.' });
+      return;
+    }
     if (!description.trim()) {
       setSaveMessage({ type: 'error', text: 'La description est requise.' });
       return;
@@ -183,6 +189,7 @@ const CreateCareer = () => {
         category: category.trim(),
         location: location.trim(),
         type,
+        shortDescription: shortDescription.trim(),
         description: description.trim(),
         responsibilities: responsibilities.filter((r) => r.trim()),
         requirements: requirements.filter((r) => r.trim()),
@@ -493,10 +500,26 @@ const CreateCareer = () => {
         </div>
       </div>
 
+      {/* Short Description */}
+      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+        <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+          Description courte * <span className="text-gray-300 normal-case font-normal">(affiché sur la liste des offres — max 300 caractères)</span>
+        </label>
+        <textarea
+          value={shortDescription}
+          onChange={(e) => setShortDescription(e.target.value)}
+          placeholder="Résumé court du poste affiché sur la page carrières..."
+          rows={3}
+          maxLength={300}
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-[#D71C1C] resize-none text-sm"
+        />
+        <p className="text-xs text-gray-400 mt-1 text-right">{shortDescription.length}/300</p>
+      </div>
+
       {/* Description */}
       <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
         <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
-          Description *
+          Description complète *
         </label>
         <textarea
           value={description}

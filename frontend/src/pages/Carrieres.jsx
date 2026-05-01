@@ -425,7 +425,7 @@ const Carrieres = () => {
                       </div>
 
                       <p className="text-gray-700 leading-relaxed mb-6 max-w-2xl">
-                        {position.description}
+                        {position.shortDescription || position.description}
                       </p>
 
                       {position.salary?.isVisible &&
