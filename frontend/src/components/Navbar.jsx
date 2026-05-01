@@ -142,9 +142,14 @@ const Navbar = () => {
       icon: BookOpen,
       items: [
         {
-          title: 'Conseils & Tendances',
-          description: 'Techniques, stratégies et tendances du marché',
-          href: '/blogs',
+          title: 'Conseils',
+          description: 'Techniques et stratégies pour améliorer vos conversions',
+          href: '/blogs?category=conseils',
+        },
+        {
+          title: 'Tendances',
+          description: 'Analyses des dernières tendances du marché',
+          href: '/blogs?category=tendances',
         },
         {
           title: 'Études de cas',
