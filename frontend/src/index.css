@@ -220,6 +220,20 @@ summary {
   overflow-x: hidden;
 }
 
+/* Paragraph rhythm + visible blank lines (Quill empty blocks are <p><br></p>) */
+.blog-content > p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.blog-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-content p:has(> br:only-child) {
+  min-height: 1.35em;
+}
+
 .blog-content img {
   max-width: 100%;
   height: auto;

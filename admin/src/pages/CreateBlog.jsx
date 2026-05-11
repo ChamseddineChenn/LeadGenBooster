@@ -76,6 +76,19 @@ const sanitizeQuillHtml = (html) => {
     }
   });
 
+  // Quill blank lines are often <p><br></p>, <p></p>, or <p>&nbsp;</p>. After
+  // replacing &nbsp; with spaces, whitespace-only paragraphs can serialize or
+  // render with no visible height. Normalize so each empty block keeps a <br>.
+  doc.body.querySelectorAll('p').forEach((p) => {
+    if (p.querySelector('img, video, iframe, picture, svg')) return;
+    const text = p.textContent
+      .replace(/\u200b/g, '')
+      .replace(/\u00a0/g, ' ')
+      .trim();
+    if (text !== '') return;
+    p.innerHTML = '<br>';
+  });
+
   return doc.body.innerHTML;
 };
 

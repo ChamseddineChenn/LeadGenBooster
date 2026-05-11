@@ -52,7 +52,7 @@ body {
 .blog-content {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
   white-space: normal;
   max-width: 100%;
   overflow-x: hidden;
@@ -71,6 +71,19 @@ body {
 .blog-content a {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
   max-width: 100%;
+}
+
+.blog-content > p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.blog-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-content p:has(> br:only-child) {
+  min-height: 1.35em;
 }

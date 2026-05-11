@@ -18,10 +18,24 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
  * Replace non-breaking spaces (&nbsp; / \u00A0) with regular spaces.
  * Quill encodes every space as &nbsp;, which prevents the browser from
  * wrapping text naturally and causes words to be cut in the middle.
+ * Blank Quill paragraphs are normalized so intentional empty lines still render.
  */
 const sanitizeHtml = (html) => {
   if (!html) return html;
-  return html.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ');
+  const cleaned = html.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ');
+  if (typeof document === 'undefined') return cleaned;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(cleaned, 'text/html');
+  doc.body.querySelectorAll('p').forEach((p) => {
+    if (p.querySelector('img, video, iframe, picture, svg')) return;
+    const text = p.textContent
+      .replace(/\u200b/g, '')
+      .replace(/\u00a0/g, ' ')
+      .trim();
+    if (text !== '') return;
+    p.innerHTML = '<br>';
+  });
+  return doc.body.innerHTML;
 };
 
 const BlogPreview = () => {
