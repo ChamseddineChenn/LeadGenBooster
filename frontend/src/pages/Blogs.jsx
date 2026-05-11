@@ -45,7 +45,7 @@ const LoadingState = () => (
 const Blogs = () => {
   const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState(
-    searchParams.get('category') || 'all'
+    searchParams.get('category') || 'all',
   );
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);

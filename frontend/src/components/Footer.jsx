@@ -21,7 +21,10 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center mb-5 gap-2">
-              <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <Link
+                to="/"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
                 <img
                   src={assets.logoWhite}
                   alt="Lead Gen Booster"

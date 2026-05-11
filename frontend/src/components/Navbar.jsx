@@ -143,7 +143,8 @@ const Navbar = () => {
       items: [
         {
           title: 'Conseils',
-          description: 'Techniques et stratégies pour améliorer vos conversions',
+          description:
+            'Techniques et stratégies pour améliorer vos conversions',
           href: '/blogs?category=conseils',
         },
         {

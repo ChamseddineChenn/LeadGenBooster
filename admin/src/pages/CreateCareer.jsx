@@ -172,7 +172,10 @@ const CreateCareer = () => {
       return;
     }
     if (!shortDescription.trim()) {
-      setSaveMessage({ type: 'error', text: 'La description courte est requise.' });
+      setSaveMessage({
+        type: 'error',
+        text: 'La description courte est requise.',
+      });
       return;
     }
     if (!description.trim()) {
@@ -503,7 +506,10 @@ const CreateCareer = () => {
       {/* Short Description */}
       <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
         <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
-          Description courte * <span className="text-gray-300 normal-case font-normal">(affiché sur la liste des offres — max 300 caractères)</span>
+          Description courte *{' '}
+          <span className="text-gray-300 normal-case font-normal">
+            (affiché sur la liste des offres — max 300 caractères)
+          </span>
         </label>
         <textarea
           value={shortDescription}
@@ -513,7 +519,9 @@ const CreateCareer = () => {
           maxLength={300}
           className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-[#D71C1C] resize-none text-sm"
         />
-        <p className="text-xs text-gray-400 mt-1 text-right">{shortDescription.length}/300</p>
+        <p className="text-xs text-gray-400 mt-1 text-right">
+          {shortDescription.length}/300
+        </p>
       </div>
 
       {/* Description */}

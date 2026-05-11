@@ -30,7 +30,10 @@ const careerSchema = new mongoose.Schema(
     shortDescription: {
       type: String,
       required: [true, 'La description courte est requise'],
-      maxlength: [300, 'La description courte ne peut pas dépasser 300 caractères'],
+      maxlength: [
+        300,
+        'La description courte ne peut pas dépasser 300 caractères',
+      ],
     },
     description: {
       type: String,
