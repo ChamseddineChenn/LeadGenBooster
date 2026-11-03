@@ -60,10 +60,10 @@ VITE v5.x.x  ready in xxx ms
 ### Step 4: Login to Admin Panel
 
 1. Open `http://localhost:5174` in browser
-2. You'll see login form with default credentials displayed (dev mode only)
+2. You'll see the login form. In development, the seeded admin email is shown; the password is not.
 3. Enter:
    - Email: `admin@leadgenbooster.ca`
-   - Password: `***REMOVED***`
+   - Password: the `ADMIN_PASSWORD` value used when seeding
 4. Click "Se connecter"
 5. Access admin dashboard ✓
 
@@ -71,7 +71,7 @@ VITE v5.x.x  ready in xxx ms
 
 ```
 Email:    admin@leadgenbooster.ca
-Password: ***REMOVED***
+Password: set ADMIN_PASSWORD in the backend environment before seeding
 ```
 
 ## 📊 Admin Features Ready
@@ -100,7 +100,7 @@ Password: ***REMOVED***
 ```bash
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@leadgenbooster.ca","password":"***REMOVED***"}'
+  -d '{"email":"admin@leadgenbooster.ca","password":"<ADMIN_PASSWORD>"}'
 ```
 
 ### Get Profile

@@ -11,6 +11,9 @@ const seedAdmin = async () => {
     if (!process.env.MONGO_URI) {
       throw new Error('MONGO_URI environment variable is not set');
     }
+    if (!process.env.ADMIN_PASSWORD) {
+      throw new Error('ADMIN_PASSWORD environment variable is not set');
+    }
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connecté pour le seeding...');
 
@@ -30,7 +33,7 @@ const seedAdmin = async () => {
       firstName: 'Admin',
       lastName: 'LeadGenBooster',
       email: 'admin@leadgen-booster.com',
-      password: '***REMOVED***',
+      password: process.env.ADMIN_PASSWORD,
       phone: '+1 (514) 000-0000',
       userType: 'Admin',
       role: 'super_admin',

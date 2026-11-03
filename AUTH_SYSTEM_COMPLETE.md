@@ -174,7 +174,7 @@ Redirect to /login
   "firstName": "Admin",
   "lastName": "LeadGenBooster",
   "email": "admin@leadgenbooster.ca",
-  "password": "***REMOVED***",
+  "password": "<ADMIN_PASSWORD>",
   "phone": "+1 (514) 000-0000",
   "userType": "Admin",
   "role": "super_admin",

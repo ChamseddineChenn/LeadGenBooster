@@ -145,7 +145,7 @@ const Login = () => {
                 </code>
               </p>
               <p className="text-xs text-blue-700">
-                🔐 <code className="bg-white px-1 rounded">***REMOVED***</code>
+                Password: set ADMIN_PASSWORD before running the seed script
               </p>
             </div>
           )}

@@ -31,7 +31,7 @@ npm run dev
 
 ```
 Email:    admin@leadgenbooster.ca
-Password: ***REMOVED***
+Password: set ADMIN_PASSWORD in the backend environment before seeding
 ```
 
 Go to: `http://localhost:5174`

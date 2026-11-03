@@ -26,7 +26,7 @@ npm run dev
 **Default Admin Credentials:**
 
 - Email: `admin@leadgenbooster.ca`
-- Password: `***REMOVED***`
+- Password: set `ADMIN_PASSWORD` in the environment before running the seed script
 
 **Backend runs on:** `http://localhost:5000`
 
